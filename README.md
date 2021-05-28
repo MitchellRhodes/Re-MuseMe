@@ -1,7 +1,7 @@
 # Re-MuseMe
 
 
-Re:MuseMe is a platform that get's people out of their music genre comfort zone by comparing sub genres and similar undertones of the artist/songs. As a group of music enthusiast we're always on the hunt for new music to listen to, We want to create a place where what music genres and artist you like are truly tailored to you.
+Re:MuseMe is a platform that gets people out of their music genre comfort zone by comparing sub genres and similar undertones of the artist/songs. As a group of music enthusiast we're always on the hunt for new music to listen to, We want to create a place where what music genres and artist you like are truly tailored to you.
 
 Why do we want to create this app?
 
