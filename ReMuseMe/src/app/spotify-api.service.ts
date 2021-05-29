@@ -10,6 +10,6 @@ export class SpotifyApiService {
   constructor(public http: HttpClient) { }
 
   apiRedirect() {
-    return this.http.get("https://accounts.spotify.com/authorize?client_id=&response_type=code&redirect_uri=http://localhost:4200/callback/&scope=streaminguser-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state")
+    return window.location.href = "https://accounts.spotify.com/authorize?client_id=91f7955d1dba44f4aaac8ad72f54a129&response_type=code&redirect_uri=http://localhost:4200/callback/&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
   }
 }
