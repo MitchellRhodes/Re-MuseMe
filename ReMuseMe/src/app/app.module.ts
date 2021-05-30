@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MusicMatchComponent } from './music-match/music-match.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UserProfileComponent,
-    MusicMatchComponent
+    MusicMatchComponent,
+    SearchPageComponent
   ],
   imports: [
     BrowserModule,
