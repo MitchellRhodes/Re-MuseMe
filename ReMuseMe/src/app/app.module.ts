@@ -7,12 +7,14 @@ import { SpotifyLoginComponent } from './spotify-login/spotify-login.component';
 import { CallbackComponent } from './callback/callback.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SpotifyCallbackComponent } from './spotify-callback/spotify-callback.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SpotifyLoginComponent,
-    CallbackComponent
+    CallbackComponent,
+    SpotifyCallbackComponent
   ],
   imports: [
     BrowserModule,
