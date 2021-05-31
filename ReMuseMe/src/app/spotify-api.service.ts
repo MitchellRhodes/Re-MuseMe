@@ -1,7 +1,6 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import base64url from "base64url";
 import * as sha256 from 'sha256'
 
 
@@ -19,13 +18,12 @@ export class SpotifyApiService {
     return window.btoa(Array.from(window.crypto.getRandomValues(new Uint8Array(length * 2))).map((b) => String.fromCharCode(b)).join("")).replace(/[+/]/g, "").substring(0, length);
   }
 
-
+  //to hash the code verifier and turn it into code challenge
   async sha256(plain: string) {
     const encoder = new TextEncoder()
     const data = encoder.encode(plain)
     return window.crypto.subtle.digest('SHA-256', data)
   }
-
 
   base64urlencode(a: any) {
     return btoa(String.fromCharCode.apply(null, new Uint8Array(a) as any))
@@ -38,15 +36,11 @@ export class SpotifyApiService {
   //Then I pass the codechallenge variable so that it can be used outside of the function for the post where it requires a code verifier in the uri to know that it is the same sender as before
   async apiRedirect() {
     const codeVerifier = this.random();
-    console.log(`codeVerifier ${codeVerifier}`)
+
     const sha = await this.sha256(codeVerifier);
-    console.log(`sha ${sha}`)
+
     const codeChallenge = this.base64urlencode(sha);
-    // const random = this.random();
-    // const hashed = await this.sha256(random.toString())
-    // const codeChallenge = this.base64urlencode(hashed)
-    console.log(`code challenge ${codeChallenge}`)
-    // code challenge is getting lost in the redirect
+
     localStorage.setItem('codeVerifier', codeVerifier);
     return window.location.href = `https://accounts.spotify.com/authorize?client_id=91f7955d1dba44f4aaac8ad72f54a129&response_type=code&redirect_uri=http://localhost:4200/spotify-callback/&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`
   }
@@ -58,8 +52,6 @@ export class SpotifyApiService {
   //the header is to let it know the content is encoded
   getAccessToken(code: string) {
     const codeVerifier = localStorage.getItem('codeVerifier')
-
-    console.log(`${codeVerifier}`)
 
     if (!codeVerifier) {
       return this.apiRedirect()
@@ -87,5 +79,3 @@ export class SpotifyApiService {
   }
 
 }
-
-
