@@ -81,6 +81,7 @@ export class SpotifyApiService {
 
     ).subscribe(accessToken => {
       console.log(accessToken)
+      //store the token 
 
     })
   }
