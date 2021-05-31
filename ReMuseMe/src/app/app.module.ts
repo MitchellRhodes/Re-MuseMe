@@ -12,7 +12,7 @@ import { SpotifyCallbackComponent } from './spotify-callback/spotify-callback.co
 
 import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { MusicMatchComponent } from './music-match/music-match.component';
+// import { MusicMatchComponent } from './music-match/music-match.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 
 
@@ -21,10 +21,10 @@ import { SearchPageComponent } from './search-page/search-page.component';
     AppComponent,
     SpotifyLoginComponent,
     CallbackComponent,
-    SpotifyCallbackComponent
+    SpotifyCallbackComponent,
     HomeComponent,
     UserProfileComponent,
-    MusicMatchComponent,
+    // MusicMatchComponent,
     SearchPageComponent
   ],
   imports: [
