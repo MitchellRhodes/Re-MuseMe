@@ -3,7 +3,7 @@
     font-size: 75px;
     font-weight: lighter;
     color: #78CED6;
-    margin: 0;
+    margin-left: 20px;
     padding: 10px;
     text-decoration: none;
 }
@@ -13,6 +13,7 @@
     height: 150px;
     background-color: black;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-direction: row;
+    align-items: baseline;
 }
