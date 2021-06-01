@@ -14,6 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 // import { MusicMatchComponent } from './music-match/music-match.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { HeaderComponent } from './header/header.component';
+import { NavComponent } from './nav/nav.component';
+import { SearchCriteriaComponent } from './search-criteria/search-criteria.component';
 
 
 @NgModule({
@@ -25,7 +28,10 @@ import { SearchPageComponent } from './search-page/search-page.component';
     HomeComponent,
     UserProfileComponent,
     // MusicMatchComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    HeaderComponent,
+    NavComponent,
+    SearchCriteriaComponent
   ],
   imports: [
     BrowserModule,
