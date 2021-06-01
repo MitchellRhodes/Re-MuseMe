@@ -97,19 +97,113 @@ export class SpotifyApiService {
 
 
 
-  // async getUserProfile() {
-  //   const headers = this.getHeaders()
-  //   console.log(headers)
-  //   return this.http.get(`https://api.spotify.com/v1/me`, headers);
-  // };
+  //search related calls
+
+  async searchBar() {
+    const headers = this.getHeaders();
+
+  }
+
+  async browseCategories() {
+    const headers = this.getHeaders();
+  }
+
+
+  async browseCategory() {
+    const headers = this.getHeaders();
+  }
+
+
+  async browseRecommendedGenres() {
+    const headers = this.getHeaders();
+  }
+
+  //user related calls
+
+
+  async getUserProfile() {
+    const headers = this.getHeaders();
+    return this.http.get(`https://api.spotify.com/v1/me`, headers);
+  };
+
+
+
+  //artist related calls
+
+
+  async getSeveralArtists() {
+    const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/artists`, headers);
+  }
+
+
+  async getArtist() {
+    const headers = this.getHeaders();
+  }
+
+
+
+  //album related calls
+
+  async getMultipleAlbums() {
+    const headers = this.getHeaders();
+  }
 
   async getAlbum() {
-    const headers = this.getHeaders()
-    console.log(headers)
-    return this.http.get(`https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj`, headers)
+    const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj`, headers);
     // return this.http.get(`https://api.spotify.com/v1/albums/${id}`, headers)
   }
 
+
+  //tracks related calls
+
+  async getSeveralTracks() {
+    const headers = this.getHeaders();
+  }
+
+
+  async getATrack() {
+    const headers = this.getHeaders();
+  }
+
+
+  async getAudioFeaturesForMultipleTracks() {
+    const headers = this.getHeaders();
+  }
+
+
+  async getAudioFeaturesForATrack() {
+    const headers = this.getHeaders();
+  }
+
+
+  //playlist related calls
+
+  async createPlaylist() {
+    const headers = this.getHeaders();
+  }
+
+  async getUserPlaylists() {
+    const headers = this.getHeaders();
+  }
+
+
+  async addItemsToPlaylist() {
+    const headers = this.getHeaders();
+  }
+
+
+  async replaceItemInPlaylist() {
+    const headers = this.getHeaders();
+  }
+
+
+  async removeItemFromPlaylist() {
+    const headers = this.getHeaders();
+  }
 }
 
 
