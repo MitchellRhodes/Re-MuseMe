@@ -106,7 +106,6 @@ export class SpotifyApiService {
     const headers = this.getHeaders();
 
     const url = new URL(`https://api.spotify.com/v1/search`)
-    // const param = '%20'
     url.searchParams.set('q', `${input}`)
     url.searchParams.set('type', `artist`)
     return this.http.get(url.toString().replace('+', '%20'), headers)
