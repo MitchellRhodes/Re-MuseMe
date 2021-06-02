@@ -1,0 +1,13 @@
+.navButton{
+    width: 100px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #78CED6;
+    border: none;
+    margin-left: 5px;
+}
+
+.navLinks{
+    text-decoration: none;
+    color: black;
+}
