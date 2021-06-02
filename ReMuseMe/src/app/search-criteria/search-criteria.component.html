@@ -1,0 +1,16 @@
+<div>
+
+  <select [(ngModel)]="selectedSearchValue">
+
+    <option value="artist">Artist</option>
+
+    <option value="album">Album</option>
+
+    <option value="track">Track</option>
+
+  </select>
+
+  <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
+  <button class="search__button" (click)=search()>Search</button>
+  <app-spotify-login></app-spotify-login>
+</div>

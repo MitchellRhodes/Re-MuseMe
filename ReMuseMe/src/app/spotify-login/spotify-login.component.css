@@ -1,24 +1,13 @@
-*{
-    display: flex;
-    height: 10vh;
-}
-
-body {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-
-.login {
-    background-color: aqua;
+.logInButton{
+    width: 100px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: black;
+    color: #78CED6;
     border: none;
-    display: flex;
-    justify-content: center;
-};
+    margin-right: 10px;
+}
 
-.loginPage{
-    display: flex;
-    justify-content: center;
-    align-items:center;
-
+.spotifyLogo{
+    width:100px
 }

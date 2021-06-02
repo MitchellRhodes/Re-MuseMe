@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SpotifyApiService } from '../spotify-api.service';
 
 @Component({
@@ -8,6 +9,10 @@ import { SpotifyApiService } from '../spotify-api.service';
   styleUrls: ['./spotify-callback.component.css']
 })
 export class SpotifyCallbackComponent implements OnInit {
+
+  album: Observable<object> | null = null;
+  query: string | null = null;
+
 
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) {
 
@@ -19,5 +24,19 @@ export class SpotifyCallbackComponent implements OnInit {
       this.spotifyApi.getAccessToken(queryParams.code)
     })
   }
+
+  async getUser() {
+    (await this.spotifyApi.getUserProfile()).subscribe(user => {
+      console.log(user)
+    })
+  }
+
+  async getAlbum() {
+    (await this.spotifyApi.getAlbum()).subscribe(album => {
+      console.log(album)
+    })
+  }
+
+  
 
 }
