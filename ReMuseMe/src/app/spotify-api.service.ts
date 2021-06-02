@@ -21,6 +21,9 @@ export class SpotifyApiService {
 
   constructor(public http: HttpClient) { }
 
+
+
+
   //to randomize code verifier to be used in challenge
   random() {
     const length = 50;
@@ -131,16 +134,28 @@ export class SpotifyApiService {
 
   async browseCategories() {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/browse/categories`, headers)
   }
 
 
-  async browseCategory() {
+  async browseCategory(id: string) {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/browse/categories/${id}`, headers)
   }
 
 
   async browseRecommendedGenres() {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, headers)
+  }
+
+
+  async getRecommendsBasedOnSeeds() {
+    const headers = this.getHeaders();
+    //this one may be really complicated and based on our match game, so we will leave it for now
   }
 
   //user related calls
@@ -159,12 +174,15 @@ export class SpotifyApiService {
   async getSeveralArtists() {
     const headers = this.getHeaders();
 
+    //this one takes multiple ids
     return this.http.get(`https://api.spotify.com/v1/artists`, headers);
   }
 
 
-  async getArtist() {
+  async getArtist(id: string) {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/artists/${id}`, headers);
   }
 
 
@@ -173,6 +191,9 @@ export class SpotifyApiService {
 
   async getMultipleAlbums() {
     const headers = this.getHeaders();
+
+    //this also needs to be able to take multiple ids
+    return this.http.get(`https://api.spotify.com/v1/albums`, headers)
   }
 
   async getAlbum() {
@@ -183,51 +204,84 @@ export class SpotifyApiService {
   }
 
 
+  async getAlbumTracks(id: string) {
+    const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/albums/${id}/tracks`, headers)
+  }
+
+
+
+
+
   //tracks related calls
 
   async getSeveralTracks() {
     const headers = this.getHeaders();
+
+    //this also needs to be able to take multiple ids
+    return this.http.get(`https://api.spotify.com/v1/tracks`, headers)
   }
 
 
-  async getATrack() {
+  async getATrack(id: string) {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/tracks/${id}`, headers)
   }
 
 
   async getAudioFeaturesForMultipleTracks() {
     const headers = this.getHeaders();
+
+    //this also needs to be able to take multiple ids
+    return this.http.get(`https://api.spotify.com/v1/audio-features`, headers)
   }
 
 
-  async getAudioFeaturesForATrack() {
+  async getAudioFeaturesForATrack(id: string) {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/audio-features/${id}`, headers)
   }
 
 
   //playlist related calls
 
-  async createPlaylist() {
-    const headers = this.getHeaders();
-  }
-
   async getUserPlaylists() {
     const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/me/playlists`, headers)
+  }
+
+  async createPlaylist() {
+    const headers = this.getHeaders();
+    //POST
   }
 
 
   async addItemsToPlaylist() {
     const headers = this.getHeaders();
+    //POST
+
   }
 
 
   async replaceItemInPlaylist() {
     const headers = this.getHeaders();
+    //PUT
+  }
+
+
+  async changePlaylistDetails() {
+    const headers = this.getHeaders();
+    //PUT
   }
 
 
   async removeItemFromPlaylist() {
     const headers = this.getHeaders();
+    //DELETE
   }
 }
 
