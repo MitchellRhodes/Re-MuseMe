@@ -25,17 +25,13 @@ export class SpotifyCallbackComponent implements OnInit {
     })
   }
 
-  async getUser() {
-    (await this.spotifyApi.getUserProfile()).subscribe(user => {
-      console.log(user)
-    })
-  }
+  
 
-  async getAlbum() {
-    (await this.spotifyApi.getAlbum()).subscribe(album => {
-      console.log(album)
-    })
-  }
+  // async getAlbum() {
+  //   (await this.spotifyApi.getAlbum()).subscribe(album => {
+  //     console.log(album)
+  //   })
+  // }
 
   
 
