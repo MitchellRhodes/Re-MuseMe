@@ -1,7 +1,10 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as sha256 from 'sha256'
+import { map, switchMap } from 'rxjs/operators';
+import * as sha256 from 'sha256';
+const SpotifyWebApi = require('spotify-web-api-node');
+const spotifyApi = new SpotifyWebApi();
 
 
 @Injectable({
@@ -9,6 +12,12 @@ import * as sha256 from 'sha256'
 })
 export class SpotifyApiService {
 
+
+  static accessToken: string | null = null;
+
+  createJson = {
+    headers: new HttpHeaders({ 'Content-type': 'application/json' })
+  }
 
   constructor(public http: HttpClient) { }
 
@@ -69,15 +78,143 @@ export class SpotifyApiService {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
       })
-    }
-
-    ).subscribe(accessToken => {
-      console.log(accessToken)
-      //store the token 
-
     })
+      .subscribe((accessToken: any) => {
+        console.log(accessToken);
+        SpotifyApiService.accessToken = accessToken.access_token;
+        // spotifyApi.setAccessToken = accessToken.access_token;
+
+      })
   }
 
+
+
+  private getHeaders() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Bearer ${SpotifyApiService.accessToken}`
+      })
+    };
+  }
+
+
+
+  //search related calls
+
+  async searchBar(input: any) {
+    const headers = this.getHeaders();
+
+    const url = new URL(`https://api.spotify.com/v1/search`)
+    url.searchParams.set('q', `${input}`)
+    url.searchParams.set('type', `artist`)
+    return this.http.get(url.toString().replace('+', '%20'), headers)
+
+  }
+
+  async browseCategories() {
+    const headers = this.getHeaders();
+  }
+
+
+  async browseCategory() {
+    const headers = this.getHeaders();
+  }
+
+
+  async browseRecommendedGenres() {
+    const headers = this.getHeaders();
+  }
+
+  //user related calls
+
+
+  async getUserProfile() {
+    const headers = this.getHeaders();
+    return this.http.get(`https://api.spotify.com/v1/me`, headers);
+  };
+
+
+
+  //artist related calls
+
+
+  async getSeveralArtists() {
+    const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/artists`, headers);
+  }
+
+
+  async getArtist() {
+    const headers = this.getHeaders();
+  }
+
+
+
+  //album related calls
+
+  async getMultipleAlbums() {
+    const headers = this.getHeaders();
+  }
+
+  async getAlbum() {
+    const headers = this.getHeaders();
+
+    return this.http.get(`https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj`, headers);
+    // return this.http.get(`https://api.spotify.com/v1/albums/${id}`, headers)
+  }
+
+
+  //tracks related calls
+
+  async getSeveralTracks() {
+    const headers = this.getHeaders();
+  }
+
+
+  async getATrack() {
+    const headers = this.getHeaders();
+  }
+
+
+  async getAudioFeaturesForMultipleTracks() {
+    const headers = this.getHeaders();
+  }
+
+
+  async getAudioFeaturesForATrack() {
+    const headers = this.getHeaders();
+  }
+
+
+  //playlist related calls
+
+  async createPlaylist() {
+    const headers = this.getHeaders();
+  }
+
+  async getUserPlaylists() {
+    const headers = this.getHeaders();
+  }
+
+
+  async addItemsToPlaylist() {
+    const headers = this.getHeaders();
+  }
+
+
+  async replaceItemInPlaylist() {
+    const headers = this.getHeaders();
+  }
+
+
+  async removeItemFromPlaylist() {
+    const headers = this.getHeaders();
+  }
 }
-// curl -H "Authorization: Bearer BQCihDRX4URKlwCDWgU_oGqpz6yrb2JVAjZNfOOIcrYFLJAs16…DlqfqMBxEbQNialwavTn-mOnGr5XcO8JKftElQ_0L5Rk7cT1V" https://api.spotify.com/v1/me
+
+
+// `curl -H "Authorization: Bearer BQCihDRX4URKlwCDWgU_oGqpz6yrb2JVAjZNfOOIcrYFLJAs16…DlqfqMBxEbQNialwavTn-mOnGr5XcO8JKftElQ_0L5Rk7cT1V" https://api.spotify.com/v1/me`
+
 

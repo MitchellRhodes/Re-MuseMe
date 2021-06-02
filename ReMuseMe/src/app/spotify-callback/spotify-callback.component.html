@@ -1,1 +1,14 @@
 <p>spotify-callback works!</p>
+
+
+<button (click)='getUser()'>
+    Get User Profile test
+</button>
+
+<button (click)='getAlbum()'>
+    Get Album test
+</button>
+
+
+<input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
+<button class="search__button" (click)=search()>Search</button>
