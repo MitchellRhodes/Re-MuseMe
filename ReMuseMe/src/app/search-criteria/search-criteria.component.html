@@ -1,16 +1,28 @@
 <div>
+    <mat-form-field>
+      
+        <mat-select  [(ngModel)]="selectedSearchValue">
+         
+          <mat-option value="artist">Artist</mat-option>
+          <mat-option value="album">Album</mat-option>
+          <mat-option value="track">Track</mat-option>
+        </mat-select>
+      </mat-form-field>
+ 
+    <!-- <select [(ngModel)]="selectedSearchValue">
 
-  <select [(ngModel)]="selectedSearchValue">
-
-    <option value="artist">Artist</option>
+    <option value="artist" ng-selected="selected">Artist</option>
 
     <option value="album">Album</option>
 
     <option value="track">Track</option>
 
-  </select>
+    </select> -->
+
 
   <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
   <button class="search__button" (click)=search()>Search</button>
   <app-spotify-login></app-spotify-login>
+  
+
 </div>

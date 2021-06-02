@@ -11,6 +11,7 @@ import { SpotifyApiService } from '../spotify-api.service';
 export class SearchCriteriaComponent implements OnInit {
   query: string | null = null;
   selectedSearchValue: string | null = null;
+  selected = 'artist';
 
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
@@ -23,5 +24,6 @@ export class SearchCriteriaComponent implements OnInit {
       console.log(search);
     })
   }
+  
 
 }

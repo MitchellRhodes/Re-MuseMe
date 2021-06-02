@@ -13,3 +13,7 @@
     background-color: #78CED6;
     border: none;
 }
+
+select > option[value=""] {
+    display: none;
+}
