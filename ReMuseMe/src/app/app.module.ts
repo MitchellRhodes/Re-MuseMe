@@ -17,6 +17,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { HeaderComponent } from './header/header.component';
 import { NavComponent } from './nav/nav.component';
 import { SearchCriteriaComponent } from './search-criteria/search-criteria.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { SearchCriteriaComponent } from './search-criteria/search-criteria.compo
     SearchPageComponent,
     HeaderComponent,
     NavComponent,
-    SearchCriteriaComponent
+    SearchCriteriaComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
