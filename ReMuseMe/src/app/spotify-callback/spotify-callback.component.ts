@@ -11,6 +11,7 @@ import { SpotifyApiService } from '../spotify-api.service';
 export class SpotifyCallbackComponent implements OnInit {
 
   album: Observable<object> | null = null;
+  query: string | null = null;
 
 
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) {
@@ -42,5 +43,10 @@ export class SpotifyCallbackComponent implements OnInit {
     })
   }
 
+  async search() {
+    (await this.spotifyApi.searchBar(this.query)).subscribe(search => {
+      console.log(search);
+    })
+  }
 
 }

@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, switchMap } from 'rxjs/operators';
 import * as sha256 from 'sha256';
-const axios = require('axios').default;
+const SpotifyWebApi = require('spotify-web-api-node');
+const spotifyApi = new SpotifyWebApi();
 
 
 @Injectable({
@@ -81,6 +82,8 @@ export class SpotifyApiService {
       .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
+        // spotifyApi.setAccessToken = accessToken.access_token;
+
       })
   }
 
@@ -99,8 +102,14 @@ export class SpotifyApiService {
 
   //search related calls
 
-  async searchBar() {
+  async searchBar(input: any) {
     const headers = this.getHeaders();
+
+    const url = new URL(`https://api.spotify.com/v1/search`)
+    // const param = '%20'
+    url.searchParams.set('q', `${input}`)
+    url.searchParams.set('type', `artist`)
+    return this.http.get(url.toString().replace('+', '%20'), headers)
 
   }
 
