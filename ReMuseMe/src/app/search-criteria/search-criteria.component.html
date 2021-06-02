@@ -1,6 +1,6 @@
 <div>
-  <input class = "searchInput"type="text" placeholder="Search for a artist/song/genre ect..."/>
-  <button class="search__button">Search</button>
+    <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
+    <button class="search__button" (click)=search()>Search</button>
   <app-spotify-login></app-spotify-login>
 </div>
 

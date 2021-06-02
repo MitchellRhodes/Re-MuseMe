@@ -37,10 +37,6 @@ export class SpotifyCallbackComponent implements OnInit {
     })
   }
 
-  async search() {
-    (await this.spotifyApi.searchBar(this.query)).subscribe(search => {
-      console.log(search);
-    })
-  }
+  
 
 }
