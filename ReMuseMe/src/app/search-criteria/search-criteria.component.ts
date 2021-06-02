@@ -10,6 +10,8 @@ import { SpotifyApiService } from '../spotify-api.service';
 })
 export class SearchCriteriaComponent implements OnInit {
   query: string | null = null;
+  selectedSearchValue: string | null = null;
+
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
 
@@ -17,7 +19,7 @@ export class SearchCriteriaComponent implements OnInit {
   }
 
   async search() {
-    (await this.spotifyApi.searchBar(this.query)).subscribe(search => {
+    (await this.spotifyApi.searchBar(this.query, this.selectedSearchValue)).subscribe(search => {
       console.log(search);
     })
   }

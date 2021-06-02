@@ -102,15 +102,32 @@ export class SpotifyApiService {
 
   //search related calls
 
-  async searchBar(input: any) {
+  async searchBar(input: any, value: any) {
     const headers = this.getHeaders();
 
     const url = new URL(`https://api.spotify.com/v1/search`)
     url.searchParams.set('q', `${input}`)
-    url.searchParams.set('type', `artist`)
+
+    //create if statements for each of these based on selection drop down
+    if (value === 'artist') {
+      url.searchParams.set('type', `artist`)
+    }
+
+    if (value === 'album') {
+      url.searchParams.set('type', `album`)
+    }
+
+
+    if (value === 'track') {
+      url.searchParams.set('type', `track`)
+    }
+
+
     return this.http.get(url.toString().replace('+', '%20'), headers)
 
   }
+
+
 
   async browseCategories() {
     const headers = this.getHeaders();
