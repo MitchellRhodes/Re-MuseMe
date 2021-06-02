@@ -27,11 +27,11 @@ export class SpotifyCallbackComponent implements OnInit {
 
   
 
-  async getAlbum() {
-    (await this.spotifyApi.getAlbum()).subscribe(album => {
-      console.log(album)
-    })
-  }
+  // async getAlbum() {
+  //   (await this.spotifyApi.getAlbum()).subscribe(album => {
+  //     console.log(album)
+  //   })
+  // }
 
   
 
