@@ -4,7 +4,8 @@ export interface Browse {
      icons : [{
             url: string;
         }]
-    
+    category_id: string;
+    country: string;
    
     
    
