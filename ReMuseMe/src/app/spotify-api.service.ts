@@ -1,7 +1,6 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
 import * as sha256 from 'sha256';
 const SpotifyWebApi = require('spotify-web-api-node');
 const spotifyApi = new SpotifyWebApi();
@@ -14,6 +13,9 @@ export class SpotifyApiService {
 
 
   static accessToken: string | null = null;
+  static refreshToken: string | null = null;
+  static expiresIn: number | null = null;
+
 
   createJson = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
@@ -85,10 +87,37 @@ export class SpotifyApiService {
       .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
+        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        SpotifyApiService.expiresIn = accessToken.expires_in;
         // spotifyApi.setAccessToken = accessToken.access_token;
 
       })
   }
+
+
+
+
+  tokenRefresh() {
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', `${SpotifyApiService.refreshToken}`)
+      .set('client_id', '91f7955d1dba44f4aaac8ad72f54a129')
+
+    return this.http.post(`https://accounts.spotify.com/api/token`, body.toString(), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    })
+      .subscribe((accessToken: any) => {
+        console.log(accessToken);
+        SpotifyApiService.accessToken = accessToken.access_token;
+        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        SpotifyApiService.expiresIn = accessToken.expires_in;
+        // spotifyApi.setAccessToken = accessToken.access_token;
+
+      })
+  }
+
 
 
 
@@ -285,7 +314,5 @@ export class SpotifyApiService {
   }
 }
 
-
-// `curl -H "Authorization: Bearer BQCihDRX4URKlwCDWgU_oGqpz6yrb2JVAjZNfOOIcrYFLJAs16…DlqfqMBxEbQNialwavTn-mOnGr5XcO8JKftElQ_0L5Rk7cT1V" https://api.spotify.com/v1/me`
 
 
