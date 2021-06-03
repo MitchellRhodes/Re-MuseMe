@@ -1,9 +1,6 @@
-<body>
-    <section class='playlists'>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </section>
-</body>
+<div class = 'categoryContainer'>
+    <li *ngFor = "let category of browseCatagories">
+        <img src="{{category.icons[0].url}}" > 
+        
+    </li>
+</div>
