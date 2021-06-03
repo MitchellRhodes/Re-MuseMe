@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~11.2.7",
     "@angular/platform-browser-dynamic": "~11.2.7",
     "@angular/router": "~11.2.7",
+    "axios": "^0.21.1",
     "base64url": "^3.0.1",
     "rxjs": "~6.6.0",
     "sha256": "^0.2.0",
