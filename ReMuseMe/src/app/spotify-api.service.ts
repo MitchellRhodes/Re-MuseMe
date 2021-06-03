@@ -78,12 +78,9 @@ export class SpotifyApiService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     })
-      .subscribe(accessToken => {
-        console.log(accessToken)
-        // accessToken.pipe(map(accessToken => {
-        //   SpotifyApiService.accessToken = accessToken;
-        //   return accessToken
-        // })
+      .subscribe((accessToken: any) => {
+        console.log(accessToken);
+        SpotifyApiService.accessToken = accessToken.access_token;
       })
   }
 
