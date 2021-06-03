@@ -286,8 +286,3 @@ export class SpotifyApiService {
     //DELETE
   }
 }
-
-
-// `curl -H "Authorization: Bearer BQCihDRX4URKlwCDWgU_oGqpz6yrb2JVAjZNfOOIcrYFLJAs16…DlqfqMBxEbQNialwavTn-mOnGr5XcO8JKftElQ_0L5Rk7cT1V" https://api.spotify.com/v1/me`
-
-
