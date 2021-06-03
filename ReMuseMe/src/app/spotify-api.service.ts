@@ -1,21 +1,21 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { OnDestroy } from '@angular/core';
 import { Injectable } from '@angular/core';
 import * as sha256 from 'sha256';
-const SpotifyWebApi = require('spotify-web-api-node');
-const spotifyApi = new SpotifyWebApi();
+
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class SpotifyApiService {
+export class SpotifyApiService implements OnDestroy {
 
 
   static accessToken: string | null = null;
   static refreshToken: string | null = null;
   static expiresIn: number | null = null;
-
+  private refreshTokenTimeout: any;
 
   createJson = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
@@ -24,6 +24,9 @@ export class SpotifyApiService {
   constructor(public http: HttpClient) { }
 
 
+  ngOnDestroy() {
+    this.stopRefreshTokenTimer;
+  }
 
 
   //to randomize code verifier to be used in challenge
@@ -89,7 +92,8 @@ export class SpotifyApiService {
         SpotifyApiService.accessToken = accessToken.access_token;
         SpotifyApiService.refreshToken = accessToken.refresh_token;
         SpotifyApiService.expiresIn = accessToken.expires_in;
-        // spotifyApi.setAccessToken = accessToken.access_token;
+        this.startRefreshTokenTimer();
+
 
       })
   }
@@ -113,11 +117,20 @@ export class SpotifyApiService {
         SpotifyApiService.accessToken = accessToken.access_token;
         SpotifyApiService.refreshToken = accessToken.refresh_token;
         SpotifyApiService.expiresIn = accessToken.expires_in;
-        // spotifyApi.setAccessToken = accessToken.access_token;
 
       })
   }
 
+
+  startRefreshTokenTimer() {
+    const expires = new Date(SpotifyApiService.expiresIn! * 1000);
+    const timeout = expires.getTime() - Date.now() - (60 * 1000);
+    this.refreshTokenTimeout = setTimeout(() => this.tokenRefresh(), timeout);
+  }
+
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
+  }
 
 
 
@@ -313,9 +326,6 @@ export class SpotifyApiService {
     //DELETE
   }
 }
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> a789d366f1ea2d6bd98d990a6e060e110d4ebab0
