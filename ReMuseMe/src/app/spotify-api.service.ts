@@ -102,6 +102,9 @@ export class SpotifyApiService implements OnDestroy {
 
 
   tokenRefresh() {
+
+    // console.log(`in tokenRefresh`)
+
     const body = new HttpParams()
       .set('grant_type', 'refresh_token')
       .set('refresh_token', `${SpotifyApiService.refreshToken}`)
