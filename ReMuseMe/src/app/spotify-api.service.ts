@@ -117,14 +117,20 @@ export class SpotifyApiService implements OnDestroy {
         SpotifyApiService.accessToken = accessToken.access_token;
         SpotifyApiService.refreshToken = accessToken.refresh_token;
         SpotifyApiService.expiresIn = accessToken.expires_in;
+        this.startRefreshTokenTimer();
 
       })
   }
 
 
   startRefreshTokenTimer() {
-    const expires = new Date(SpotifyApiService.expiresIn! * 1000);
+    const expires = new Date(Date.now() + SpotifyApiService.expiresIn! * 1000);
     const timeout = expires.getTime() - Date.now() - (60 * 1000);
+
+    console.log(`refreshing`)
+    console.log(expires)
+    console.log(timeout)
+
     this.refreshTokenTimeout = setTimeout(() => this.tokenRefresh(), timeout);
   }
 
