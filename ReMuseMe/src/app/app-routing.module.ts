@@ -6,12 +6,15 @@ import { HomeComponent } from './home/home.component';
 import { MatchmakerComponent } from './matchmaker/matchmaker.component';
 import { SpotifyCallbackComponent } from './spotify-callback/spotify-callback.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
 
 const routes: Routes = [
   { path: 'spotify-callback', component: SpotifyCallbackComponent },
   { path: 'matchmaker', component: MatchmakerComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'home', component: HomeComponent }
+  { path: 'home', component: HomeComponent },
+  { path: 'categories', component: BrowsecategorydetailsComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
