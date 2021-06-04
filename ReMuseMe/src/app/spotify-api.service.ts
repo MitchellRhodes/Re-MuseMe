@@ -141,7 +141,7 @@ export class SpotifyApiService {
   }
 
 
-  async browseCategory(id: string) {
+  async browseCategory(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/browse/categories/${id}`, headers)

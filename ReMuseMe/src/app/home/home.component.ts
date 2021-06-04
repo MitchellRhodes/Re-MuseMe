@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Browse } from '../Interfaces/browse'
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -16,19 +15,9 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
   async ngOnInit(): Promise<void> {
-    (await this.spotifyApi.browseCategories()).subscribe((reponse: any) => {
-      this.browseCatagories = reponse.categories.items
-      console.log(reponse)
+    (await this.spotifyApi.browseCategories()).subscribe((response: any) => {
+      this.browseCatagories = response.categories.items
+      console.log(response)
     });
-   
   };
-
- 
-
-  // async getCategories() {
-  //   (await this.spotifyApi.browseCategory())).subscribe(user => {
-  //     console.log(user)
-  //   })
-  // }
-
 }

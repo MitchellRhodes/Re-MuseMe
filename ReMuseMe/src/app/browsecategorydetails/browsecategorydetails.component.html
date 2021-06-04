@@ -1,3 +1,4 @@
-<div class="categoriesContainer">
-    
+<div *ngIf="browseCatagory" class= "categoryDetailsContainer">
+    <h1>{{browseCatagory.name}}</h1>
+    <img src="{{browseCatagory.icons[0].url}}" > 
 </div>

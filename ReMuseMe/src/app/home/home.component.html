@@ -1,8 +1,7 @@
 <div class = 'categoryContainer'>
-    <li *ngFor = "let category of browseCatagories">
-        <a routerLink = "/categories/{{category.category_id}}" click="">
+    <li *ngFor = "let category of browseCatagories ">
+        <a routerLink = "/categories/{{category.id}}">
          <img src="{{category.icons[0].url}}" > 
         </a>
-      
     </li>
 </div>

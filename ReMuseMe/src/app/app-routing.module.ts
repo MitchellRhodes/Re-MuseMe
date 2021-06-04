@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'matchmaker', component: MatchmakerComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'categories', component: BrowsecategorydetailsComponent},
+  { path: 'categories/:id', component: BrowsecategorydetailsComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 

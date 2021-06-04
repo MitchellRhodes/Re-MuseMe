@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Browse } from '../Interfaces/browse'
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,20 +11,18 @@ import { Browse } from '../Interfaces/browse'
   styleUrls: ['./browsecategorydetails.component.css']
 })
 export class BrowsecategorydetailsComponent implements OnInit {
+  browseCatagory: Browse | null = null;
+  details: Observable<any> | null = null;
 
-  categoryDetails: Browse[] | null = null;
+  constructor(
+    private route: ActivatedRoute,
+    private spotifyApi: SpotifyApiService
+  ){}
 
-  constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
-
-  // async ngOnInit(): Promise<void> {
-  //   (await this.spotifyApi.browseCategory('id')).subscribe((reponse: any) => {
-  //     this.categoryDetails = reponse.categories.items
-  //     console.log(reponse)
-  //   });
-
-  ngOnInit(): void {
-   
-      }
-    }
-
-
+  async ngOnInit(): Promise<void> {
+    (await this.spotifyApi.browseCategory(this.route.snapshot.paramMap.get('id'))).subscribe((reponse: any) => {
+      this.browseCatagory = reponse
+      console.log(reponse)
+    });
+  }
+}
