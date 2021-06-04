@@ -22,6 +22,9 @@ import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
+
+
 
 
 @NgModule({
@@ -38,7 +41,9 @@ import { MatSelectModule } from '@angular/material/select';
     HeaderComponent,
     NavComponent,
     SearchCriteriaComponent,
-    FooterComponent
+    FooterComponent,
+    BrowsecategorydetailsComponent,
+    
   ],
   imports: [
     BrowserModule,

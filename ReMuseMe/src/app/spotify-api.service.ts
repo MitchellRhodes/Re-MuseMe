@@ -137,7 +137,7 @@ export class SpotifyApiService {
   async browseCategories() {
     const headers = this.getHeaders();
 
-    return this.http.get(`https://api.spotify.com/v1/browse/categories`, headers)
+    return this.http.get(`https://api.spotify.com/v1/browse/categories?limit=50`, headers)
   }
 
 
