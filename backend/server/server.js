@@ -19,7 +19,8 @@ app.use(express.static(__dirname + '/public'))
 
 
 
-
+const userStats = require('../routes/user-stats');
+app.use('/', userStats);
 
 app.listen(port, () =>
     console.log(`server is running on ${port}`));
