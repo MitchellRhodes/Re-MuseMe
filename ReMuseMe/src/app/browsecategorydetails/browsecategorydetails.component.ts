@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Browse } from '../Interfaces/browse'
+import { Observable } from 'rxjs';
+import { Artists } from '../Interfaces/artists';
 
 
 @Component({
@@ -10,20 +12,28 @@ import { Browse } from '../Interfaces/browse'
   styleUrls: ['./browsecategorydetails.component.css']
 })
 export class BrowsecategorydetailsComponent implements OnInit {
+  browseCatagory: Browse | null = null;
+  details: Observable<any> | null = null;
+  artistInfo: Artists[] | null = null;
 
-  categoryDetails: Browse[] | null = null;
+  constructor(
+    private route: ActivatedRoute,
+    private spotifyApi: SpotifyApiService
+  ){}
 
-  constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
+  async ngOnInit(): Promise<void> {
 
-  // async ngOnInit(): Promise<void> {
-  //   (await this.spotifyApi.browseCategory('id')).subscribe((reponse: any) => {
-  //     this.categoryDetails = reponse.categories.items
-  //     console.log(reponse)
-  //   });
+    // old category page, replacing everything with the music match component
 
-  ngOnInit(): void {
+    // (await this.spotifyApi.browseCategory(this.route.snapshot.paramMap.get('id'))).subscribe((response: any) => {
+    //   this.browseCatagory = response
+    //   console.log(response)
+    // });
+
+    // (await this.spotifyApi.searchBar(this.route.snapshot.paramMap.get('id'), 'categoryPage')).subscribe((response: any) => {
+    //   console.log(response)
+    //   this.artistInfo = response.artists.items;
+    // });
    
-      }
-    }
-
-
+  }
+}

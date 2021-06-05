@@ -1,4 +1,7 @@
 <div>
+  
+<!-- Filters will eventually be gone, the search bar should be able to figure it out on it's own -->
+
     <mat-form-field>
       
         <mat-select  [(ngModel)]="selectedSearchValue">
@@ -9,16 +12,6 @@
         </mat-select>
       </mat-form-field>
  
-    <!-- <select [(ngModel)]="selectedSearchValue">
-
-    <option value="artist" ng-selected="selected">Artist</option>
-
-    <option value="album">Album</option>
-
-    <option value="track">Track</option>
-
-    </select> -->
-
 
   <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
   <button class="search__button" (click)=search()>Search</button>

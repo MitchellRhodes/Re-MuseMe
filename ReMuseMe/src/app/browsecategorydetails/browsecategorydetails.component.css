@@ -1,0 +1,16 @@
+img{
+    height: 200px;
+    width: 200px
+}
+.artistContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+    align-items: baseline;
+}
+
+li{
+    display: block;
+    padding: 10px;
+}

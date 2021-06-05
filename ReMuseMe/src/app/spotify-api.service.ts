@@ -110,7 +110,7 @@ export class SpotifyApiService {
   async searchBar(input: any, value: any) {
     const headers = this.getHeaders();
 
-    const url = new URL(`https://api.spotify.com/v1/search`)
+    let url = new URL(`https://api.spotify.com/v1/search`)
     url.searchParams.set('q', `${input}`)
 
     //create if statements for each of these based on selection drop down
@@ -127,6 +127,9 @@ export class SpotifyApiService {
       url.searchParams.set('type', `track`)
     }
 
+    if(value === 'searchPage'){
+      url.searchParams.set('type', 'artist,album,track,playlist')
+    }
 
     return this.http.get(url.toString().replace('+', '%20'), headers)
 
@@ -141,7 +144,7 @@ export class SpotifyApiService {
   }
 
 
-  async browseCategory(id: string) {
+  async browseCategory(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/browse/categories/${id}`, headers)
@@ -173,15 +176,21 @@ export class SpotifyApiService {
   //artist related calls
 
 
-  async getSeveralArtists() {
+  async getSeveralArtists(ids: string[] = []) {
     const headers = this.getHeaders();
+    let url = new URL(`https://api.spotify.com/v1/artists`)
+    let query: string = '';
+    for(let id of ids){
+      query = `${query}${id},`;
+    }
+    url.searchParams.set('ids', `${ids}`)
 
     //this one takes multiple ids
-    return this.http.get(`https://api.spotify.com/v1/artists`, headers);
+    return this.http.get(query.replace('+', '%20') , headers);
   }
 
 
-  async getArtist(id: string) {
+  async getArtist(id: string| null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/artists/${id}`, headers);
@@ -226,7 +235,7 @@ export class SpotifyApiService {
   }
 
 
-  async getATrack(id: string) {
+  async getATrack(id: string | null): Promise<any>{
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/tracks/${id}`, headers)

@@ -1,14 +1,7 @@
-.container {
-    width: 200px;
-    height: 200px;
-    background-color: rgb(101, 230, 230);
+.matchMakerDiv {
+    width: 400px;
+    height: 600px;
+    background-color: grey;
 };
 
-.work{
-    color: rgb(245, 163, 163);
-};
-
-.container2 {
-    color:  rgb(245, 163, 163);
-}
 
