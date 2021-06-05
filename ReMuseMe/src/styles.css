@@ -6,3 +6,27 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+/* This is the styling for the music match container, for some reason it wouldn't
+ pull from the css linked to the componenet */
+
+.matchMakerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.headerContainer{
+    color: #78CED6;
+    display: flex;
+    justify-content: center;
+}
+
+.matchMakerButton{
+    padding: 5px;
+    margin: 100px;
+    width: 100px; 
+    border-radius: 20px;
+    background-color: #78CED6;
+    border: none;
+}
