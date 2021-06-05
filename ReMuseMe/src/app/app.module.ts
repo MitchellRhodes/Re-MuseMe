@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { SpotifyLoginComponent } from './spotify-login/spotify-login.component';
 import { CallbackComponent } from './callback/callback.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SpotifyCallbackComponent } from './spotify-callback/spotify-callback.component';
 
 import { HomeComponent } from './home/home.component';
@@ -22,6 +22,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
 
 
 @NgModule({
@@ -50,7 +51,13 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
