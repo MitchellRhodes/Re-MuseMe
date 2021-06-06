@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
-import { Browse } from '../Interfaces/browse'
+import { Browse } from '../Interfaces/browse';
+import { BrowsecategorydetailsComponent } from '../browsecategorydetails/browsecategorydetails.component';
+import { CategorydialogComponent } from '../categorydialog/categorydialog.component';
 
 @Component({
   selector: 'app-home',
@@ -20,4 +22,5 @@ export class HomeComponent implements OnInit {
       console.log(response)
     });
   };
+
 }

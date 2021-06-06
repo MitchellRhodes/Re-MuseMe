@@ -92,6 +92,10 @@ export class SpotifyApiService {
       })
   }
 
+  returnAccessToken() {
+    return SpotifyApiService.accessToken;
+  }
+
 
 
   private getHeaders() {
@@ -127,7 +131,7 @@ export class SpotifyApiService {
       url.searchParams.set('type', `track`)
     }
 
-    if(value === 'searchPage'){
+    if(value === 'categoryPage'){
       url.searchParams.set('type', 'artist,album,track,playlist')
     }
 
@@ -235,7 +239,7 @@ export class SpotifyApiService {
   }
 
 
-  async getATrack(id: string | null): Promise<any>{
+  async getATrack(id:  string| null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/tracks/${id}`, headers)
@@ -256,6 +260,17 @@ export class SpotifyApiService {
     return this.http.get(`https://api.spotify.com/v1/audio-features/${id}`, headers)
   }
 
+  // we have to use this to get tracks
+
+  async getRecommendations(){
+    const headers = this.getHeaders();
+    let url = new URL(`https://api.spotify.com/v1/recommendations`)
+    url.searchParams.set('seed_genres', 'rock');
+    // url.searchParams.set('seed_tracks', '');
+   
+
+    return this.http.get( url.toString().replace('+', '%20') , headers)
+  }
 
   //playlist related calls
 
@@ -294,4 +309,6 @@ export class SpotifyApiService {
     const headers = this.getHeaders();
     //DELETE
   }
+
+
 }

@@ -1,51 +1,12 @@
 
-.matchBody {
-    background-image: url('../Assets/pawel-czerwinski-XM1YUUVXj64-unsplash.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-
-}
-
-
-h1 {
-    text-align: center;
-    color: rgb(118, 105, 230);
-    font-family: 'Jura';
-    font-size: 50px;
-    margin-bottom: 45px;
-}
-
-
-.mainContainer {
+.matchMakerDiv {
+    width: 496px;
+    height: auto;
+    background-color: #78CED6;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-}
-
-.container2 {
-    width: 400px;
-    height: 400px;
-    background-color: rgb(143, 241, 241);
-}
-
-.buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    position:relative;
-    top: -50%;
-    z-index: 1;
-}
-
-.next {
-    margin-right: calc(15% - 30px);
-}
-
-.previous {
-    margin-left: calc(15% - 35px);
-}
-
-
+    margin-top: 200px;
+  
+};

@@ -25,6 +25,9 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
+import { CategorydialogComponent } from './categorydialog/categorydialog.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -46,6 +49,7 @@ import { BrowsecategorydetailsComponent } from './browsecategorydetails/browseca
     SearchCriteriaComponent,
     FooterComponent,
     BrowsecategorydetailsComponent,
+    CategorydialogComponent,
     
   ],
   imports: [
@@ -56,8 +60,9 @@ import { BrowsecategorydetailsComponent } from './browsecategorydetails/browseca
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatRadioModule, 
     MatButtonModule,
-    MatRadioModule
+
 
   ],
   providers: [],

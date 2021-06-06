@@ -1,10 +1,20 @@
-<body class='matchBody'>
-    <section class=mainContainer>
-        <h1>So...What Are You Into?</h1>
-        <div class='container2'></div>
-    </section>
-    <section class='buttonContainer'>
-        <button mat-fab class='previous'>Previous</button>
-        <button mat-fab class='next'>Next</button>
-    </section>
-</body>
+
+<!-- <div class="headerContainer">
+    <h2>Oh so that's what you're into</h2>
+</div> -->
+ 
+<div class ="matchMakerContainer">
+    <button mat-fab class='mattButton'>No</button>
+    <div  class="matchMakerButton" class = "matchMakerDiv" *ngIf = "track" >
+        <img class= "trackAlbumImage" src="{{track.album.images[0].url}}" >
+        <p> {{track.name}}</p>
+        <p> {{track.album.artists[0].name}} </p>
+        <p> {{track.album.name}} </p>
+        <p> {{track.external_urls.spotify}}</p>
+        <audio controls  src="{{track.preview_url}}"></audio>
+    </div>  
+  
+    <button  class="matchMakerButton" mat-fab class='mattButton'>Yes</button>
+</div>
+
+
