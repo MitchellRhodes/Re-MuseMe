@@ -127,7 +127,7 @@ export class SpotifyApiService {
       url.searchParams.set('type', `track`)
     }
 
-    if(value === 'searchPage'){
+    if (value === 'searchPage') {
       url.searchParams.set('type', 'artist,album,track,playlist')
     }
 
@@ -180,17 +180,17 @@ export class SpotifyApiService {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/artists`)
     let query: string = '';
-    for(let id of ids){
+    for (let id of ids) {
       query = `${query}${id},`;
     }
     url.searchParams.set('ids', `${ids}`)
 
     //this one takes multiple ids
-    return this.http.get(query.replace('+', '%20') , headers);
+    return this.http.get(query.replace('+', '%20'), headers);
   }
 
 
-  async getArtist(id: string| null): Promise<any> {
+  async getArtist(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/artists/${id}`, headers);
@@ -235,7 +235,7 @@ export class SpotifyApiService {
   }
 
 
-  async getATrack(id: string | null): Promise<any>{
+  async getATrack(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/tracks/${id}`, headers)
@@ -265,13 +265,13 @@ export class SpotifyApiService {
     return this.http.get(`https://api.spotify.com/v1/me/playlists`, headers)
   }
 
-  async createPlaylist() {
+  createPlaylist() {
     const headers = this.getHeaders();
     //POST
   }
 
 
-  async addItemsToPlaylist() {
+  addItemsToPlaylist() {
     const headers = this.getHeaders();
     //POST
 
@@ -289,9 +289,11 @@ export class SpotifyApiService {
     //PUT
   }
 
-
-  async removeItemFromPlaylist() {
+  //send playlist id in 
+  removeItemFromPlaylist(id: string) {
     const headers = this.getHeaders();
-    //DELETE
+
+    return this.http.delete(`https://api.spotify.com/v1/playlists/${id}/tracks`, headers)
+
   }
 }
