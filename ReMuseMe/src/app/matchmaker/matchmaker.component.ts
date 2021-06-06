@@ -19,7 +19,6 @@ export class MatchmakerComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     (await this.spotifyApi.getATrack('4cOdK2wGLETKBW3PvgPWqT')).subscribe((response: any) => {
         this.track = response
-        this.startPlayer(response.uri)
         console.log(response)
     });    
     (await this.spotifyApi.getRecommendations()).subscribe((response: any) => {
@@ -30,9 +29,4 @@ export class MatchmakerComponent implements OnInit {
   }
   
 
-  async startPlayer(uri: string): Promise<void> {
-    (await this.spotifyApi.playerPlay(uri)).subscribe((response: any) => {
-      console.log(response)
-    })
-  }
 }

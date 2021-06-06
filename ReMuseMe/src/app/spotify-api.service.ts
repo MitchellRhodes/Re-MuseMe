@@ -310,14 +310,5 @@ export class SpotifyApiService {
     //DELETE
   }
 
-  //Player endpoints
-  async playerPlay(uri: string) {
-    const headers = this.getHeaders();
-    let body = {
-      context_url: `${uri}`,
-      position_ms: 0
-    };
 
-    return this.http.put(`https://api.spotify.com/v1/me/player/play`, body, headers)
-  }
 }
