@@ -3,7 +3,9 @@ export interface Tracks{
         album_type:string,
         artists: [
             {
-               external_urls: string;
+               external_urls: {
+                   spotify: string;
+               }
                id: string,
                name: string,
                type: string,
@@ -11,17 +13,23 @@ export interface Tracks{
             },  
         ]
         id: string,
-        images: [
-            {
+        images: [{
                 height: number,
                 url: string,
                 width: number
-            }
-        ],
+            }],
+
         name: string,
         release_date: string,
         release_date_precision: string,
         type: string,
         uri: string,
-    }
+        
+    },
+        name: string,
+        uri: string,
+        preview_url: string,
+        external_urls:{
+            spotify: string,
+        }
 }

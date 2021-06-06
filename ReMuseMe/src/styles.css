@@ -30,3 +30,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: #78CED6;
     border: none;
 }
+
+.trackAlbumImage{
+    width:auto;
+    height: 500px;
+}
+

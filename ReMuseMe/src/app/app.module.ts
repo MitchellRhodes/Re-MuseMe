@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
+import { CategorydialogComponent } from './categorydialog/categorydialog.component';
 
 
 
@@ -43,6 +44,7 @@ import { BrowsecategorydetailsComponent } from './browsecategorydetails/browseca
     SearchCriteriaComponent,
     FooterComponent,
     BrowsecategorydetailsComponent,
+    CategorydialogComponent,
     
   ],
   imports: [

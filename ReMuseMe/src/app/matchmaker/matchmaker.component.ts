@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Tracks } from '../Interfaces/tracks';
+import { Recommendations } from '../Interfaces/recommendations';
 
 @Component({
   selector: 'app-matchmaker',
@@ -9,15 +10,29 @@ import { Tracks } from '../Interfaces/tracks';
   styleUrls: ['./matchmaker.component.css']
 })
 export class MatchmakerComponent implements OnInit {
-  trackList: Tracks[] | null = null;
+  track: Tracks | null = null;
+  trackArray: Tracks [] | null = null;
+  recommended: Recommendations | null = null;
 
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
   async ngOnInit(): Promise<void> {
-    (await this.spotifyApi.getATrack(this.route.snapshot.paramMap.get('id'))).subscribe((response: any) => {
-        this.trackList = response.tracks.items
+    (await this.spotifyApi.getATrack('4cOdK2wGLETKBW3PvgPWqT')).subscribe((response: any) => {
+        this.track = response
+        this.startPlayer(response.uri)
         console.log(response)
-      });
+    });    
+    (await this.spotifyApi.getRecommendations()).subscribe((response: any) => {
+      this.recommended = response
+      // this.startPlayer(response.uri)
+      console.log(response)
+  }); 
   }
+  
 
+  async startPlayer(uri: string): Promise<void> {
+    (await this.spotifyApi.playerPlay(uri)).subscribe((response: any) => {
+      console.log(response)
+    })
+  }
 }

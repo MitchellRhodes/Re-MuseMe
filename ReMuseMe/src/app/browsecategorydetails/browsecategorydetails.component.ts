@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Artists } from '../Interfaces/artists';
 
 
+//delete this componenet 
+
 @Component({
   selector: 'app-browsecategorydetails',
   templateUrl: './browsecategorydetails.component.html',
@@ -25,15 +27,15 @@ export class BrowsecategorydetailsComponent implements OnInit {
 
     // old category page, replacing everything with the music match component
 
-    // (await this.spotifyApi.browseCategory(this.route.snapshot.paramMap.get('id'))).subscribe((response: any) => {
-    //   this.browseCatagory = response
-    //   console.log(response)
-    // });
+    (await this.spotifyApi.browseCategory(this.route.snapshot.paramMap.get('id'))).subscribe((response: any) => {
+      this.browseCatagory = response
+      console.log(response)
+    });
 
-    // (await this.spotifyApi.searchBar(this.route.snapshot.paramMap.get('id'), 'categoryPage')).subscribe((response: any) => {
-    //   console.log(response)
-    //   this.artistInfo = response.artists.items;
-    // });
+    (await this.spotifyApi.searchBar(this.route.snapshot.paramMap.get('id'), 'categoryPage')).subscribe((response: any) => {
+      console.log(response)
+      this.artistInfo = response.artists.items;
+    });
    
   }
 }

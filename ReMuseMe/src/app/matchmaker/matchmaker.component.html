@@ -1,16 +1,18 @@
-<div class="headerContainer">
+<!-- <div class="headerContainer">
     <h2>Oh so that's what you're into</h2>
-</div>
+</div> -->
  
 <div class ="matchMakerContainer">
     <button class="matchMakerButton">No</button>
-    <div class = "matchMakerDiv">
-        <ul>
-            <li>
-
-            </li>
-        </ul>
+    <div class = "matchMakerDiv" *ngIf = "track" >
+        <img class= "trackAlbumImage" src="{{track.album.images[0].url}}" >
+        <p> {{track.name}}</p>
+        <p> {{track.album.artists[0].name}} </p>
+        <p> {{track.album.name}} </p>
+        <p> {{track.external_urls.spotify}}</p>
+        <audio controls  src="{{track.preview_url}}"></audio>
     </div>  
+  
     <button class="matchMakerButton">Yes</button>
 </div>
 
