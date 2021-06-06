@@ -8,6 +8,9 @@ const SpotifyWebApi = require('spotify-web-api-node');
 const spotifyApi = new SpotifyWebApi();
 
 
+import { Posts } from './Interfaces/posts';
+import { Playlistitems } from './Interfaces/playlistitems';
+
 
 @Injectable({
   providedIn: 'root'
@@ -265,28 +268,27 @@ export class SpotifyApiService {
     return this.http.get(`https://api.spotify.com/v1/me/playlists`, headers)
   }
 
-  createPlaylist() {
+  createPlaylist(playlist: Posts, userId: string) {
     const headers = this.getHeaders();
-    //POST
+    return this.http.post(`https://api.spotify.com/v1/users/${userId}/playlists`, playlist, headers)
   }
 
 
-  addItemsToPlaylist() {
+  addItemsToPlaylist(id: string) {
     const headers = this.getHeaders();
-    //POST
-
+    return this.http.post(`https://api.spotify.com/v1/playlists/${id}/tracks`, headers)
   }
 
 
-  async replaceItemInPlaylist() {
+  async replaceItemInPlaylist(playlistId: string, item: Playlistitems) {
     const headers = this.getHeaders();
-    //PUT
+    return this.http.put(`https://api.spotify.com/v1/playlists/${playlistId}`, item, headers)
   }
 
 
-  async changePlaylistDetails() {
+  async changePlaylistDetails(playlist: Posts, playlistId: string) {
     const headers = this.getHeaders();
-    //PUT
+    return this.http.put(`https://api.spotify.com/v1/playlists/${playlistId}`, playlist, headers)
   }
 
   //send playlist id in 
