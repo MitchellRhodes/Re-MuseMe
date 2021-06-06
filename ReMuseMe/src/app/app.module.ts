@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
 import { CategorydialogComponent } from './categorydialog/categorydialog.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -55,6 +56,7 @@ import { CategorydialogComponent } from './categorydialog/categorydialog.compone
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatRadioModule
 
   ],
   providers: [],

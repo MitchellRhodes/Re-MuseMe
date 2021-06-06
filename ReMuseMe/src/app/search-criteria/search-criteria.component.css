@@ -1,5 +1,5 @@
 .searchInput{
-    width: 250px;
+    width: 450px;
     margin: 10px;
     padding: 10px;
     border-radius: 15px;
@@ -14,3 +14,18 @@
     border: none;
 }
 
+
+.labels {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    position: relative;
+    top: 25px;
+    left: 25px;
+}
+
+.searchContainer {
+    position: relative;
+    top: -20px;
+}
