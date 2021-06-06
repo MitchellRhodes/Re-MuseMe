@@ -3,8 +3,8 @@
 </div> -->
  
 <div class ="matchMakerContainer">
-    <button class="matchMakerButton">No</button>
-    <div class = "matchMakerDiv" *ngIf = "track" >
+    <button mat-fab class='mattButton'>No</button>
+    <div  class="matchMakerButton" class = "matchMakerDiv" *ngIf = "track" >
         <img class= "trackAlbumImage" src="{{track.album.images[0].url}}" >
         <p> {{track.name}}</p>
         <p> {{track.album.artists[0].name}} </p>
@@ -13,6 +13,6 @@
         <audio controls  src="{{track.preview_url}}"></audio>
     </div>  
   
-    <button class="matchMakerButton">Yes</button>
+    <button  class="matchMakerButton" mat-fab class='mattButton'>Yes</button>
 </div>
 

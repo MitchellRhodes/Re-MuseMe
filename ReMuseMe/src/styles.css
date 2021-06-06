@@ -33,6 +33,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border: none;
 }
 
+button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
+    margin: 50px;
+}
+
 .trackAlbumImage{
     width:auto;
     height: 500px;
