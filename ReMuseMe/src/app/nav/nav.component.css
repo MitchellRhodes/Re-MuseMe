@@ -1,13 +1,26 @@
+.navContainer {
+    min-width: 100vh;
+
+}
+
 .navButton{
     width: 100px;
     padding: 5px;
     border-radius: 20px;
     background-color: #78CED6;
     border: none;
-    margin-left: 5px;
+    margin-left: 25px;
 }
 
 .navLinks{
     text-decoration: none;
     color: black;
+}
+
+.multipleButtons {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: -45px;
+    left: -100px;
 }
