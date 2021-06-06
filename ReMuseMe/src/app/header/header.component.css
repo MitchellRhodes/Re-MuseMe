@@ -3,9 +3,12 @@
     font-size: 75px;
     font-weight: lighter;
     color: #78CED6;
-    margin-left: 20px;
     padding: 10px;
     text-decoration: none;
+    position: relative;
+    top: 45px;
+    left: 25px
+
 }
 
 .navContainer{
@@ -16,4 +19,5 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: baseline;
+    position: fixed;
 }
