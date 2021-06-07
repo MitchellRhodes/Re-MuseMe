@@ -1,28 +1,21 @@
-<div>
-    <mat-form-field>
-      
-        <mat-select  [(ngModel)]="selectedSearchValue">
-         
-          <mat-option value="artist">Artist</mat-option>
-          <mat-option value="album">Album</mat-option>
-          <mat-option value="track">Track</mat-option>
-        </mat-select>
-      </mat-form-field>
- 
-    <!-- <select [(ngModel)]="selectedSearchValue">
+<div class='searchContainer'>
 
-    <option value="artist" ng-selected="selected">Artist</option>
+  <!-- Filters will eventually be gone, the search bar should be able to figure it out on it's own -->
+  <!-- 
+  <mat-radio-group> -->
 
-    <option value="album">Album</option>
+  <mat-radio-group [(ngModel)]="selectedSearchValue" class='labels'>
+    <mat-radio-button value="artist" class='buttons'>Artist</mat-radio-button>
+    <mat-radio-button value="album" class='buttons'>Album</mat-radio-button>
+    <mat-radio-button value="track" class='buttons'>Track</mat-radio-button>
+    <!-- </mat-select> -->
 
-    <option value="track">Track</option>
-
-    </select> -->
+  </mat-radio-group>
 
 
   <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
   <button class="search__button" (click)=search()>Search</button>
   <app-spotify-login></app-spotify-login>
-  
+
 
 </div>

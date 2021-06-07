@@ -2,8 +2,7 @@ img{
     height: 200px;
     width: 200px
 }
-
-.categoryContainer {
+.artistContainer {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-end;
@@ -15,4 +14,3 @@ li{
     display: block;
     padding: 10px;
 }
-

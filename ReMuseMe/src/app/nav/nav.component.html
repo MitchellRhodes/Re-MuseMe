@@ -1,11 +1,16 @@
 <app-search-criteria></app-search-criteria>
+<div class='multipleButtons'>
+  <button  routerLink="/user-profile" class="navButton" (click)='getUser()'>
+       Profile
+    </button>
+  <button class="navButton">
+        <a class='navLinks' routerLink="/home">Home</a>
+    </button>
+</div>
 
-<button class = "navButton" (click)='getUser()'>
-    Profile
-</button>
-<button class = "navButton">
-<a class = 'navLinks'routerLink = "/home">Home</a>
-</button>
-<button class = "navButton">
-<a class = 'navLinks'routerLink = "/musicmatch">Music Match</a>
-</button>
+
+<!-- match maker will be on the homepage no need for a button to go to it -->
+
+<!-- <button class = "navButton">
+<a class = 'navLinks'routerLink = "/matchmaker">Music Match</a>
+</button> -->

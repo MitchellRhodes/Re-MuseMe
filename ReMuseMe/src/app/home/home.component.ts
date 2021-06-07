@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SpotifyApiService } from '../spotify-api.service';
+import { Browse } from '../Interfaces/browse';
+import { BrowsecategorydetailsComponent } from '../browsecategorydetails/browsecategorydetails.component';
+import { CategorydialogComponent } from '../categorydialog/categorydialog.component';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +11,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  browseCatagories: Browse[] | null = null;
+  categoryDetails: Browse[] | null = null;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
-  ngOnInit(): void {
-  }
+  async ngOnInit(): Promise<void> {
+    (await this.spotifyApi.browseCategories()).subscribe((response: any) => {
+      this.browseCatagories = response.categories.items
+      console.log(response)
+    });
+  };
 
 }

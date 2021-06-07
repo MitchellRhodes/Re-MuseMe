@@ -1,14 +1,12 @@
-.container {
-    width: 200px;
-    height: 200px;
-    background-color: rgb(101, 230, 230);
+
+.matchMakerDiv {
+    width: 496px;
+    height: auto;
+    background-color: #78CED6;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+  
 };
-
-.work{
-    color: rgb(245, 163, 163);
-};
-
-.container2 {
-    color:  rgb(245, 163, 163);
-}
-

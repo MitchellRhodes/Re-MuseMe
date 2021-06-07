@@ -1,8 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url('https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap');
-
+*{
+    font-family: 'Jura';
+}
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+   
+}
+body{
+    background-image: url('./app/Assets/pawel-czerwinski-XM1YUUVXj64-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
+
+/* This is the styling for the music match container, for some reason it wouldn't
+ pull from the css linked to the componenet */
+
+ .matchMakerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.headerContainer{
+    color: #78CED6;
+    display: flex;
+    justify-content: center;
+}
+
+.matchMakerButton{
+    padding: 5px;
+    margin: 100px;
+    width: 100px; 
+    border-radius: 20px;
+    background-color: #78CED6;
+    border: none;
+}
+
+button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
+    margin: 50px;
+}
+
+.trackAlbumImage{
+    width:auto;
+    height: 500px;
+}
 

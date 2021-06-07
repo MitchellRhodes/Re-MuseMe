@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { SpotifyApiService } from '../spotify-api.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spotifyApi: SpotifyApiService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
   }
 
-}

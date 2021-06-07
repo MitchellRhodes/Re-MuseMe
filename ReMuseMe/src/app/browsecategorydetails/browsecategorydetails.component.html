@@ -1,0 +1,16 @@
+<!-- // old category page, replacing everything with the music match component -->
+
+
+<div *ngIf="browseCatagory" class= "categoryDetailsContainer">
+    <h1>{{browseCatagory.name}}</h1>
+    <img src="{{browseCatagory.icons[0].url}}" > 
+</div>
+<h1>Artists</h1>
+<div *ngIf="artistInfo" class= "artistContainer" >
+    
+    <li *ngFor = "let artist of artistInfo " >
+        <img src="{{artist.images[0].url}}" > 
+       <p>{{artist.name}}</p>
+    </li>
+    
+</div>

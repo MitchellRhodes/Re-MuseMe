@@ -21,7 +21,15 @@ import { SearchCriteriaComponent } from './search-criteria/search-criteria.compo
 import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
+import { CategorydialogComponent } from './categorydialog/categorydialog.component';
+
+
+
+
 
 
 
@@ -39,7 +47,10 @@ import { MatSelectModule } from '@angular/material/select';
     HeaderComponent,
     NavComponent,
     SearchCriteriaComponent,
-    FooterComponent
+    FooterComponent,
+    BrowsecategorydetailsComponent,
+    CategorydialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -49,6 +60,9 @@ import { MatSelectModule } from '@angular/material/select';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatRadioModule, 
+    MatButtonModule,
+
 
   ],
   providers: [
