@@ -108,39 +108,6 @@ export class SpotifyApiService {
   }
 
 
-  tokenRefresh() {
-
-    let refreshToken = localStorage.getItem('refreshToken')
-
-    const body = new HttpParams()
-      .set('grant_type', 'refresh_token')
-      .set('refresh_token', `${refreshToken}`)
-      .set('client_id', '91f7955d1dba44f4aaac8ad72f54a129')
-
-    return this.http.post(`https://accounts.spotify.com/api/token`, body.toString(), {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
-      })
-    })
-      .subscribe((accessToken: any) => {
-        console.log(accessToken);
-
-        SpotifyApiService.accessToken = accessToken.access_token;
-        localStorage.setItem('accessToken', accessToken.access_token);
-
-        SpotifyApiService.refreshToken = accessToken.refresh_token;
-        localStorage.setItem('refreshToken', accessToken.refresh_token);
-
-        SpotifyApiService.expiresIn = accessToken.expires_in;
-      })
-  }
-
-
-
-
-
-
-
 
   tokenRefresh() {
 
