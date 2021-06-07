@@ -1,0 +1,12 @@
+<h1> Please choose one or more genres you're into </h1>
+<p class = "headerPTag">(You must choose atleast one to continue)</p>
+<hr>
+<div class = 'categoryContainer'>
+    <li *ngFor = "let category of browseCatagories" >
+        <div class = 'genreDivContainer' [ngClass]="{'selected': category.selected === true}" (click) = "categorySelect($event, category)">
+            <p> {{category.name}}</p>
+            <img src="{{category.icons[0].url}}" > 
+        </div>
+    </li>
+    <button class="continueButton" (click) = continueButton()> Continue </button>
+</div> 

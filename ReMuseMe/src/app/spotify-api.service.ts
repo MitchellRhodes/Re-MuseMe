@@ -1,6 +1,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { map, switchMap, windowToggle } from 'rxjs/operators';
 import * as sha256 from 'sha256';
 import { PlaylistItems } from './Interfaces/playlist-items';
 import { Posts } from './Interfaces/posts';
@@ -12,6 +13,7 @@ import { Posts } from './Interfaces/posts';
   providedIn: 'root'
 })
 export class SpotifyApiService {
+
 
 
   static accessToken: string | null = null;
@@ -63,9 +65,9 @@ export class SpotifyApiService {
 
 
 
-  //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
+   //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
   //the header is to let it know the content is encoded
-  getAccessToken(code: string) {
+  getAccessToken(code: string, redirect: string) {
     const codeVerifier = localStorage.getItem('codeVerifier')
 
     if (!codeVerifier) {
@@ -95,12 +97,47 @@ export class SpotifyApiService {
         localStorage.setItem('refreshToken', accessToken.refresh_token);
 
         SpotifyApiService.expiresIn = accessToken.expires_in;
+
+        
+        window.location.href = redirect;
       })
   }
 
   returnAccessToken() {
     return SpotifyApiService.accessToken;
   }
+
+
+  tokenRefresh() {
+
+    let refreshToken = localStorage.getItem('refreshToken')
+
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', `${refreshToken}`)
+      .set('client_id', '91f7955d1dba44f4aaac8ad72f54a129')
+
+    return this.http.post(`https://accounts.spotify.com/api/token`, body.toString(), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    })
+      .subscribe((accessToken: any) => {
+        console.log(accessToken);
+
+        SpotifyApiService.accessToken = accessToken.access_token;
+        localStorage.setItem('accessToken', accessToken.access_token);
+
+        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        localStorage.setItem('refreshToken', accessToken.refresh_token);
+
+        SpotifyApiService.expiresIn = accessToken.expires_in;
+      })
+  }
+
+
+
+
 
 
 
@@ -322,10 +359,11 @@ export class SpotifyApiService {
 
   // we have to use this to get tracks
 
-  async getRecommendations() {
+
+  async getRecommendations(seed: string){
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
-    url.searchParams.set('seed_genres', 'rock');
+    url.searchParams.set('seed_genres', seed);
     // url.searchParams.set('seed_tracks', '');
 
 

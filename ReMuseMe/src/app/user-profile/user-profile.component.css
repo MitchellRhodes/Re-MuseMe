@@ -7,3 +7,10 @@
 .container2{
   font-size: 500px;
 };
+
+div{
+  width: 100px;
+  height: 100px;
+  background-color: white;
+}
+
