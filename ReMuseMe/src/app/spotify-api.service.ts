@@ -2,6 +2,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as sha256 from 'sha256';
+import { PlaylistItems } from './Interfaces/playlist-items';
+import { Posts } from './Interfaces/posts';
 
 
 
@@ -336,35 +338,35 @@ export class SpotifyApiService {
     return this.http.get(`https://api.spotify.com/v1/me/playlists`, headers)
   }
 
-  async createPlaylist() {
+  createPlaylist(playlist: Posts, userId: string) {
     const headers = this.getHeaders();
-    //POST
+    return this.http.post(`https://api.spotify.com/v1/users/${userId}/playlists`, playlist, headers)
   }
 
 
-  async addItemsToPlaylist() {
+  addItemsToPlaylist(id: string) {
     const headers = this.getHeaders();
-    //POST
-
+    return this.http.post(`https://api.spotify.com/v1/playlists/${id}/tracks`, headers)
   }
 
 
-  async replaceItemInPlaylist() {
+  async replaceItemInPlaylist(playlistId: string, item: PlaylistItems) {
     const headers = this.getHeaders();
-    //PUT
+    return this.http.put(`https://api.spotify.com/v1/playlists/${playlistId}`, item, headers)
   }
 
 
-  async changePlaylistDetails() {
+  async changePlaylistDetails(playlist: Posts, playlistId: string) {
     const headers = this.getHeaders();
-    //PUT
+    return this.http.put(`https://api.spotify.com/v1/playlists/${playlistId}`, playlist, headers)
   }
 
-
-  async removeItemFromPlaylist() {
+  //send playlist id in 
+  removeItemFromPlaylist(id: string) {
     const headers = this.getHeaders();
-    //DELETE
-  }
 
+    return this.http.delete(`https://api.spotify.com/v1/playlists/${id}/tracks`, headers)
+
+  }
 
 }
