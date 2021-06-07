@@ -22,7 +22,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
+
 
 
 @NgModule({
@@ -52,11 +52,6 @@ import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
 
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorInterceptor,
-      multi: true
-    }
   ],
   bootstrap: [AppComponent]
 })

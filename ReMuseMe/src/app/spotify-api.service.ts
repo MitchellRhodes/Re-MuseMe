@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { OnDestroy } from '@angular/core';
 import { Injectable } from '@angular/core';
 import * as sha256 from 'sha256';
-import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
+
 
 
 
@@ -90,7 +90,8 @@ export class SpotifyApiService implements OnDestroy {
       .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
-        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        // SpotifyApiService.refreshToken = accessToken.refresh_token;
+        localStorage.setItem('refreshToken', accessToken.refresh_token);
         SpotifyApiService.expiresIn = accessToken.expires_in;
 
 
@@ -103,9 +104,11 @@ export class SpotifyApiService implements OnDestroy {
 
   tokenRefresh() {
 
+    let refreshToken = localStorage.getItem('refreshToken');
+
     const body = new HttpParams()
       .set('grant_type', 'refresh_token')
-      .set('refresh_token', `${SpotifyApiService.refreshToken}`)
+      .set('refresh_token', `${refreshToken}`)
       .set('client_id', '91f7955d1dba44f4aaac8ad72f54a129')
 
     return this.http.post(`https://accounts.spotify.com/api/token`, body.toString(), {
@@ -116,17 +119,35 @@ export class SpotifyApiService implements OnDestroy {
       .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
-        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        // SpotifyApiService.refreshToken = accessToken.refresh_token;
+        localStorage.setItem('refreshToken', accessToken.refresh_token);
         SpotifyApiService.expiresIn = accessToken.expires_in;
 
       })
   }
 
 
-
-
-
   private getHeaders() {
+    console.log(SpotifyApiService.accessToken)
+
+    if (SpotifyApiService.accessToken === null) {
+
+      let accessToken = localStorage.getItem('token')
+
+      console.log(accessToken)
+
+
+      if (accessToken === null) {
+        console.log('BAD TOKEN')
+        // window.location.href = '/login';
+
+        //circumvents login, need to do it specifically 
+        this.tokenRefresh();
+
+      } else {
+        SpotifyApiService.accessToken = accessToken;
+      }
+    }
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -134,6 +155,16 @@ export class SpotifyApiService implements OnDestroy {
       })
     };
   }
+
+
+  // private getHeaders() {
+  //   return {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Authorization': `Bearer ${SpotifyApiService.accessToken}`
+  //     })
+  //   };
+  // }
 
 
 
