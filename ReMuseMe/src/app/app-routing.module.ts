@@ -12,12 +12,8 @@ const routes: Routes = [
   { path: 'matchmaker/:id', component: MatchmakerComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'home', component: HomeComponent },
-<<<<<<< HEAD
-
-=======
-  { path: 'categories/:id', component: BrowsecategorydetailsComponent},
+  { path: 'categories/:id', component: BrowsecategorydetailsComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
->>>>>>> 1a562f62a3932781c9eca7287f799d53eda0b3c4
 ];
 
 @NgModule({

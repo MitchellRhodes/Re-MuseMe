@@ -3,14 +3,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { OnDestroy } from '@angular/core';
 import { Injectable } from '@angular/core';
 import * as sha256 from 'sha256';
-<<<<<<< HEAD
 
 
-=======
-import { Observable } from 'rxjs';
-const SpotifyWebApi = require('spotify-web-api-node');
-const spotifyApi = new SpotifyWebApi();
->>>>>>> 1a562f62a3932781c9eca7287f799d53eda0b3c4
 
 
 
@@ -203,7 +197,7 @@ export class SpotifyApiService implements OnDestroy {
       url.searchParams.set('type', `track`)
     }
 
-    if(value === 'categoryPage'){
+    if (value === 'categoryPage') {
       url.searchParams.set('type', 'artist,album,track,playlist')
     }
 
@@ -256,17 +250,17 @@ export class SpotifyApiService implements OnDestroy {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/artists`)
     let query: string = '';
-    for(let id of ids){
+    for (let id of ids) {
       query = `${query}${id},`;
     }
     url.searchParams.set('ids', `${ids}`)
 
     //this one takes multiple ids
-    return this.http.get(query.replace('+', '%20') , headers);
+    return this.http.get(query.replace('+', '%20'), headers);
   }
 
 
-  async getArtist(id: string| null): Promise<any> {
+  async getArtist(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/artists/${id}`, headers);
@@ -311,7 +305,7 @@ export class SpotifyApiService implements OnDestroy {
   }
 
 
-  async getATrack(id:  string| null): Promise<any> {
+  async getATrack(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/tracks/${id}`, headers)
@@ -334,14 +328,14 @@ export class SpotifyApiService implements OnDestroy {
 
   // we have to use this to get tracks
 
-  async getRecommendations(){
+  async getRecommendations() {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
     url.searchParams.set('seed_genres', 'rock');
     // url.searchParams.set('seed_tracks', '');
-   
 
-    return this.http.get( url.toString().replace('+', '%20') , headers)
+
+    return this.http.get(url.toString().replace('+', '%20'), headers)
   }
 
   //playlist related calls
