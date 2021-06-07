@@ -39,7 +39,22 @@ userStats.get('/user/:id', async (req, res) => {
 
 //delete for removing user
 
+userStats.delete('/user/:id', async (req, res) => {
 
+    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.id = $(id)`, {
+        id: +req.params.id,
+    })
+
+    if (!user) {
+        return res.status(404).send('ID not found')
+    };
+
+    const deleteUser = await db.none(`DELETE FROM users WHERE users.id = $(id)`, {
+        id: +req.params.id,
+    })
+
+    res.status(204).json(deleteUser);
+});
 
 
 
