@@ -135,6 +135,26 @@ export class SpotifyApiService {
 
 
   private getHeaders() {
+
+    console.log(SpotifyApiService.accessToken)
+
+
+    if (SpotifyApiService.accessToken === null) {
+
+      let accessToken = localStorage.getItem('accessToken')
+
+      console.log(accessToken)
+
+
+      if (accessToken === null) {
+        console.log('Bad Token')
+
+        this.tokenRefresh();
+
+      } else {
+        SpotifyApiService.accessToken = accessToken;
+      }
+    }
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
