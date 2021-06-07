@@ -1,9 +1,3 @@
-.container {
-    width: 200px;
-    height: 200px;
-    background-color: rgb(56, 78, 78);
-};
-
-.container2{
-  font-size: 500px;
-};
+.userProfileContainer {
+  border-radius: 12px;
+}

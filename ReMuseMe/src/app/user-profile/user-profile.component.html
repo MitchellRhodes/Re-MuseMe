@@ -1,9 +1,7 @@
 <p>user-profile works!</p>
 
-<main>
-    <section>
-        <div class='container'>
-            <h2>So...What Are You Into?</h2>
-        </div>
-    </section>
-</main>
+<div class="userProfileContainer" *ngIf="userProfile">
+    <img class="userImage" src="{{userProfile.images[0].url}}">
+    <h2> Welcome back {{userProfile.display_name}}! </h2>
+
+</div>
