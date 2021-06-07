@@ -90,6 +90,7 @@ export class SpotifyApiService implements OnDestroy {
       .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
+        localStorage.setItem('accessToken', accessToken.access_token)
         // SpotifyApiService.refreshToken = accessToken.refresh_token;
         localStorage.setItem('refreshToken', accessToken.refresh_token);
         SpotifyApiService.expiresIn = accessToken.expires_in;
@@ -119,6 +120,7 @@ export class SpotifyApiService implements OnDestroy {
       .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
+        localStorage.setItem('accessToken', accessToken.access_token)
         // SpotifyApiService.refreshToken = accessToken.refresh_token;
         localStorage.setItem('refreshToken', accessToken.refresh_token);
         SpotifyApiService.expiresIn = accessToken.expires_in;
@@ -132,7 +134,7 @@ export class SpotifyApiService implements OnDestroy {
 
     if (SpotifyApiService.accessToken === null) {
 
-      let accessToken = localStorage.getItem('token')
+      let accessToken = localStorage.getItem('accessToken')
 
       console.log(accessToken)
 
