@@ -14,7 +14,10 @@ const db = pgp({
 //get by id for user and their stats
 userStats.get('/user/:id', async (req, res) => {
 
-    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.id = $(id)`, {
+    const user = await db.many(`SELECT u.id, u.name, us.stat_name, us.stat_exp FROM users u
+    INNER JOIN user_statistics us ON u.id = us.user_id
+    WHERE u.id = $(id);`, {
+
         id: +req.params.id
     })
 
@@ -26,6 +29,7 @@ userStats.get('/user/:id', async (req, res) => {
 
     res.status(200).json(user);
 });
+
 
 
 
