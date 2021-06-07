@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'home', component: HomeComponent },
   { path: 'categories/:id', component: BrowsecategorydetailsComponent},
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: SpotifyLoginPageComponent},
   { path: 'category', component: CategoriesComponent}
 ];
