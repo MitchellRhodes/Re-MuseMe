@@ -3,7 +3,7 @@
 <hr>
 <div class = 'categoryContainer'>
     <li *ngFor = "let category of browseCatagories" >
-        <div class = 'genreDivContainer' (click) = "categorySelect($event, category)">
+        <div class = 'genreDivContainer' [ngClass]="{'selected': category.selected === true}" (click) = "categorySelect($event, category)">
             <p> {{category.name}}</p>
             <img src="{{category.icons[0].url}}" > 
         </div>

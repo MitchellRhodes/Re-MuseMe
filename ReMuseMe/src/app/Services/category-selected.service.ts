@@ -28,7 +28,10 @@ export class CategorySelectedService {
     let storageSelected: any = localStorage.getItem('selectedCategories');
     if(typeof storageSelected === 'object'){
       this.selectedCategories = storageSelected
+    } else {
+      this.selectedCategories = JSON.parse(storageSelected);
     }
+    
     return this.selectedCategories
   }
 

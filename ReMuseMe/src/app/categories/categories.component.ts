@@ -22,11 +22,25 @@ export class CategoriesComponent implements OnInit {
     //This is how to pull every single category/genre from spotifys api
 
     (await this.spotifyApi.browseCategories()).subscribe((response: any) => {
-      this.browseCatagories = response.categories.items
-      // console.log(response)
+      let categories =  response.categories.items;
+      //getting selected categories 
+      this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
+
+      console.log(this.selectedCategories)
+      //compare response categories against selected categories
+      categories.forEach((category: any, index: any) => {
+        this.selectedCategories.forEach(selected => {
+          if(category.id === selected.id){
+            categories[index].selected = true
+          }
+        });
+      });
+
+      this.browseCatagories = categories
+      console.log(this.browseCatagories )
     });
 
-    this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
+  
   }
 
   //This is how we get the selected class to go onto the genre they click as well as how what they selected
@@ -38,6 +52,7 @@ export class CategoriesComponent implements OnInit {
     let target = event.target as Element;
     let isSelected: Boolean = false;
     let childTarget: Boolean = false;
+   
     
     if(target.tagName === 'P' || target.tagName === 'IMG'){
       if(target.parentElement?.classList.contains('selected')){

@@ -276,10 +276,10 @@ export class SpotifyApiService {
 
   // we have to use this to get tracks
 
-  async getRecommendations(){
+  async getRecommendations(seed: string){
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
-    url.searchParams.set('seed_genres', 'rock');
+    url.searchParams.set('seed_genres', seed);
     // url.searchParams.set('seed_tracks', '');
    
 
