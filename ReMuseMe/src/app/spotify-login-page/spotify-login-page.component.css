@@ -10,5 +10,10 @@ h2{
     font-size: 2rem;
     font-family: 'Jura';
     padding-top: 25px;
+    color: white;
+}
+
+p{
+    color: white;
 }
  /* All styling to the button goes in the spotify-login css not the spotify-login-page css  */

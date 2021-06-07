@@ -48,7 +48,7 @@ export class MatchmakerComponent implements OnInit {
       }
     });
 
-    //console.log(seed);
+    // console.log(seed);
     
     //Passing Seed to get recommendations from spotify api service
     (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {

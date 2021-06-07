@@ -31,11 +31,13 @@ h1{
     text-align: center;
     width: 100vw;
     padding-top: 30px;
+    color: white;
 }
 
 .headerPTag{
     text-align: center;
     width: 100vw;
+    color: white;
 }
 
 .selected.genreDivContainer{
