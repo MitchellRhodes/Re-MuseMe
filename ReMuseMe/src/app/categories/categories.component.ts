@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { elementAt } from 'rxjs/operators';
 import { Browse } from '../Interfaces/browse';
+import { CategorySelectedService } from '../Services/category-selected.service';
 import { SpotifyApiService } from '../spotify-api.service';
+
 
 @Component({
   selector: 'app-categories',
@@ -12,7 +14,8 @@ export class CategoriesComponent implements OnInit {
   browseCatagories: Browse[] | null = null;
   selectedCategories: Browse[] = [];
 
-  constructor(private spotifyApi: SpotifyApiService) { }
+  constructor(private spotifyApi: SpotifyApiService,
+     private categorySelectedService: CategorySelectedService) { }
 
   async ngOnInit(): Promise<void> {
 
@@ -22,11 +25,13 @@ export class CategoriesComponent implements OnInit {
       this.browseCatagories = response.categories.items
       // console.log(response)
     });
+
+    this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
   }
 
-  //There has to be a better way to do this which is part of the reason I'm a little confused.
   //This is how we get the selected class to go onto the genre they click as well as how what they selected
-  // gets pushed to the new selectedCategory array - Ami
+  // gets pushed to the new selectedCategory array which is sent into local storage.
+  // still a work in progress - Ami
 
 
   categorySelect(event: Event, category: Browse){
@@ -50,9 +55,7 @@ export class CategoriesComponent implements OnInit {
       } else {
         target.classList.remove('selected')
       }
-      this.selectedCategories = this.selectedCategories.filter(cat => {
-        return cat.id !== category.id
-      });
+      this.categorySelectedService.removeCategory(category);
     } else {
       if(target.tagName === 'P' || target.tagName === 'IMG'){
         target.parentElement?.classList.add('selected')
@@ -60,27 +63,17 @@ export class CategoriesComponent implements OnInit {
         target.classList.add('selected')
       }
 
-      this.selectedCategories?.push(category)
+      this.categorySelectedService.addCategory(category);
     }
-    console.log(this.selectedCategories)
+    console.log(this.categorySelectedService.returnSelectedCategories())
   }
 
-  //I don't want to keep this, I need to figure out a way to store this in their local storage because
-  //right now the selected categories they choose get displayed in the url which looks really messy
-  //The user also must choose atleast one genre they like in order to move onto the homepage
-  // I think what I have to do is make a service just for what categories they choose, store it in the 
-  // service and pull what's stored to use it for the api call to getRecommended.
-  // - Ami
-
+  
+// This is the click event that once the user has selected atleast one genre they are taken to homepage
 
   continueButton(){
-    if(this.selectedCategories.length > 0){
-      let qurey =  '?q='
-      this.selectedCategories.forEach(category => {
-          qurey = qurey+category.id+','
-      })
-      window.location.href = '/home' + qurey
+    if(this.categorySelectedService.returnSelectedCategories().length > 0){
+      window.location.href = '/home'
     }
   }
-
 }

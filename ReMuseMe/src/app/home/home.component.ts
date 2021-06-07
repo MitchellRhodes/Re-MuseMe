@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
-
+import {CategorySelectedService} from '../Services/category-selected.service';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +11,13 @@ import { SpotifyApiService } from '../spotify-api.service';
 export class HomeComponent implements OnInit {
 
 
-  constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
+  constructor(private route: ActivatedRoute, 
+    private spotifyApi: SpotifyApiService,
+    private selectedCategoryService: CategorySelectedService ) { }
 
   async ngOnInit(): Promise<void> {
-    
+
+      console.log(this.selectedCategoryService.returnSelectedCategories())
         
       }
 
