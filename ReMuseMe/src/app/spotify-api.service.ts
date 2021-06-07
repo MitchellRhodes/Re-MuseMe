@@ -264,14 +264,14 @@ export class SpotifyApiService {
     const headers = this.getHeaders();
 
     //this also needs to be able to take multiple ids
-    return this.http.get(`https://api.spotify.com/v1/albums`, headers)
+    return this.http.get(`https://api.spotify.com/v1/albums`, headers);
   }
 
-  async getAlbum() {
+  async getAlbum(id: string) {
     const headers = this.getHeaders();
 
-    return this.http.get(`https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj`, headers);
-    // return this.http.get(`https://api.spotify.com/v1/albums/${id}`, headers)
+
+    return this.http.get(`https://api.spotify.com/v1/albums/${id}`, headers);
   }
 
 
