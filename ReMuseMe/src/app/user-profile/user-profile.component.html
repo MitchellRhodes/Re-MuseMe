@@ -1,7 +1,4 @@
-<p>user-profile works!</p>
-
-<div class="userProfileContainer" *ngIf="userProfile">
-    <img class="userImage" src="{{userProfile.images[0].url}}">
-    <h2> Welcome back {{userProfile.display_name}}! </h2>
-
+<div *ngIf="userProfile">
+    <p> {{userProfile.display_name}} </p>
+    <img class="trackAlbumImage" src="{{userProfile.images[0].url}}">
 </div>

@@ -20,7 +20,6 @@
 .multipleButtons {
     display: flex;
     justify-content: center;
-    position: relative;
-    top: -65px;
-    left: -100px;
+  
 }
+

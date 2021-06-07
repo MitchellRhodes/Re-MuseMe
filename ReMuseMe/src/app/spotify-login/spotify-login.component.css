@@ -1,18 +1,23 @@
 
 .logInButton{
-    width: 75px;
+    width: 300px;
+    height: 50px;
     padding: 5px;
     border-radius: 20px;
-    background-color: black;
-    color: #78CED6;
+    background-color: #78CED6;;
+    color: black;
     border: none;
     margin:15px;
 }
 
 .spotifyLogo{
-    width:75px;
-    position: relative;
-    right: 5px;
-    margin-block-end: 2px;
+    width: auto;
+    height: 500px;
     
+}
+
+.loginButtonDiv{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }

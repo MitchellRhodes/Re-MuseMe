@@ -1,11 +1,11 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, windowToggle } from 'rxjs/operators';
 import * as sha256 from 'sha256';
-import { Observable } from 'rxjs';
-const SpotifyWebApi = require('spotify-web-api-node');
-const spotifyApi = new SpotifyWebApi();
+import { PlaylistItems } from './Interfaces/playlist-items';
+import { Posts } from './Interfaces/posts';
+
 
 
 
@@ -15,7 +15,10 @@ const spotifyApi = new SpotifyWebApi();
 export class SpotifyApiService {
 
 
+
   static accessToken: string | null = null;
+  static refreshToken: string | null = null;
+  static expiresIn: number | null = null;
 
   createJson = {
     headers: new HttpHeaders({ 'Content-type': 'application/json' })
@@ -62,9 +65,9 @@ export class SpotifyApiService {
 
 
 
-  //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
+   //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
   //the header is to let it know the content is encoded
-  getAccessToken(code: string) {
+  getAccessToken(code: string, redirect: string) {
     const codeVerifier = localStorage.getItem('codeVerifier')
 
     if (!codeVerifier) {
@@ -86,9 +89,17 @@ export class SpotifyApiService {
     })
       .subscribe((accessToken: any) => {
         console.log(accessToken);
-        SpotifyApiService.accessToken = accessToken.access_token;
-        // spotifyApi.setAccessToken = accessToken.access_token;
 
+        SpotifyApiService.accessToken = accessToken.access_token;
+        localStorage.setItem('accessToken', accessToken.access_token);
+
+        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        localStorage.setItem('refreshToken', accessToken.refresh_token);
+
+        SpotifyApiService.expiresIn = accessToken.expires_in;
+
+        
+        window.location.href = redirect;
       })
   }
 
@@ -98,7 +109,60 @@ export class SpotifyApiService {
 
 
 
+  tokenRefresh() {
+
+    let refreshToken = localStorage.getItem('refreshToken')
+
+    const body = new HttpParams()
+      .set('grant_type', 'refresh_token')
+      .set('refresh_token', `${refreshToken}`)
+      .set('client_id', '91f7955d1dba44f4aaac8ad72f54a129')
+
+    return this.http.post(`https://accounts.spotify.com/api/token`, body.toString(), {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    })
+      .subscribe((accessToken: any) => {
+        console.log(accessToken);
+
+        SpotifyApiService.accessToken = accessToken.access_token;
+        localStorage.setItem('accessToken', accessToken.access_token);
+
+        SpotifyApiService.refreshToken = accessToken.refresh_token;
+        localStorage.setItem('refreshToken', accessToken.refresh_token);
+
+        SpotifyApiService.expiresIn = accessToken.expires_in;
+      })
+  }
+
+
+
+
+
+
+
   private getHeaders() {
+
+    console.log(SpotifyApiService.accessToken)
+
+
+    if (SpotifyApiService.accessToken === null) {
+
+      let accessToken = localStorage.getItem('accessToken')
+
+      console.log(accessToken)
+
+
+      if (accessToken === null) {
+        console.log('Bad Token')
+
+        this.tokenRefresh();
+
+      } else {
+        SpotifyApiService.accessToken = accessToken;
+      }
+    }
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -131,7 +195,7 @@ export class SpotifyApiService {
       url.searchParams.set('type', `track`)
     }
 
-    if(value === 'categoryPage'){
+    if (value === 'categoryPage') {
       url.searchParams.set('type', 'artist,album,track,playlist')
     }
 
@@ -184,17 +248,17 @@ export class SpotifyApiService {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/artists`)
     let query: string = '';
-    for(let id of ids){
+    for (let id of ids) {
       query = `${query}${id},`;
     }
     url.searchParams.set('ids', `${ids}`)
 
     //this one takes multiple ids
-    return this.http.get(query.replace('+', '%20') , headers);
+    return this.http.get(query.replace('+', '%20'), headers);
   }
 
 
-  async getArtist(id: string| null): Promise<any> {
+  async getArtist(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/artists/${id}`, headers);
@@ -208,14 +272,14 @@ export class SpotifyApiService {
     const headers = this.getHeaders();
 
     //this also needs to be able to take multiple ids
-    return this.http.get(`https://api.spotify.com/v1/albums`, headers)
+    return this.http.get(`https://api.spotify.com/v1/albums`, headers);
   }
 
-  async getAlbum() {
+  async getAlbum(id: string) {
     const headers = this.getHeaders();
 
-    return this.http.get(`https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj`, headers);
-    // return this.http.get(`https://api.spotify.com/v1/albums/${id}`, headers)
+
+    return this.http.get(`https://api.spotify.com/v1/albums/${id}`, headers);
   }
 
 
@@ -239,7 +303,7 @@ export class SpotifyApiService {
   }
 
 
-  async getATrack(id:  string| null): Promise<any> {
+  async getATrack(id: string | null): Promise<any> {
     const headers = this.getHeaders();
 
     return this.http.get(`https://api.spotify.com/v1/tracks/${id}`, headers)
@@ -262,14 +326,15 @@ export class SpotifyApiService {
 
   // we have to use this to get tracks
 
-  async getRecommendations(){
+
+  async getRecommendations(seed: string){
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
-    url.searchParams.set('seed_genres', 'rock');
+    url.searchParams.set('seed_genres', seed);
     // url.searchParams.set('seed_tracks', '');
-   
 
-    return this.http.get( url.toString().replace('+', '%20') , headers)
+
+    return this.http.get(url.toString().replace('+', '%20'), headers)
   }
 
   //playlist related calls
@@ -280,35 +345,35 @@ export class SpotifyApiService {
     return this.http.get(`https://api.spotify.com/v1/me/playlists`, headers)
   }
 
-  async createPlaylist() {
+  createPlaylist(playlist: Posts, userId: string) {
     const headers = this.getHeaders();
-    //POST
+    return this.http.post(`https://api.spotify.com/v1/users/${userId}/playlists`, playlist, headers)
   }
 
 
-  async addItemsToPlaylist() {
+  addItemsToPlaylist(id: string) {
     const headers = this.getHeaders();
-    //POST
-
+    return this.http.post(`https://api.spotify.com/v1/playlists/${id}/tracks`, headers)
   }
 
 
-  async replaceItemInPlaylist() {
+  async replaceItemInPlaylist(playlistId: string, item: PlaylistItems) {
     const headers = this.getHeaders();
-    //PUT
+    return this.http.put(`https://api.spotify.com/v1/playlists/${playlistId}`, item, headers)
   }
 
 
-  async changePlaylistDetails() {
+  async changePlaylistDetails(playlist: Posts, playlistId: string) {
     const headers = this.getHeaders();
-    //PUT
+    return this.http.put(`https://api.spotify.com/v1/playlists/${playlistId}`, playlist, headers)
   }
 
-
-  async removeItemFromPlaylist() {
+  //send playlist id in 
+  removeItemFromPlaylist(id: string) {
     const headers = this.getHeaders();
-    //DELETE
-  }
 
+    return this.http.delete(`https://api.spotify.com/v1/playlists/${id}/tracks`, headers)
+
+  }
 
 }

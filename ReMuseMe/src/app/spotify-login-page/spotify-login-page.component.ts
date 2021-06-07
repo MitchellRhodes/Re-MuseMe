@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { SpotifyApiService } from '../spotify-api.service';
 
 @Component({
-  selector: 'app-spotify-login',
-  templateUrl: './spotify-login.component.html',
-  styleUrls: ['./spotify-login.component.css']
+  selector: 'app-spotify-login-page',
+  templateUrl: './spotify-login-page.component.html',
+  styleUrls: ['./spotify-login-page.component.css']
 })
-export class SpotifyLoginComponent implements OnInit {
-
-
+export class SpotifyLoginPageComponent implements OnInit {
 
   constructor(private service: SpotifyApiService) { }
 

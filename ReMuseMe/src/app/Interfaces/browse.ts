@@ -5,4 +5,5 @@ export interface Browse {
             url: string;
         }]
     country: string;
+    selected: boolean;
 }
