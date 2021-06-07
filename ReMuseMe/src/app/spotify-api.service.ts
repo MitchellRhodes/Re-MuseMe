@@ -1,7 +1,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, windowToggle } from 'rxjs/operators';
 import * as sha256 from 'sha256';
 import { Observable } from 'rxjs';
 const SpotifyWebApi = require('spotify-web-api-node');
@@ -64,7 +64,7 @@ export class SpotifyApiService {
 
   //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
   //the header is to let it know the content is encoded
-  getAccessToken(code: string) {
+  getAccessToken(code: string, redirect: string) {
     const codeVerifier = localStorage.getItem('codeVerifier')
 
     if (!codeVerifier) {
@@ -84,21 +84,35 @@ export class SpotifyApiService {
         'Content-Type': 'application/x-www-form-urlencoded'
       })
     })
-      .subscribe((accessToken: any) => {
+    .subscribe((accessToken: any) => {
         console.log(accessToken);
         SpotifyApiService.accessToken = accessToken.access_token;
+        localStorage.setItem('token', accessToken.access_token);
+        window.location.href = redirect;
         // spotifyApi.setAccessToken = accessToken.access_token;
-
-      })
+        
+    })
   }
 
   returnAccessToken() {
     return SpotifyApiService.accessToken;
   }
 
+  //This was an attempt to fix the auth token, Completely disregard and will change with Mitches working one
 
 
   private getHeaders() {
+    console.log(SpotifyApiService.accessToken)
+    if (SpotifyApiService.accessToken === null){
+      let accessToken =  localStorage.getItem('token')
+      console.log(accessToken)
+      if (accessToken === null){
+        //window.location.href = '/login';
+        console.log('BAD TOKEN');
+      } else {
+        SpotifyApiService.accessToken = accessToken;
+      }
+    }
     return {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',

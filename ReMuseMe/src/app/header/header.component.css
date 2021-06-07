@@ -7,7 +7,7 @@
     padding: 10px;
     text-decoration: none;
     position: relative;
-    top: 45px;
+    top: 25px;
     left: 25px
 
 }
@@ -20,6 +20,9 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: baseline;
-    position: fixed;
 }
 
+app-nav {
+    margin-top: 30px;
+    margin-right: 25px;
+}

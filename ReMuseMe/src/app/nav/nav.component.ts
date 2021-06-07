@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Profile } from '../Interfaces/profile';
 import { SpotifyApiService } from '../spotify-api.service';
 
 @Component({
@@ -11,12 +12,32 @@ export class NavComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
-  ngOnInit(): void {
-  }
+    userProfile: Profile | null = null;
+
+  //This is how we get all the user profile information from the spotify api to generate on the user-profile
+  //page -Ami
+
+    async ngOnInit(): Promise<void> {
+      (await this.spotifyApi.getUserProfile()).subscribe((response: any) => {
+        this.userProfile = response;
+        console.log(response)
+      })
+   }
+
+
+   //This is how we redirect them to the login page if they're not authenticated. I'm trying to figure
+   //out how to have everything on one page instead of having the user constantly be redirected
+   // would like to make the whole app a single-page app - Ami
+
 
   async getUser() {
     (await this.spotifyApi.getUserProfile()).subscribe(user => {
       console.log(user)
-    })
+    },
+    (error) => {
+      window.location.href = "/login"
+    });
+    
   }
+  
 }

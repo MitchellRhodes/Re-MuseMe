@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { SpotifyApiService } from '../spotify-api.service';
+import { Profile } from '../Interfaces/profile'
 
 @Component({
   selector: 'app-user-profile',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+  userProfile: Profile | null = null;
 
-  ngOnInit(): void {
+
+  constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
+
+  //This is how we are getting any of the users spotify profile information
+
+   async ngOnInit(): Promise<void> {
+     (await this.spotifyApi.getUserProfile()).subscribe((response: any) => {
+       this.userProfile = response;
+       console.log(response)
+     })
   }
 
 }

@@ -17,10 +17,22 @@ export class MatchmakerComponent implements OnInit {
   constructor(private route: ActivatedRoute, private spotifyApi: SpotifyApiService) { }
 
   async ngOnInit(): Promise<void> {
-    (await this.spotifyApi.getATrack('4cOdK2wGLETKBW3PvgPWqT')).subscribe((response: any) => {
+
+    //This is currently getting the track by id, I have it hard coded right now just to see exactly how
+    //the match maker component would look with everything on it. Will be getting rid of it with the 
+    // call below, getRecommendations - Ami
+
+    (await this.spotifyApi.getATrack('6S41USppfhF2c9xuNx97AN')).subscribe((response: any) => {
         this.track = response
         console.log(response)
-    });    
+    }); 
+
+    //This is how the match maker will pull songs based on the seed_genres they select on the category page
+    //they will have to atleast choose one in order for the api to pull any recommendations. It's a little
+    //messy, I am still working on how to get the seed_genres they pick that got put into a new array to
+    //this function. - Ami
+
+
     (await this.spotifyApi.getRecommendations()).subscribe((response: any) => {
       this.recommended = response
       // this.startPlayer(response.uri)

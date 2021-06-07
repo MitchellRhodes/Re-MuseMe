@@ -18,10 +18,12 @@ export class SpotifyCallbackComponent implements OnInit {
 
   }
 
+  //I'm not sure if this component is being used anymore - ami
+
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
-      console.log(queryParams)
-      this.spotifyApi.getAccessToken(queryParams.code)
+      console.log(queryParams);
+      this.spotifyApi.getAccessToken(queryParams.code, '/category');
     })
   }
 

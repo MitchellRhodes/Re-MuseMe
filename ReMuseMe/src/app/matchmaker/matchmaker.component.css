@@ -1,4 +1,7 @@
 
+/* all other styles for this page for some reason would not pull from this css file,
+they are in the global styles.css file  */
+
 .matchMakerDiv {
     width: 496px;
     height: auto;
@@ -7,6 +10,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    margin-top: 200px;
+    margin-top: 50px;
   
 };

@@ -19,6 +19,9 @@ export class SearchCriteriaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // This is the search in the navbars call to get the matching items back of what the user put in the 
+  //search - Ami
+
   async search() {
     (await this.spotifyApi.searchBar(this.query, this.selectedSearchValue)).subscribe(search => {
       console.log(search);
