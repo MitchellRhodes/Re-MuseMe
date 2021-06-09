@@ -1,16 +1,35 @@
+.userProfile {
+  display: flex;
+  flex-direction: row-reverse;
+}
 
-.container {
-    width: 200px;
-    height: 200px;
-    background-color: rgb(56, 78, 78);
-};
+.welcome{
+  color:  white;
+}
 
-.container2{
-  font-size: 500px;
-};
-
-div{
+.userImage{
+  border-radius: 50%;
   width: 100px;
-  height: 100px;
-  background-color: white;
+}
+
+
+.block1 {
+  height: 200px;
+  background-color: aqua;
+  margin: 8.5px;
+}
+
+.block2 {
+  height: 200px;
+  background-color: aqua;
+  margin: 8.5px;
+}
+
+.profile {
+  width:92vw;
+  position: fixed;
+}
+
+.playlist {
+  padding: 5px;
 }
