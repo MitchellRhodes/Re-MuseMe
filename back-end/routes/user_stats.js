@@ -69,9 +69,9 @@ userStats.get('/song-data', async (req, res) => {
 //get song data
 userStats.get('/song-data/:id', async (req, res) => {
 
-    const songData = await db.many(`select danceability, energy,acousticness,instrumentalness,valence FROM song_stats WHERE song_id = $(id); `, {
+    const songData = await db.many(`select danceability, energy, acousticness, instrumentalness, valence FROM song_stats WHERE song_id = $(id); `, {
 
-        id: +req.params.id
+        id: req.params.id
     })
 
     if (!songData) {
