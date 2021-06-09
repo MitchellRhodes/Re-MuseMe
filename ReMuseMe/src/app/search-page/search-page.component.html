@@ -1,7 +1,14 @@
-<div class = "searchResultsContainer"*ngFor = "let search of searchResults" >
+
+<div class = "searchResultsContainer" > 
+ <ul class = 'searchResultsList' >
+     <li class = 'searchResultsItem' *ngFor = "let search of searchResults">
+        <img class= "searchImage" src="{{search.album.images[0].url}}" >
+        <h1 class = 'trackInfo'> {{search.name}}</h1>
+        <p class = 'trackInfo'>{{search.artists[0].name}}</p>
+        <p class = 'trackInfo'> {{search.album.name}} </p>   
+        <button> Add to liked tracks </button>
+     </li>
+ </ul>
  
-     <h1 class = 'trackInfo'> {{search.artists[0].name}}</h1>
-     <p class = 'trackInfo'>{{search.name}}</p>
-     <p class = 'trackInfo'> {{search.album.name}} </p>   
 </div>
 
