@@ -5,6 +5,7 @@ import { Tracks } from '../Interfaces/tracks';
 import { Recommendations } from '../Interfaces/recommendations';
 import { CategorySelectedService } from '../Services/category-selected.service';
 import { Browse } from '../Interfaces/browse';
+import { DatabaseService } from '../database.service';
 
 @Component({
   selector: 'app-matchmaker',
@@ -13,13 +14,14 @@ import { Browse } from '../Interfaces/browse';
 })
 export class MatchmakerComponent implements OnInit {
   track: Tracks | null = null;
-  trackArray: Tracks [] | null = null;
+  trackArray: Tracks[] | null = null;
   recommended: Recommendations | null = null;
   selectedCategories: Browse[] = [];
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
-    private categorySelectedService: CategorySelectedService) { }
+    private categorySelectedService: CategorySelectedService,
+    private databaseService: DatabaseService) { }
 
   async ngOnInit(): Promise<void> {
 
@@ -36,31 +38,38 @@ export class MatchmakerComponent implements OnInit {
     //they will have to atleast choose one in order for the api to pull any recommendations. It's a little
     //messy, I am still working on how to get the seed_genres they pick that got put into a new array to
     //this function. - Ami
-    
+
     //Getting selected categories from service and then creating seed
-    this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
-    let seed = '';
-    this.selectedCategories.forEach((category: any, index: any) => {
-      if (index > 0){
-        seed = `${seed},${category.id}`;
-      } else {
-        seed = category.id
-      }
-    });
+    // this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
+    // let seed = '';
+    // this.selectedCategories.forEach((category: any, index: any) => {
+    //   if (index > 0) {
+    //     seed = `${seed},${category.id}`;
+    //   } else {
+    //     seed = category.id
+    //   }
+    // });
 
-    // console.log(seed);
-    
-    //Passing Seed to get recommendations from spotify api service
-    (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
-      //console.log(response)
-      //Not using yet
-      this.recommended = response
+    // // console.log(seed);
 
-      //Selecting a random track from response to play
-      let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
-      this.track = response.tracks[trackToPlayIndex];
-    }); 
+    // //Passing Seed to get recommendations from spotify api service
+    // (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
+    //   //console.log(response)
+    //   //Not using yet
+    //   this.recommended = response
+
+    //   //Selecting a random track from response to play
+    //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
+    //   this.track = response.tracks[trackToPlayIndex];
+    // });
+
+
+
+
+    (await (await this.databaseService.getAllSongs()).subscribe(songs => {
+      console.log(songs)
+    }));
   }
-  
+
 
 }

@@ -67,9 +67,6 @@ userStats.get('/song-data/:id', async (req, res) => {
 
 
 
-
-
-
 //post for new users (may hardcode beginning stats in here)
 userStats.post('/user', async (req, res) => {
 
@@ -104,7 +101,7 @@ function validateUser(user) {
 
 
 
-//post user's swipe on song if swipe true then song analytics change one way, and if flase they change another way
+//post user's swipe on song if swipe true then song analytics change one way, and if flase they change another way (NOT DONE)
 userStats.post('/swipes', async (req, res) => {
 
     const validation = validateSwipe(req.body);
@@ -127,7 +124,7 @@ userStats.post('/swipes', async (req, res) => {
     })
 
 
-    res.status(201).json(item);
+    res.status(201).json(swipe);
 
 
 });
@@ -162,8 +159,6 @@ userStats.delete('/user/:id', async (req, res) => {
 
     res.status(204).json(deleteUser);
 });
-
-
 
 
 
