@@ -13,7 +13,7 @@ const db = pgp({
 
 
 
-//get only user
+//get only the user
 userStats.get('/user/:id', async (req, res) => {
 
     const user = await db.oneOrNone(`SELECT * FROM users WHERE users.id = $(id);`, {
@@ -34,26 +34,6 @@ userStats.get('/user/:id', async (req, res) => {
 
 
 
-
-//get by id for user and their stats
-userStats.get('/user/:id', async (req, res) => {
-
-    const user = await db.many(`SELECT u.id, u.name, us.stat_name, us.stat_exp FROM users u
-    INNER JOIN user_statistics us ON u.id = us.user_id
-    WHERE u.id = $(id);`, {
-
-        id: +req.params.id
-    })
-
-
-    if (!user) {
-        return res.status(404).send('UserId not found')
-    };
-
-
-    res.status(200).json(user);
-});
-
 //get every songID for matchmaker random
 userStats.get('/song-data', async (req, res) => {
     const songIds = await db.many(`select song_id FROM song_stats`)
@@ -69,7 +49,7 @@ userStats.get('/song-data', async (req, res) => {
 //get song data
 userStats.get('/song-data/:id', async (req, res) => {
 
-    const songData = await db.many(`select danceability, energy, acousticness, instrumentalness, valence FROM song_stats WHERE song_id = $(id); `, {
+    const songData = await db.oneOrNone(`select danceability, energy, acousticness, instrumentalness, valence FROM song_stats WHERE song_id = $(id); `, {
 
         id: req.params.id
     })
@@ -119,6 +99,47 @@ function validateUser(user) {
     });
 
     return schema.validate(user);
+};
+
+
+
+
+//post user's swipe on song if swipe true then song analytics change one way, and if flase they change another way
+userStats.post('/swipes', async (req, res) => {
+
+    const validation = validateSwipe(req.body);
+
+    if (validation.error) {
+        return res.status(400).send(validation.error.details[0].message);
+    };
+
+
+    await db.none(`INSERT INTO swipes (user_id,song_id,swipe) VALUES($(user_id),$(song_id), $(swipe))`, {
+        user_id: req.body.user_id,
+        song_id: req.body.song_id,
+        swipe: req.body.swipe
+    })
+
+    const swipe = await db.one(`SELECT * FROM swipes WHERE song_id = $(song_id)`, {
+        user_id: req.body.user_id,
+        song_id: req.body.song_id,
+        swipe: req.body.swipe
+    })
+
+
+    res.status(201).json(item);
+
+
+});
+
+function validateSwipe(swipe) {
+    const schema = Joi.object({
+        user_id: Joi.number().min(1).required(),
+        song_id: Joi.string().min(1).required(),
+        swipe: Joi.boolean()
+    });
+
+    return schema.validate(swipe);
 };
 
 
