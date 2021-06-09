@@ -7,6 +7,7 @@ import { CategorySelectedService } from '../Services/category-selected.service';
 import { Browse } from '../Interfaces/browse';
 import { DatabaseService } from '../database.service';
 
+
 @Component({
   selector: 'app-matchmaker',
   templateUrl: './matchmaker.component.html',
@@ -18,6 +19,8 @@ export class MatchmakerComponent implements OnInit {
   recommended: Recommendations | null = null;
   selectedCategories: Browse[] = [];
 
+  songIdArray: string[] = [];
+
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
     private categorySelectedService: CategorySelectedService,
@@ -25,14 +28,27 @@ export class MatchmakerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
 
+
+    //gets every song id from our database to be used on this page
+    (await this.databaseService.getAllSongs()).subscribe(songs => {
+
+      this.songIdArray = songs.map((song: any) => song.song_id)
+      // console.log(this.songIdArray)
+    });
+
+    (await this.spotifyApi.getSeveralTracks(this.songIdArray)).subscribe((response: any) => {
+      // this.track = response
+      console.log(response)
+    });
+
     //This is currently getting the track by id, I have it hard coded right now just to see exactly how
     //the match maker component would look with everything on it. Will be getting rid of it with the 
     // call below, getRecommendations - Ami
 
-    /*(await this.spotifyApi.getATrack('6S41USppfhF2c9xuNx97AN')).subscribe((response: any) => {
-        this.track = response
-        console.log(response)
-    }); */
+    // (await this.spotifyApi.getATrack()).subscribe((response: any) => {
+    //   this.track = response
+    //   console.log(response)
+    // });
 
     //This is how the match maker will pull songs based on the seed_genres they select on the category page
     //they will have to atleast choose one in order for the api to pull any recommendations. It's a little
@@ -64,11 +80,6 @@ export class MatchmakerComponent implements OnInit {
     // });
 
 
-
-
-    (await (await this.databaseService.getAllSongs()).subscribe(songs => {
-      console.log(songs)
-    }));
   }
 
 
