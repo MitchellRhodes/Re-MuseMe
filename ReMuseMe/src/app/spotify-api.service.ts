@@ -1,6 +1,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map, switchMap, windowToggle } from 'rxjs/operators';
 import * as sha256 from 'sha256';
 import { PlaylistItems } from './Interfaces/playlist-items';
@@ -295,18 +296,23 @@ export class SpotifyApiService {
 
   //tracks related calls
 
-  async getSeveralTracks(ids: string[] = []) {
+  async getSeveralTracks(ids: string[]) {
     const headers = this.getHeaders();
 
     let url = new URL(`https://api.spotify.com/v1/tracks`)
     let query: string = '';
-    for (let id of ids) {
-      query = `${query}${id},`;
-    }
-    url.searchParams.set('ids', `${ids}`)
+    // for (let id of ids) {
+    //   query = query + id + '%2C'
+    //   // query = `${query}${id},`;
+    // }
+    query = ids.join('%2C')
+    console.log(ids)
+
+    // url.searchParams.set('ids', `${ids}`)
+    console.log(query)
 
     //this one takes multiple ids
-    return this.http.get(query.replace('+', '%20'), headers);
+    return this.http.get(`${url}?ids=${query}`, headers) as Observable<any>;
   }
 
 
