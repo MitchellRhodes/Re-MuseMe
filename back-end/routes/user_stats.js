@@ -55,7 +55,12 @@ userStats.get('/user/:id', async (req, res) => {
 });
 
 //get every songID for matchmaker random
-userStats
+userStats.get('/song-data', async (req, res) => {
+    const songIds = await db.many(`select song_id FROM song_stats`)
+
+    res.status(200).json(songIds)
+
+});
 
 
 
@@ -63,6 +68,7 @@ userStats
 
 //get song data
 userStats.get('/song-data/:id', async (req, res) => {
+
     const songData = await db.many(`select danceability, energy,acousticness,instrumentalness,valence FROM song_stats WHERE song_id = $(id); `, {
 
         id: +req.params.id
