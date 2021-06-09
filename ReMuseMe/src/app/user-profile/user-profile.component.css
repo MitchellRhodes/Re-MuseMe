@@ -1,6 +1,5 @@
 .userProfile {
-  display: flex;
-  flex-direction: row-reverse;
+  margin: 15px;
 }
 
 .welcome{
@@ -33,3 +32,5 @@
 .playlist {
   padding: 5px;
 }
+
+
