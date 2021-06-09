@@ -1,3 +1,7 @@
-<div *ngIf = 'searchResults'>
-    <h1>{{searchResults.id}}</h1>
+<div class = "searchResultsContainer"*ngFor = "let search of searchResults" >
+ 
+     <h1 class = 'trackInfo'> {{search.artists[0].name}}</h1>
+     <p class = 'trackInfo'>{{search.name}}</p>
+     <p class = 'trackInfo'> {{search.album.name}} </p>   
 </div>
+

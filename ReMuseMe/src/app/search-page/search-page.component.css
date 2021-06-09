@@ -1,0 +1,12 @@
+.searchResultsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: stretch;
+   
+}
+.trackInfo{
+    color: white;
+    margin: 25px;
+}

@@ -25,11 +25,11 @@ export class SearchPageComponent implements OnInit {
 
     console.log(input, type);
 
-    (await this.spotifyApi.searchBar(input, type)).subscribe(search => {
+    (await this.spotifyApi.searchBar(input, type)).subscribe((search:any) => {
       
       console.log(search);
       //update to response tracks when auth token is working
-      this.searchResults = search
+      this.searchResults = search.tracks.items
     })
 
 
