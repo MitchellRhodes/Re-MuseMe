@@ -13,49 +13,52 @@ export class CategorySelectedService {
   // this service is for pushing the selected categories the user chooses on the category page to the
   // local storage as well as removing and updating the selectedCategories Array
 
-  addCategory(category: any) {
-    if (this.selectedCategories === null) {
-      this.selectedCategories = []
-    }
-    this.selectedCategories.push(category);
-    this.updateLocalStorage(this.selectedCategories)
-  }
 
-  removeCategory(category: any) {
-    if (this.selectedCategories === null) {
-      this.selectedCategories = []
-    }
-    this.selectedCategories = this.selectedCategories.filter(cat => {
-      return cat.id !== category.id
-    });
-    this.updateLocalStorage(this.selectedCategories)
-  }
+  // category page code that will be reworked for finished product - ami
 
-  returnSelectedCategories() {
-    let storageSelected: any = localStorage.getItem('selectedCategories');
+  // addCategory(category: any) {
+  //   if (this.selectedCategories === null) {
+  //     this.selectedCategories = []
+  //   }
+  //   this.selectedCategories.push(category);
+  //   this.updateLocalStorage(this.selectedCategories)
+  // }
 
-    if (this.selectedCategories === null) {
-      this.selectedCategories = []
-    }
+  // removeCategory(category: any) {
+  //   if (this.selectedCategories === null) {
+  //     this.selectedCategories = []
+  //   }
+  //   this.selectedCategories = this.selectedCategories.filter(cat => {
+  //     return cat.id !== category.id
+  //   });
+  //   this.updateLocalStorage(this.selectedCategories)
+  // }
 
-    if (typeof storageSelected === 'object') {
-      this.selectedCategories = storageSelected
+  // returnSelectedCategories() {
+  //   let storageSelected: any = localStorage.getItem('selectedCategories');
 
-    } else {
-      this.selectedCategories = JSON.parse(storageSelected);
-    }
+  //   if (this.selectedCategories === null) {
+  //     this.selectedCategories = []
+  //   }
 
-    console.log(this.selectedCategories)
-    return this.selectedCategories
-  }
+  //   if (typeof storageSelected === 'object') {
+  //     this.selectedCategories = storageSelected
 
-  updateLocalStorage(selectedJson: any) {
+  //   } else {
+  //     this.selectedCategories = JSON.parse(storageSelected);
+  //   }
 
-    if (this.selectedCategories === null) {
-      this.selectedCategories = []
-    }
+  //   console.log(this.selectedCategories)
+  //   return this.selectedCategories
+  // }
 
-    console.log(JSON.stringify(selectedJson))
-    localStorage.setItem('selectedCategories', JSON.stringify(selectedJson))
-  }
+  // updateLocalStorage(selectedJson: any) {
+
+  //   if (this.selectedCategories === null) {
+  //     this.selectedCategories = []
+  //   }
+
+  //   console.log(JSON.stringify(selectedJson))
+  //   localStorage.setItem('selectedCategories', JSON.stringify(selectedJson))
+  // }
 }

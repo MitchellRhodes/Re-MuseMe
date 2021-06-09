@@ -15,9 +15,11 @@ export class HomeComponent implements OnInit {
     private spotifyApi: SpotifyApiService,
     private selectedCategoryService: CategorySelectedService ) { }
 
-  async ngOnInit(): Promise<void> {
+    async ngOnInit(): Promise<void> {
 
-      console.log(this.selectedCategoryService.returnSelectedCategories())
+      // category page code that will be reworked for finished product - ami
+
+      // console.log(this.selectedCategoryService.returnSelectedCategories())
         
       }
 

@@ -24,6 +24,7 @@ export class SearchCriteriaComponent implements OnInit {
 
   async search() {
     (await this.spotifyApi.searchBar(this.query, this.selectedSearchValue)).subscribe(search => {
+      
       console.log(search);
     })
   }

@@ -6,7 +6,7 @@ import { SpotifyCallbackComponent } from './spotify-callback/spotify-callback.co
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
 import { SpotifyLoginPageComponent } from './spotify-login-page/spotify-login-page.component';
-import { CategoriesComponent } from './categories/categories.component'
+// import { CategoriesComponent } from './categories/categories.component'
 
 const routes: Routes = [
   { path: 'spotify-callback', component: SpotifyCallbackComponent },
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'categories/:id', component: BrowsecategorydetailsComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: SpotifyLoginPageComponent},
-  { path: 'category', component: CategoriesComponent}
+  // { path: 'category', component: CategoriesComponent}
 ];
 
 @NgModule({
