@@ -150,7 +150,7 @@ userStats.post('/swipes', async (req, res) => {
 function validateSwipe(swipe) {
     const schema = Joi.object({
         user_id: Joi.number().min(1).required(),
-        song_id: Joi.string().min(1).required(),
+        song_id: Joi.number().min(1).required(),
         swipe: Joi.boolean()
     });
 
