@@ -580,7 +580,7 @@
 -- VALUES('66TSoVnJ1P9Tyok03zUlTr', 0.666,0.733,0.0563,0.138, 0.000349, 0.0892, 0.597);
 
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
--- VALUES('6fjHmx74TeXIqFOHiuK0FH', 0.763, 0.916, 0.049, 0.0973, 0.000792, 0.377,0.932,);
+-- VALUES('6fjHmx74TeXIqFOHiuK0FH', 0.763, 0.916, 0.049, 0.0973, 0.000792, 0.377,0.932);
   
   
   -- --PUNK
