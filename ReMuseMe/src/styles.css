@@ -16,6 +16,8 @@ body{
 }
 
 
+
+
 /* This is the styling for the music match container, for some reason it wouldn't
  pull from the css linked to the componenet */
 
@@ -40,6 +42,7 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
     border-top-right-radius: 50px;
 }
 
+
 a{
     text-decoration: none;
     color: black;
@@ -55,3 +58,10 @@ p{
     padding-top: 10px;
     
 }
+
+.entireApp {
+    position: fixed;
+    width: 100%;
+    
+}
+

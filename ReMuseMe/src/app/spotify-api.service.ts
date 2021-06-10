@@ -1,6 +1,7 @@
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map, switchMap, windowToggle } from 'rxjs/operators';
 import * as sha256 from 'sha256';
 import { PlaylistItems } from './Interfaces/playlist-items';
@@ -65,7 +66,7 @@ export class SpotifyApiService {
 
 
 
-   //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
+  //gets access token, brings in the codechallenge for the verifier part of the uri, const body sets the uri params for the post, you call it to string so it can be used as a url,then
   //the header is to let it know the content is encoded
   getAccessToken(code: string, redirect: string) {
     const codeVerifier = localStorage.getItem('codeVerifier')
@@ -98,7 +99,7 @@ export class SpotifyApiService {
 
         SpotifyApiService.expiresIn = accessToken.expires_in;
 
-        
+
         window.location.href = redirect;
       })
   }
@@ -295,11 +296,23 @@ export class SpotifyApiService {
 
   //tracks related calls
 
-  async getSeveralTracks() {
+  async getSeveralTracks(ids: string[]) {
     const headers = this.getHeaders();
 
-    //this also needs to be able to take multiple ids
-    return this.http.get(`https://api.spotify.com/v1/tracks`, headers)
+    let url = new URL(`https://api.spotify.com/v1/tracks`)
+    let query: string = '';
+    // for (let id of ids) {
+    //   query = query + id + '%2C'
+    //   // query = `${query}${id},`;
+    // }
+    query = ids.join('%2C')
+    console.log(ids)
+
+    // url.searchParams.set('ids', `${ids}`)
+    console.log(query)
+
+    //this one takes multiple ids
+    return this.http.get(`${url}?ids=${query}`, headers) as Observable<any>;
   }
 
 
@@ -327,7 +340,7 @@ export class SpotifyApiService {
   // we have to use this to get tracks
 
 
-  async getRecommendations(seed: string){
+  async getRecommendations(seed: string) {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
     url.searchParams.set('seed_genres', seed);
