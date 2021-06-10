@@ -27,13 +27,13 @@
 
 .block1 {
   height: 200px;
-  background-color: aqua;
+  background-color: rgba(120, 206, 214, .5) ;
   margin: 20px;
 }
 
 .block2 {
   height: 200px;
-  background-color: aqua;
+  background-color: rgba(120, 206, 214, .5) ;
   margin: 20px;
 }
 

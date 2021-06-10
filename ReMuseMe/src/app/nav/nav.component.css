@@ -9,7 +9,7 @@
     border-radius: 20px;
     background-color: #78CED6;
     border: none;
-    margin-left: 25px;
+    margin-left: 15px;
 }
 
 .navLinks{
@@ -17,9 +17,10 @@
     color: black;
 }
 
-.multipleButtons {
-    display: flex;
-    justify-content: center;
-  
-}
 
+.userImage{
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    padding-left: 15px;
+}

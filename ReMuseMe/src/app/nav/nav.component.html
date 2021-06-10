@@ -1,10 +1,10 @@
-<app-search-criteria> </app-search-criteria>
-<div class='multipleButtons'>
-  <button  routerLink="/user-profile" class="navButton" (click)='getUser()'>
-       Profile
-    </button>
+
+<div class='homeButton' >
   <button class="navButton">
         <a class='navLinks' routerLink="/home">Home</a>
     </button>
+</div>
+<div *ngIf="userProfile"> 
+  <img  routerLink="/user-profile" class="userImage" src="{{userProfile.images[0].url}}" (click)='getUser()'>
 </div>
 

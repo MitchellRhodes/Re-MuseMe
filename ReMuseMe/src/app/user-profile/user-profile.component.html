@@ -1,14 +1,16 @@
 <div class='profile'>
     <div class='userProfile' *ngIf="userProfile">
-        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>
         <img class="userImage" src="{{userProfile.images[0].url}}">
+        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>  
     </div>
     <div class='userInfo'>
-        <div class='block1'>
+        <h2>Your data stats</h2>
+        <div class='block1'>   
         </div>
+        <h2>Your liked songs</h2>
         <div class='block2'></div>
         <div class='block3'>
-            <input class='playlist' value='Type Playlist Here'>
+            <input class='playlist' value='Name your playlist here'>
             <button class='export'>Export To Spotify</button>
         </div>
     </div>

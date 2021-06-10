@@ -6,6 +6,7 @@ import { Recommendations } from '../Interfaces/recommendations';
 import { CategorySelectedService } from '../Services/category-selected.service';
 import { Browse } from '../Interfaces/browse';
 import { DatabaseService } from '../database.service';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -39,10 +40,12 @@ export class MatchmakerComponent implements OnInit {
       });
 
       //uses the ids found in the above to get the info from spotify
-      (await this.spotifyApi.getSeveralTracks(this.songIdArray)).subscribe((response: any) => {
-        this.track = response
-        console.log(this.track)
-      });
+
+      (await this.spotifyApi.getSeveralTracks(this.songIdArray))
+      .subscribe((response: any) => {
+        this.trackArray = response.tracks
+        console.log('trackArray' ,this.trackArray)
+      }) 
     })
 
 
