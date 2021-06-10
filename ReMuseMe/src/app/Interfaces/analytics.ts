@@ -1,5 +1,4 @@
 export interface Analytics {
-
     song_id: string,
     danceability: number,
     energy: number,

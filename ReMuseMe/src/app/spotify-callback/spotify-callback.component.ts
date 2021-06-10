@@ -23,7 +23,7 @@ export class SpotifyCallbackComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
       console.log(queryParams);
-      this.spotifyApi.getAccessToken(queryParams.code, '/category');
+      this.spotifyApi.getAccessToken(queryParams.code, '/home');
     })
   }
 
