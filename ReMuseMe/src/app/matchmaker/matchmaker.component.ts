@@ -16,7 +16,8 @@ import { map } from 'rxjs/operators';
 })
 export class MatchmakerComponent implements OnInit {
   track: Tracks | null = null;
-  trackArray: Tracks[] | null = null;
+  trackArray: Tracks[] = [];
+  currentIndex: number = 0;
   recommended: Recommendations | null = null;
   selectedCategories: Browse[] = [];
 
@@ -24,7 +25,6 @@ export class MatchmakerComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
-    private categorySelectedService: CategorySelectedService,
     private databaseService: DatabaseService) { }
 
   async ngOnInit(): Promise<void> {
@@ -43,10 +43,13 @@ export class MatchmakerComponent implements OnInit {
       (await this.spotifyApi.getSeveralTracks(this.songIdArray))
       .subscribe((response: any) => {
         this.trackArray = response.tracks
+        this.track = response.tracks[0]
+        this.currentIndex = 0
         console.log('trackArray' ,this.trackArray)
       }) 
     })
 
+    
 
     //This is currently getting the track by id, I have it hard coded right now just to see exactly how
     //the match maker component would look with everything on it. Will be getting rid of it with the 
@@ -94,8 +97,18 @@ export class MatchmakerComponent implements OnInit {
     //   this.track = response.tracks[trackToPlayIndex];
     // });
 
+    
 
   }
+
+   nextTrack(addToPlaylist: string) {
+     if(addToPlaylist === 'true'){
+       //create a service to store tracks which looked sexy
+       //someServiceCall(this.track)
+     }
+     this.currentIndex++;
+     this.track = this.trackArray[this.currentIndex]
+   }
 
 
 }

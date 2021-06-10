@@ -23,4 +23,8 @@
     width: 75px;
     border-radius: 50%;
     padding-left: 15px;
+};
+
+.hide{
+    display: none;
 }
