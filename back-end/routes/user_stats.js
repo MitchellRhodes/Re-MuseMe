@@ -32,9 +32,27 @@ userStats.get('/user/:id', async (req, res) => {
 
 
 
+//get average of all of a single user's swipe data when swipe is true
+userStats.get('/user-stats/:id', async (req, res) => {
+    const userStats = await db.oneOrNone(`SELECT s.user_id, AVG(danceability) as danceability, AVG(energy) as energy, AVG(acousticness) as acousticness,
+        AVG(instrumentalness) as instrumentalness, AVG(valence) as valence 
+        FROM swipes s
+        INNER JOIN song_stats ss ON ss.id = s.song_id
+        WHERE s.user_id = $(id) AND s.swipe = true
+        GROUP BY s.user_id;`, {
+        id: +req.params.id
+    })
+
+    if (!userStats) {
+        return res.status(404).send('UserId not found')
+    };
+
+    res.status(200).json(userStats);
+});
 
 
-//get every songID for matchmaker random
+
+//get every songID for matchmaker random(make it so that if song was swiped before it won't appear)
 userStats.get('/song-data', async (req, res) => {
 
     const songIds = await db.many(`select song_id FROM song_stats ORDER BY RANDOM() LIMIT 50`)
@@ -67,7 +85,7 @@ userStats.get('/song-data/:id', async (req, res) => {
 
 
 
-//post for new users (may hardcode beginning stats in here)
+//post for new users
 userStats.post('/user', async (req, res) => {
 
     const validation = validateUser(req.body);
@@ -132,7 +150,7 @@ userStats.post('/swipes', async (req, res) => {
 function validateSwipe(swipe) {
     const schema = Joi.object({
         user_id: Joi.number().min(1).required(),
-        song_id: Joi.string().min(1).required(),
+        song_id: Joi.number().min(1).required(),
         swipe: Joi.boolean()
     });
 
