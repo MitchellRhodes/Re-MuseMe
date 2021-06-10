@@ -26,22 +26,10 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    border-bottom-left-radius: 50%;
+   
 }
 
-.headerContainer{
-    color: #78CED6;
-    display: flex;
-    justify-content: center;
-}
-
-.matchMakerButton{
-    padding: 5px;
-    margin: 100px;
-    width: 100px; 
-    border-radius: 20px;
-    background-color: #78CED6;
-    border: none;
-}
 
 button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
     margin: 50px;
@@ -50,6 +38,25 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
 .trackAlbumImage{
     width:auto;
     height: 500px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+
+a{
+    text-decoration: none;
+    color: black;
+    text-align: center;
+
+}
+a:hover{
+    color: white;
+}
+
+p{
+    font-size: 18px;
+    padding-top: 10px;
+    
 }
 
 .entireApp {
@@ -57,3 +64,4 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
     width: 100%;
     
 }
+

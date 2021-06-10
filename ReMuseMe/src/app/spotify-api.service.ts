@@ -196,7 +196,7 @@ export class SpotifyApiService {
       url.searchParams.set('type', `track`)
     }
 
-    if (value === 'categoryPage') {
+    if (value === 'any') {
       url.searchParams.set('type', 'artist,album,track,playlist')
     }
 

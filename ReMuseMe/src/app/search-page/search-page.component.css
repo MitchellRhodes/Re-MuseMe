@@ -1,0 +1,52 @@
+
+.searchHeader{
+    display: flex;
+    justify-content: space-evenly;
+    color: black;
+    margin-top: 20px;
+}
+
+
+.trackInfo{
+    color: black;
+    margin: 25px;
+}
+
+.searchResultsList{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    
+   
+   
+}
+
+.searchResultsItem{
+    border: 1px solid black;
+    margin: 10px;
+    background-color: rgba(120, 206, 214, .3) ;
+    width: 30vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 50px;
+    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .3) 
+}
+
+.searchImage{
+    height: 200px;
+    width: 200px;
+    margin: 20px;
+}
+
+button{
+    width: 100px;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #78CED6;
+    border: none;
+    margin: 20px;
+}

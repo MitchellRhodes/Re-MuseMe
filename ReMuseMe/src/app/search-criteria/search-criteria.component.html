@@ -4,15 +4,16 @@
   <!-- 
   <mat-radio-group> -->
 
-   <mat-radio-group [(ngModel)]="selectedSearchValue" class='labels'>
+   <!-- <mat-radio-group [(ngModel)]="selectedSearchValue" class='labels'>
     <mat-radio-button value="artist" class='buttons'>Artist</mat-radio-button>
     <mat-radio-button value="album" class='buttons'>Album</mat-radio-button>
     <mat-radio-button value="track" class='buttons'>Track</mat-radio-button>
-    </mat-radio-group>
+    </mat-radio-group> -->
 
-  <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a artist/song/genre ect..." />
+  <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a song" />
   <button class="search__button" (click)=search()>Search</button>
- 
+
+
 
 
 </div>
