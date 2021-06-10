@@ -96,6 +96,8 @@ export class MatchmakerComponent implements OnInit {
 
 
   }
-
+rightSwipe() {
+  console.log('It works...');
+}
 
 }
