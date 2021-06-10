@@ -40,7 +40,7 @@ export class MatchmakerComponent implements OnInit {
 
       //uses the ids found in the above to get the info from spotify
       (await this.spotifyApi.getSeveralTracks(this.songIdArray)).subscribe((response: any) => {
-        // this.track = response
+        this.track = response
         console.log(response)
       });
     })
