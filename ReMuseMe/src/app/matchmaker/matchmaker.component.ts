@@ -40,6 +40,7 @@ export class MatchmakerComponent implements OnInit {
       });
 
       //uses the ids found in the above to get the info from spotify
+
       (await this.spotifyApi.getSeveralTracks(this.songIdArray))
       .subscribe((response: any) => {
         this.trackArray = response.tracks
@@ -67,8 +68,8 @@ export class MatchmakerComponent implements OnInit {
     //messy, I am still working on how to get the seed_genres they pick that got put into a new array to
     //this function. - Ami
 
-    
-  // getRecommended  code that will be reworked for finished product - ami
+
+    // getRecommended  code that will be reworked for finished product - ami
 
     //Getting selected categories from service and then creating seed
 
