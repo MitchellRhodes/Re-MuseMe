@@ -37,7 +37,7 @@ userStats.get('/user/:id', async (req, res) => {
 //get every songID for matchmaker random
 userStats.get('/song-data', async (req, res) => {
 
-    const songIds = await db.many(`select song_id FROM song_stats LIMIT 50`)
+    const songIds = await db.many(`select song_id FROM song_stats ORDER BY RANDOM() LIMIT 50`)
 
     res.status(200).json(songIds)
 });

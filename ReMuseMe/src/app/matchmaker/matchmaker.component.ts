@@ -32,19 +32,18 @@ export class MatchmakerComponent implements OnInit {
     //gets every song id from our database to be used on this page
     (await this.databaseService.getAllSongs()).subscribe(async songs => {
 
-      // this.songIdArray = songs.map((song: any) => song.song_id)
+
       this.songIdArray = [];
       songs.forEach((song: any) => {
         this.songIdArray.push(song.song_id)
       });
-      // this.songIdArray = ['3n3Ppam7vgaVa1iaRUc9Lp', '3twNvmDtFQtAd5gMKedhLD'];
-      // console.log(this.songIdArray)
+
+      //uses the ids found in the above to get the info from spotify
       (await this.spotifyApi.getSeveralTracks(this.songIdArray)).subscribe((response: any) => {
         // this.track = response
         console.log(response)
       });
     })
-    //uses the ids found in the above to get the info from spotify
 
 
     //This is currently getting the track by id, I have it hard coded right now just to see exactly how
