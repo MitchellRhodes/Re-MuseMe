@@ -34,8 +34,16 @@ export class TracksLikedDislikedService {
     }
 
     this.likedTrack.push(song);
-
+    this.likedTrack = this._removeDuplicates(this.likedTrack);
+    
     this.pushToLocalStorage()
+  }
+
+  //Removes array duplicates
+  _removeDuplicates(arry: any){
+    let uniqueTracks: any = [];
+    arry.map((track:Tracks) => uniqueTracks.filter((a:any) => a.id == track.id).length > 0 ? null : uniqueTracks.push(track));
+    return uniqueTracks;
   }
 
   // Adds the no track to the local storage as an array, Will be pushing the no tracks to the 
