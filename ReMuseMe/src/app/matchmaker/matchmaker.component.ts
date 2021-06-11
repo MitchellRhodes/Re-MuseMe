@@ -6,7 +6,8 @@ import { Recommendations } from '../Interfaces/recommendations';
 import { CategorySelectedService } from '../Services/category-selected.service';
 import { Browse } from '../Interfaces/browse';
 import { DatabaseService } from '../database.service';
-import { map } from 'rxjs/operators';
+import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.service';
+
 
 
 @Component({
@@ -19,13 +20,13 @@ export class MatchmakerComponent implements OnInit {
   trackArray: Tracks[] = [];
   currentIndex: number = 0;
   recommended: Recommendations | null = null;
-  selectedCategories: Browse[] = [];
-
   songIdArray: string[] = [];
+  selectedTrack: Tracks[] = [];
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
-    private databaseService: DatabaseService) { }
+    private databaseService: DatabaseService,
+    private trackslikeddislikedService: TracksLikedDislikedService) { }
 
   async ngOnInit(): Promise<void> {
 
@@ -47,8 +48,10 @@ export class MatchmakerComponent implements OnInit {
         this.track = response.tracks[0]
         this.currentIndex = 0
         console.log('trackArray' ,this.trackArray)
-      }) 
+      })
     })
+
+      
 
     
 
@@ -104,12 +107,21 @@ export class MatchmakerComponent implements OnInit {
 
    nextTrack(addToPlaylist: string) {
      if(addToPlaylist === 'true'){
-       //create a service to store tracks which looked sexy
-       //someServiceCall(this.track)
+
+       this.trackslikeddislikedService.addedToPlaylist(this.track)
+
+     } else if (addToPlaylist === 'false'){
+
+       this.trackslikeddislikedService.dislikedTracks(this.track)
+       
      }
      this.currentIndex++;
      this.track = this.trackArray[this.currentIndex]
    }
+
+
+
+  
 
 
 }
