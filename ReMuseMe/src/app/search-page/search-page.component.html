@@ -1,5 +1,5 @@
 <div class="alertBox" *ngIf = "alertBox">
-    <p>{{alertBox.name}} has been added to your liked list</p>
+    <p class = 'alertBoxText'>{{alertBox.name}} by {{alertBox.album.artists[0].name}}has been added to your liked tracks list</p>
 </div>
 <div class = "searchResultsContainer" > 
  <ul class = 'searchResultsList' >

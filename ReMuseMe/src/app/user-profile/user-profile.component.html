@@ -16,7 +16,8 @@
                     <th>Track Name</th>
                     <th>Artist Name</th>
                     <th>Album Name</th>
-                    <th>Add to playlist</th>
+                    <th></th>
+                    <th></th>
                 </tr>
 
                 <tr class = "likedTracksList"*ngFor = 'let track of likedTracks'>
@@ -26,16 +27,17 @@
                     <td><p>{{track.name}}</p></td>
                     <td><p>{{track.album.artists[0].name}}</p></td>
                     <td><p>{{track.album.name}}</p></td>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox">Add to playlist</td>
+                    <td><input type="checkbox">Remove from liked songs</td>
                 </tr>
                 
 
             </table>
         </div>
   
-        <div class='block3'>
+        <div class='createPlaylist'>
             <input class='playlist' value='Name your playlist here'>
-            <button class='export'>Export To Spotify</button>
+            <button class='export'>Export playlist to spotify</button>
         </div>
     </div>
 </div>
