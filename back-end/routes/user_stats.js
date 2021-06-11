@@ -88,17 +88,6 @@ userStats.get('/user-stats/:id', async (req, res) => {
 });
 
 
-
-//get every songID (TEMPORARY WHILE WORKING ON USER POSTING)
-userStats.get('/song-data', async (req, res) => {
-
-    const songIds = await db.many(`Select * from song_stats ORDER BY RANDOM() LIMIT 50`)
-
-    res.status(200).json(songIds)
-});
-
-
-
 //get every songID for matchmaker random that will only return songs not swiped on by user
 
 userStats.get('/user/:id/song-data', async (req, res) => {

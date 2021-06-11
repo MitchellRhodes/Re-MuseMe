@@ -1,16 +1,21 @@
 <div class='profile'>
     <div class='userProfile' *ngIf="userProfile">
         <img class="userImage" src="{{userProfile.images[0].url}}">
-        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>  
+        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>
     </div>
     <div class='userInfo'>
         <h2>Your data stats</h2>
-        <div class='userDataStatsDiv box'>   
+        <div class='userDataStatsDiv box' *ngIf='userStats'>
+            {{userStats.danceability}}
+            {{userStats.energy}}
+            {{userStats.acousticness}}
+            {{userStats.instrumentalness}}
+            {{userStats.valence}}
         </div>
-        <h2>Your liked songs</h2>  
+        <h2>Your liked songs</h2>
         <div class='likedTracksDiv box'>
-            
-            <table class ='likedTable'>
+
+            <table class='likedTable'>
                 <tr>
                     <th></th>
                     <th>Track Name</th>
@@ -20,21 +25,27 @@
                     <th></th>
                 </tr>
 
-                <tr class = "likedTracksList"*ngFor = 'let track of likedTracks'>
+                <tr class="likedTracksList" *ngFor='let track of likedTracks'>
                     <td>
-                        <img class= "likedTrackImage" src="{{track.album.images[0].url}}" >
+                        <img class="likedTrackImage" src="{{track.album.images[0].url}}">
                     </td>
-                    <td><p>{{track.name}}</p></td>
-                    <td><p>{{track.album.artists[0].name}}</p></td>
-                    <td><p>{{track.album.name}}</p></td>
+                    <td>
+                        <p>{{track.name}}</p>
+                    </td>
+                    <td>
+                        <p>{{track.album.artists[0].name}}</p>
+                    </td>
+                    <td>
+                        <p>{{track.album.name}}</p>
+                    </td>
                     <td><input type="checkbox">Add to playlist</td>
                     <td><input type="checkbox">Remove from liked songs</td>
                 </tr>
-                
+
 
             </table>
         </div>
-  
+
         <div class='createPlaylist'>
             <input class='playlist' value='Name your playlist here'>
             <button class='export'>Export playlist to spotify</button>

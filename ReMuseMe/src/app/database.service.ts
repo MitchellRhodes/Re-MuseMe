@@ -16,12 +16,6 @@ export class DatabaseService {
 
   constructor(private http: HttpClient) { }
 
-
-  async getAllSongs() {
-
-    return this.http.get(`http://localhost:3000/song-data`) as Observable<any>;
-  };
-
   async getAllSongsNotSwiped(id: number) {
     return this.http.get(`http://localhost:3000/user/${id}/song-data`);
   }
@@ -45,6 +39,10 @@ export class DatabaseService {
 
   async postUser(user: User) {
     return this.http.post(`http://localhost:3000/user`, user, this.createJson).subscribe(res => console.log(`service`, res))
+  }
+
+  async getUserStats(id: number) {
+    return this.http.get(`http://localhost:3000/user-stats/${id}`);
   }
 
 }

@@ -23,6 +23,8 @@ export class UserProfileComponent implements OnInit {
   songIdArray: string[] = [];
   selectedTrack: Tracks[] = [];
 
+  userStats: any;
+
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -38,9 +40,28 @@ export class UserProfileComponent implements OnInit {
 
     this.likedTracks = this.trackslikeddislikedService.returnSelectedTracks();
     console.log(this.likedTracks);
+
+
+
+    //get user stats and show them on init
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+
+      let userEmail = response.email;
+
+
+      //backend call for user to get id, grab track string id from local storage 
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        return (await this.databaseService.getUserStats(user.id)).subscribe(async (stats: any) => {
+          this.userStats = stats
+        })
+      })
+    });
   }
 
-
-
-
 }
+
+
+
+
+
