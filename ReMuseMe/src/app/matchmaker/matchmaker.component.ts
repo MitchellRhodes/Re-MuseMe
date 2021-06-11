@@ -38,7 +38,7 @@ export class MatchmakerComponent implements OnInit {
 
 
 
-
+    //checks our database for user with email, and if there is no email in ours that matches we create user
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
       let user = (await this.databaseService.getUsers()).pipe(map((response: any) => response.email))
 
@@ -58,27 +58,39 @@ export class MatchmakerComponent implements OnInit {
 
 
 
-    //gets every song id from our database to be used on this page
-    (await this.databaseService.getAllSongs()).subscribe(async songs => {
+    //search our database for user after getting email from spotify api so then check the swipes table for songs that have been swiped, 
+    //so we can populate with songs that have no swipe
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+
+      let userEmail = response.email;
+
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        (await this.databaseService.getAllSongsNotSwiped(user.id)).subscribe(async (songs: any) => {
 
 
-      this.songIdArray = [];
-      songs.forEach((song: any) => {
-        this.songIdArray.push(song.song_id)
+          this.songIdArray = [];
+          songs.forEach((song: any) => {
+            this.songIdArray.push(song.song_id)
+          });
+
+
+
+          //uses the ids found in the above to get the info from spotify
+
+          (await this.spotifyApi.getSeveralTracks(this.songIdArray))
+            .subscribe((response: any) => {
+              this.trackArray = response.tracks
+              this.track = response.tracks[0]
+              this.currentIndex = 0
+              console.log('trackArray', this.trackArray)
+            });
+        });
       });
 
-      //uses the ids found in the above to get the info from spotify
-
-      (await this.spotifyApi.getSeveralTracks(this.songIdArray))
-        .subscribe((response: any) => {
-          this.trackArray = response.tracks
-          this.track = response.tracks[0]
-          this.currentIndex = 0
-          console.log('trackArray', this.trackArray)
-        })
-    })
-
+    });
   };
+
 
 
 

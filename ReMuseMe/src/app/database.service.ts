@@ -22,6 +22,10 @@ export class DatabaseService {
     return this.http.get(`http://localhost:3000/song-data`) as Observable<any>;
   };
 
+  async getAllSongsNotSwiped(id: number) {
+    return this.http.get(`http://localhost:3000/user/${id}/song-data`);
+  }
+
   async postSwipe(swipe: Swipe) {
     return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => console.log(res))
   }
