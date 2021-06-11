@@ -16,9 +16,10 @@ import { map } from 'rxjs/operators';
 })
 export class MatchmakerComponent implements OnInit {
   track: Tracks | null = null;
-  trackArray: Tracks[] | null = null;
+  trackArray: Tracks[]=[];
   recommended: Recommendations | null = null;
   selectedCategories: Browse[] = [];
+  currentIndex: number = 0;
 
   songIdArray: string[] = [];
 
@@ -44,6 +45,8 @@ export class MatchmakerComponent implements OnInit {
       (await this.spotifyApi.getSeveralTracks(this.songIdArray))
       .subscribe((response: any) => {
         this.trackArray = response.tracks
+        this.track=response.tracks[0];
+        this.currentIndex = 0;
         console.log('trackArray' ,this.trackArray)
       }) 
     })
@@ -97,6 +100,15 @@ export class MatchmakerComponent implements OnInit {
 
 
   }
+rightSwipe() {
+  console.log('It works...');
+  this.currentIndex++;
+  this.track=this.trackArray[this.currentIndex]
 
-
+}
+leftSwipe() {
+  console.log('It works...again');
+  this.currentIndex++;
+  this.track=this.trackArray[this.currentIndex]
+}
 }

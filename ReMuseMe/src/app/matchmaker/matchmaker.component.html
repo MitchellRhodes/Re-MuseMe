@@ -1,22 +1,17 @@
+<div class="matchMakerContainer">
+    <button mat-fab class='mattButton' (click)='leftSwipe()'>No</button>
+    <div class="matchMakerButton" class="matchMakerDiv" *ngIf="track">
+        <img class="trackAlbumImage" src="{{track.album.images[0].url}}">
+        <p> {{track.name}}</p>
+        <p> {{track.album.artists[0].name}} </p>
+        <p> {{track.album.name}} </p>
+        <audio controls preload loop src="{{track.preview_url}}"></audio>
 
-
- 
-<div class ="matchMakerContainer">
-    <button mat-fab class='mattButton'>No</button>
-    <div  class="matchMakerButton" class = "matchMakerDiv" *ngIf ="trackArray" >
-        <img class= "trackAlbumImage" src="{{trackArray[0].album.images[0].url}}" >
-        <p> {{trackArray[0].name}}</p>
-        <p> {{trackArray[0].album.artists[0].name}} </p>
-        <p> {{trackArray[0].album.name}} </p>
-        <audio controls preload loop src="{{trackArray[0].preview_url}}"></audio>
-
-        <a href="{{trackArray[0].external_urls.spotify}}"> 
+        <a href="{{track.external_urls.spotify}}">
             <p>Want to hear more? Click here to open the song in spotify</p>
         </a>
-    </div>  
-  
-    <button  class="matchMakerButton" mat-fab class='mattButton'>Yes</button>
-   
+    </div>
+
+    <button class="matchMakerButton" mat-fab class='mattButton' (click)='rightSwipe()'>Yes</button>
+
 </div>
-
-
