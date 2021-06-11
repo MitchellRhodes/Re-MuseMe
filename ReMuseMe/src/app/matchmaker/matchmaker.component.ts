@@ -43,17 +43,17 @@ export class MatchmakerComponent implements OnInit {
       //uses the ids found in the above to get the info from spotify
 
       (await this.spotifyApi.getSeveralTracks(this.songIdArray))
-      .subscribe((response: any) => {
-        this.trackArray = response.tracks
-        this.track = response.tracks[0]
-        this.currentIndex = 0
-        console.log('trackArray' ,this.trackArray)
-      })
+        .subscribe((response: any) => {
+          this.trackArray = response.tracks
+          this.track = response.tracks[0]
+          this.currentIndex = 0
+          console.log('trackArray', this.trackArray)
+        })
     })
 
-      
 
-    
+
+
 
     //This is currently getting the track by id, I have it hard coded right now just to see exactly how
     //the match maker component would look with everything on it. Will be getting rid of it with the 
@@ -101,27 +101,40 @@ export class MatchmakerComponent implements OnInit {
     //   this.track = response.tracks[trackToPlayIndex];
     // });
 
-    
+
 
   }
 
-   nextTrack(addToPlaylist: string) {
-     if(addToPlaylist === 'true'){
+  nextTrack(addToPlaylist: string) {
+    if (addToPlaylist === 'true') {
 
-       this.trackslikeddislikedService.addedToPlaylist(this.track)
-
-     } else if (addToPlaylist === 'false'){
-
-       this.trackslikeddislikedService.dislikedTracks(this.track)
-       
-     }
-     this.currentIndex++;
-     this.track = this.trackArray[this.currentIndex]
-   }
+      this.trackslikeddislikedService.addedToPlaylist(this.track)
 
 
+    } else if (addToPlaylist === 'false') {
 
-  
+      this.trackslikeddislikedService.dislikedTracks(this.track)
+
+    }
+    this.currentIndex++;
+    this.track = this.trackArray[this.currentIndex]
+  }
+
+
+  // likedSwipe() {
+  //   this.databaseService.postSwipe({
+  //     user_id = number,
+  //     song_id = number,
+  //     swipe = true
+  //   })
+  // }
+
+  dislikedSwipe() {
+
+
+  }
+
+
 
 
 }
