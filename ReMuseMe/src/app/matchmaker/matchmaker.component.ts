@@ -7,6 +7,7 @@ import { CategorySelectedService } from '../Services/category-selected.service';
 import { Browse } from '../Interfaces/browse';
 import { DatabaseService } from '../database.service';
 import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.service';
+import { map } from 'rxjs/operators';
 
 
 
@@ -22,6 +23,7 @@ export class MatchmakerComponent implements OnInit {
   recommended: Recommendations | null = null;
   songIdArray: string[] = [];
   selectedTrack: Tracks[] = [];
+  newUser: any;
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -29,6 +31,28 @@ export class MatchmakerComponent implements OnInit {
     private trackslikeddislikedService: TracksLikedDislikedService) { }
 
   async ngOnInit(): Promise<void> {
+
+
+
+
+
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+      let user = (await this.databaseService.getUser()).pipe(map((response: any) => response.email))
+
+      let newUser = {
+        name: response.display_name,
+        email: response.email
+      }
+
+
+      if (user !== newUser.email) {
+
+        return this.databaseService.postUser(newUser);
+      }
+
+      return user;
+    });
+
 
 
     //gets every song id from our database to be used on this page
@@ -129,10 +153,10 @@ export class MatchmakerComponent implements OnInit {
   //   })
   // }
 
-  dislikedSwipe() {
+  // dislikedSwipe() {
 
 
-  }
+  // }
 
 
 

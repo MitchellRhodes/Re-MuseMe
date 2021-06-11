@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Swipe } from './Interfaces/swipe';
+import { User } from './Interfaces/user';
 
 
 @Injectable({
@@ -23,6 +24,14 @@ export class DatabaseService {
 
   async postSwipe(swipe: Swipe) {
     return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => console.log(res))
+  }
+
+  async getUser() {
+    return this.http.get(`http://localhost:3000/user`);
+  }
+
+  async postUser(user: User) {
+    return this.http.post(`http://localhost:3000/user`, user, this.createJson).subscribe(res => console.log(`service`, res))
   }
 
 }

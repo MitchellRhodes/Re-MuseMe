@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DatabaseService } from '../database.service';
+import { Profile } from '../Interfaces/profile';
+import { User } from '../Interfaces/user';
 import { SpotifyApiService } from '../spotify-api.service';
 
 @Component({
@@ -11,7 +14,8 @@ export class SpotifyLoginComponent implements OnInit {
 
 
 
-  constructor(private service: SpotifyApiService) { }
+
+  constructor(private spotifyApi: SpotifyApiService) { }
 
   ngOnInit(): void {
   }
@@ -20,7 +24,8 @@ export class SpotifyLoginComponent implements OnInit {
   // with spotify
 
   spotifyAuth() {
-    this.service.apiRedirect();
+    this.spotifyApi.apiRedirect();
   }
+
 
 }

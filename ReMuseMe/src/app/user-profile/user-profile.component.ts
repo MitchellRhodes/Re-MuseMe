@@ -14,7 +14,7 @@ import { DatabaseService } from '../database.service';
 export class UserProfileComponent implements OnInit {
 
   userProfile: Profile | null = null;
-  
+
   likedTracks: Tracks[] = [];
 
   track: Tracks | null = null;
@@ -24,24 +24,23 @@ export class UserProfileComponent implements OnInit {
   selectedTrack: Tracks[] = [];
 
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
     private trackslikeddislikedService: TracksLikedDislikedService,
     private databaseService: DatabaseService) { }
 
   //This is how we are getting any of the users spotify profile information
 
-   async ngOnInit(): Promise<void> {
-     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
-       this.userProfile = response;
-       console.log(response);
-     });
+  async ngOnInit(): Promise<void> {
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+      this.userProfile = response;
+    });
 
-     this.likedTracks = this.trackslikeddislikedService.returnSelectedTracks();
-     console.log(this.likedTracks);
+    this.likedTracks = this.trackslikeddislikedService.returnSelectedTracks();
+    console.log(this.likedTracks);
   }
 
 
-  
+
 
 }
