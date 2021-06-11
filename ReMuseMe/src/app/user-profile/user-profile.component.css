@@ -24,17 +24,36 @@
   width: 100px;
 }
 
-
-.block1 {
-  height: 200px;
+.box{
+  min-height: 200px;
   background-color: rgba(120, 206, 214, .5) ;
   margin: 20px;
+
 }
 
-.block2 {
-  height: 200px;
-  background-color: rgba(120, 206, 214, .5) ;
-  margin: 20px;
+.likedTable{
+  padding: 10px;
+}
+
+
+.likedSongsLables{
+  background-color: rgba(120, 206, 214, .5);
+  
+}
+
+tr{
+  border-bottom: 5px solid white;
+
+}
+
+.likedTrackImage{
+  height: 100px;
+  width: 100px;
+ 
+}
+
+p{
+  padding: 10px;
 }
 
 .block3 {
@@ -46,7 +65,7 @@
 
 .profile {
   width:100vw;
-  position: fixed;
+  
 }
 
 .playlist {
@@ -64,25 +83,19 @@
   align-items: center;
 }
 
-.block1 {
+.box {
   width: 75%;
 }
 
-.block2 {
-  width: 75%;
-}
 
 }
 
 @media only screen and (min-width: 1024px) {
 
-  .block1 {
+  .box {
     width: 50%;
   }
 
-  .block2 {
-    width: 50%;
-  }
 }
 
    

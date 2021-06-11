@@ -306,10 +306,10 @@ export class SpotifyApiService {
     //   // query = `${query}${id},`;
     // }
     query = ids.join('%2C')
-    console.log(ids)
+    // console.log(ids)
 
     // url.searchParams.set('ids', `${ids}`)
-    console.log(query)
+    // console.log(query)
 
     //this one takes multiple ids
     return this.http.get(`${url}?ids=${query}`, headers) as Observable<any>;

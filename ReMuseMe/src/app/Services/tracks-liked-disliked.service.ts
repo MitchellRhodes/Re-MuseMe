@@ -10,71 +10,64 @@ export class TracksLikedDislikedService {
  dislikedTrack: Tracks[] = [];
   constructor() { }
 
+  //Pull from local storage into service properties
+  getFromLocalStorage(){
+    let storageSelected: any = localStorage.getItem('likedTrack');
+    this.likedTrack = JSON.parse(storageSelected);
+    let storageDisliked: any = localStorage.getItem('dislikedTrack');
+    this.dislikedTrack = JSON.parse(storageDisliked);
+  }
+
+  //Push from service to local storage
+  pushToLocalStorage(){
+    localStorage.setItem('dislikedTrack', JSON.stringify(this.dislikedTrack))
+    localStorage.setItem('likedTrack', JSON.stringify(this.likedTrack))
+  }
+
   //Adds the yes track to the local storage as an array, Will be pushing the no tracks to the 
   // user data stats to effect avg
-  
-
   addedToPlaylist(song: any) {
+    this.getFromLocalStorage()
+
     if (this.likedTrack === null) {
       this.likedTrack = []
     }
+
     this.likedTrack.push(song);
-    this.updateLocalStorageLikedTrack(this.likedTrack)
+
+    this.pushToLocalStorage()
   }
 
   // Adds the no track to the local storage as an array, Will be pushing the no tracks to the 
   // user data stats to effect avg
-  
-
   dislikedTracks(song:any){
+    this.getFromLocalStorage()
+
     if(this.dislikedTrack === null){
       this.dislikedTrack = []
     }
+    
     this.dislikedTrack.push(song);
-    this.updateLocalStorageDislikedTrack(this.dislikedTrack)
-  }
 
-  //Updates the local storage when adding a new yes track 
-
-  updateLocalStorageLikedTrack(selectedJson: any) {
-
-    if (this.likedTrack === null) {
-      this.likedTrack = []
-    }
-
-    console.log(JSON.stringify(selectedJson))
-    localStorage.setItem('likedTrack', JSON.stringify(selectedJson))
-  }
-
-  //Updates the local storage when adding a no tack
-
-  updateLocalStorageDislikedTrack(selectedJson: any){
-    if(this.dislikedTrack === null){
-      this.dislikedTrack = []
-    }
-    console.log(JSON.stringify(selectedJson))
-    localStorage.setItem('dislikedTrack', JSON.stringify(selectedJson))
+    this.pushToLocalStorage()
   }
   
-
   //Gets the Liked track array from local storage
-
  returnSelectedTracks() {
-    let storageSelected: any = localStorage.getItem('likedTrack');
-
+    this.getFromLocalStorage();
     if (this.likedTrack === null) {
       this.likedTrack = []
-    }
-
-    if (typeof storageSelected === 'object') {
-      this.likedTrack = storageSelected
-
-    } else {
-      this.likedTrack = JSON.parse(storageSelected);
     }
 
     return this.likedTrack
   }
+
+  //Gets the Liked track array from local storage
+ returnDislikedTracks() {
+  this.getFromLocalStorage();
+    if (this.dislikedTrack === null) {
+      this.dislikedTrack = []
+    }
+    return this.dislikedTrack
+  }
 }
-
-

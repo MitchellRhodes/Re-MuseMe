@@ -5,10 +5,34 @@
     </div>
     <div class='userInfo'>
         <h2>Your data stats</h2>
-        <div class='block1'>   
+        <div class='userDataStatsDiv box'>   
         </div>
-        <h2>Your liked songs</h2>
-        <div class='block2'></div>
+        <h2>Your liked songs</h2>  
+        <div class='likedTracksDiv box'>
+            
+            <table class ='likedTable'>
+                <tr>
+                    <th></th>
+                    <th>Track Name</th>
+                    <th>Artist Name</th>
+                    <th>Album Name</th>
+                    <th>Add to playlist</th>
+                </tr>
+
+                <tr class = "likedTracksList"*ngFor = 'let track of likedTracks'>
+                    <td>
+                        <img class= "likedTrackImage" src="{{track.album.images[0].url}}" >
+                    </td>
+                    <td><p>{{track.name}}</p></td>
+                    <td><p>{{track.album.artists[0].name}}</p></td>
+                    <td><p>{{track.album.name}}</p></td>
+                    <td><input type="checkbox"></td>
+                </tr>
+                
+
+            </table>
+        </div>
+  
         <div class='block3'>
             <input class='playlist' value='Name your playlist here'>
             <button class='export'>Export To Spotify</button>
