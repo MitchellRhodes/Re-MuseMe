@@ -8,6 +8,7 @@ import { Browse } from '../Interfaces/browse';
 import { DatabaseService } from '../database.service';
 import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.service';
 import { map } from 'rxjs/operators';
+import { User } from '../Interfaces/user';
 
 
 
@@ -17,13 +18,15 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./matchmaker.component.css']
 })
 export class MatchmakerComponent implements OnInit {
-  track: Tracks | null = null;
+  track: any;
   trackArray: Tracks[] = [];
   currentIndex: number = 0;
   recommended: Recommendations | null = null;
   songIdArray: string[] = [];
   selectedTrack: Tracks[] = [];
   newUser: any;
+  newSwipe: any;
+  likedTracks: Tracks[] = [];
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -37,7 +40,7 @@ export class MatchmakerComponent implements OnInit {
 
 
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
-      let user = (await this.databaseService.getUser()).pipe(map((response: any) => response.email))
+      let user = (await this.databaseService.getUsers()).pipe(map((response: any) => response.email))
 
       let newUser = {
         name: response.display_name,
@@ -75,90 +78,60 @@ export class MatchmakerComponent implements OnInit {
         })
     })
 
+  };
 
 
 
+  //when yes is clicked, song gets swiped true and pushed to playlist through local storage.
+  async likedSwipe() {
 
-    //This is currently getting the track by id, I have it hard coded right now just to see exactly how
-    //the match maker component would look with everything on it. Will be getting rid of it with the 
-    // call below, getRecommendations - Ami
+    //gets user profile info of currently logged in user and takes just email and puts into backend call for user
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
 
-
-    // (await this.spotifyApi.getATrack()).subscribe((response: any) => {
-    //   this.track = response
-    //   console.log(response)
-    // });
+      let userEmail = response.email;
 
 
-    //This is how the match maker will pull songs based on the seed_genres they select on the category page
-    //they will have to atleast choose one in order for the api to pull any recommendations. It's a little
-    //messy, I am still working on how to get the seed_genres they pick that got put into a new array to
-    //this function. - Ami
+      //backend call for user to get id, grab track string id from local storage 
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        this.trackslikeddislikedService.addedToPlaylist(this.track);
 
 
-    // getRecommended  code that will be reworked for finished product - ami
+        //calls backend to convert track string id to number so we can store it in swipe
+        (await this.databaseService.changeSongStringIdToNumber(this.track.id)).subscribe((song: any) => {
 
-    //Getting selected categories from service and then creating seed
+          this.newSwipe = {
+            user_id: user.id,
+            song_id: song.id,
+            swipe: true
+          }
 
-
-    // this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
-    // let seed = '';
-    // this.selectedCategories.forEach((category: any, index: any) => {
-    //   if (index > 0){
-    //     seed = `${seed},${category.id}`;
-    //   } else {
-    //     seed = category.id
-    //   }
-    // });
-
-    // // console.log(seed);
-
-    // //Passing Seed to get recommendations from spotify api service
-    // (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
-    //   //console.log(response)
-    //   //Not using yet
-    //   this.recommended = response
+          console.log(`newSwipe`, this.newSwipe)
 
 
-    //   //Selecting a random track from response to play
-    //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
-    //   this.track = response.tracks[trackToPlayIndex];
-    // });
-
+          //moves track ahead in array and posts swipe to our database
+          this.currentIndex++;
+          this.track = this.trackArray[this.currentIndex]
+          this.databaseService.postSwipe(this.newSwipe)
+        }
+        )
+      })
+    })
 
 
   }
-
-  nextTrack(addToPlaylist: string) {
-    if (addToPlaylist === 'true') {
-
-      this.trackslikeddislikedService.addedToPlaylist(this.track)
-
-
-    } else if (addToPlaylist === 'false') {
-
-      this.trackslikeddislikedService.dislikedTracks(this.track)
-
-    }
-    this.currentIndex++;
-    this.track = this.trackArray[this.currentIndex]
-  }
-
-
-  // likedSwipe() {
-  //   this.databaseService.postSwipe({
-  //     user_id = number,
-  //     song_id = number,
-  //     swipe = true
-  //   })
-  // }
-
   // dislikedSwipe() {
 
 
   // }
+};
 
 
 
 
-}
+
+
+
+
+
+

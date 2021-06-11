@@ -31,21 +31,41 @@ userStats.get('/user', async (req, res) => {
 
 
 //get only the user
-userStats.get('/user/:id', async (req, res) => {
+userStats.get('/user/:email', async (req, res) => {
 
-    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.id = $(id);`, {
+    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.email = $(email);`, {
 
-        id: +req.params.id
+        email: req.params.email
     })
 
 
     if (!user) {
-        return res.status(404).send('UserId not found')
+        return res.status(404).send('User Email not found')
     };
 
 
     res.status(200).json(user);
 });
+
+
+
+//turn song id string into songId number
+userStats.get('/song/:id', async (req, res) => {
+
+    const songId = await db.oneOrNone(`SELECT id FROM song_stats WHERE song_id = $(id);`, {
+
+        id: req.params.id
+    })
+
+
+    if (!songId) {
+        return res.status(404).send('songId not found')
+    };
+
+
+    res.status(200).json(songId);
+});
+
 
 
 
