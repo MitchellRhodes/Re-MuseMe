@@ -1,0 +1,2 @@
+export PGPASSWORD='Bombay@ticonderoga38'
+export PGUSER=postgres
