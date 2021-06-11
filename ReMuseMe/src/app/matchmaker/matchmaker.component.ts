@@ -106,24 +106,50 @@ export class MatchmakerComponent implements OnInit {
             swipe: true
           }
 
-          console.log(`newSwipe`, this.newSwipe)
-
-
-          //moves track ahead in array and posts swipe to our database
+          //moves track ahead in array and posts swipe as true to our database and to users playlist
           this.currentIndex++;
           this.track = this.trackArray[this.currentIndex]
           this.databaseService.postSwipe(this.newSwipe)
         }
         )
       })
-    })
-
-
+    });
   }
-  // dislikedSwipe() {
 
 
-  // }
+  async dislikedSwipe() {
+
+    //gets user profile info of currently logged in user and takes just email and puts into backend call for user
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+
+      let userEmail = response.email;
+
+
+      //backend call for user to get id, grab track string id from local storage 
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        this.trackslikeddislikedService.dislikedTracks(this.track);
+
+
+        //calls backend to convert track string id to number so we can store it in swipe
+        (await this.databaseService.changeSongStringIdToNumber(this.track.id)).subscribe((song: any) => {
+
+          this.newSwipe = {
+            user_id: user.id,
+            song_id: song.id,
+            swipe: false
+          }
+
+
+          //moves track ahead in array and posts swipe to our database as false
+          this.currentIndex++;
+          this.track = this.trackArray[this.currentIndex]
+          this.databaseService.postSwipe(this.newSwipe)
+        }
+        )
+      })
+    });
+  };
 };
 
 
