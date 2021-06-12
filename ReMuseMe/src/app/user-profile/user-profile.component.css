@@ -32,8 +32,10 @@ h2{
 /* all three div stlying */
 .box{
   min-height: 200px;
-  background-color: rgba(120, 206, 214, .5) ;
+  background-color: rgba(120, 206, 214, .8) ;
+  box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
   margin: 20px;
+  border: 1px solid black;
 
 }
 
@@ -45,7 +47,7 @@ h2{
 
 
 .likedSongsLables{
-  background-color: rgba(120, 206, 214, .5);
+  background-color: rgba(120, 206, 214, .8);
   
 }
 
@@ -82,6 +84,7 @@ p{
     border-radius: 20px;
     background-color: #78CED6;
     border: none;
+    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
 }
 
 button:hover{
@@ -97,7 +100,7 @@ hr{
 .recommendedResults{
   border: 1px solid black;
   margin: 10px;
-  background-color: rgba(120, 206, 214, .3) ;
+  background-color: rgba(120, 206, 214, .8) ;
   width: 30vw;
   display: flex;
   justify-content: center;
@@ -105,7 +108,7 @@ hr{
   align-items: center;
   text-align: center;
   border-radius: 50px;
-  box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .3) 
+  box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
 }
 
 .recommendedImage{
@@ -132,6 +135,7 @@ hr{
   border: none;
   padding: 10px;
   margin: 10px;
+  box-shadow: 5px 5px 5px 5px rgba(27, 72, 77, 0.5) 
 }
 
 .dataStatsChart{

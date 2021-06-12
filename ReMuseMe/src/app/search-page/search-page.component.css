@@ -25,7 +25,7 @@
 .searchResultsItem{
     border: 1px solid black;
     margin: 10px;
-    background-color: rgba(120, 206, 214, .3) ;
+    background-color: rgba(120, 206, 214, .8) ;
     width: 30vw;
     display: flex;
     justify-content: center;
@@ -33,7 +33,7 @@
     align-items: center;
     text-align: center;
     border-radius: 50px;
-    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .3) 
+    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
 }
 
 .searchImage{
@@ -68,6 +68,7 @@ button{
     background-color: #78CED6;
     border: none;
     margin: 20px;
+    box-shadow: 5px 5px 5px 5px rgba(27, 72, 77, 0.5) 
 }
 
 button:hover{
