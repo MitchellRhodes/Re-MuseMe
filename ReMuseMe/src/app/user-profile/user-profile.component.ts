@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Profile } from '../Interfaces/profile'
@@ -6,7 +6,7 @@ import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.se
 import { Tracks } from '../Interfaces/tracks';
 import { DatabaseService } from '../database.service';
 import { Recommendations } from '../Interfaces/recommendations';
-import {Chart} from 'node_modules/chart.js';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit {
   recommended: any;
 
   alertBox: Tracks | null = null;
-  chart:any;
+  chart: any;
   stats: [] = [];
   statName: any;
   statValue: any;
@@ -56,13 +56,13 @@ export class UserProfileComponent implements OnInit {
   //This is how we are getting any of the users spotify profile information
 
   async ngOnInit(): Promise<void> {
-   
+
 
     this.getTracksFromLocalStorage();
 
     this.getUserStats();
 
-  
+
   };
 
 
@@ -170,28 +170,27 @@ export class UserProfileComponent implements OnInit {
     this.randomizedMinMax2 = minMaxArray[random]
   }
 
-  getStatNameAndValue(object: any){
+  getStatNameAndValue(object: any) {
     let stats = Object.keys(object);
-    for(let i = 0; i <= stats.length; i++){
+    for (let i = 0; i <= stats.length; i++) {
       this.statName = stats[i];
       this.statValue = object[stats[i]];
-      console.log("statArray",this.statName, this.statValue);
+      console.log("statArray", this.statName, this.statValue);
     }
-    
-    
+
+
 
   }
 
   nextTrack(addToPlaylist: Tracks) {
     this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
     this.alertBox = addToPlaylist;
-    setTimeout( () => {
+    setTimeout(() => {
       this.alertBox = null
     }, 3000)
 
   }
 
- 
 
 
 
@@ -199,32 +198,33 @@ export class UserProfileComponent implements OnInit {
 
 
 
-// getRecommended  code that will be reworked for finished product - ami
 
-    //Getting selected categories from service and then creating seed
+  // getRecommended  code that will be reworked for finished product - ami
 
-
-    // this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
-    // let seed = '';
-    // this.selectedCategories.forEach((category: any, index: any) => {
-    //   if (index > 0){
-    //     seed = ${seed},${category.id};
-    //   } else {
-    //     seed = category.id
-    //   }
-    // });
-
-    // // console.log(seed);
-
-    // //Passing Seed to get recommendations from spotify api service
-    // (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
-    //   //console.log(response)
-    //   //Not using yet
-    //   this.recommended = response
+  //Getting selected categories from service and then creating seed
 
 
-    //   //Selecting a random track from response to play
-    //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
-    //   this.track = response.tracks[trackToPlayIndex];
-    // });
+  // this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
+  // let seed = '';
+  // this.selectedCategories.forEach((category: any, index: any) => {
+  //   if (index > 0){
+  //     seed = ${seed},${category.id};
+  //   } else {
+  //     seed = category.id
+  //   }
+  // });
+
+  // // console.log(seed);
+
+  // //Passing Seed to get recommendations from spotify api service
+  // (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
+  //   //console.log(response)
+  //   //Not using yet
+  //   this.recommended = response
+
+
+  //   //Selecting a random track from response to play
+  //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
+  //   this.track = response.tracks[trackToPlayIndex];
+  // });
 }
