@@ -3,12 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Tracks } from '../Interfaces/tracks';
 import { Recommendations } from '../Interfaces/recommendations';
-import { CategorySelectedService } from '../Services/category-selected.service';
-import { Browse } from '../Interfaces/browse';
 import { DatabaseService } from '../database.service';
 import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.service';
 import { map } from 'rxjs/operators';
-import { User } from '../Interfaces/user';
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
+
+
 
 
 

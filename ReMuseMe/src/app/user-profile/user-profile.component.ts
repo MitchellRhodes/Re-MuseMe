@@ -181,6 +181,8 @@ export class UserProfileComponent implements OnInit {
 
 
   }
+  //adds the liked track they hit yes on to the local storage as well as when the user hits 
+  //add to liked tracks from the search page and the recommended tracks
 
   nextTrack(addToPlaylist: Tracks) {
     this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
@@ -191,6 +193,11 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  // Removes a track from the users liked tracks when clicking the x button
+
+  removeTrack(removeFromPlaylist: Tracks){
+    this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
+  }
 
 
 

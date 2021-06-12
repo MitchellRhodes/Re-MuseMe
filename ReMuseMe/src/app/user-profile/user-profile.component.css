@@ -59,6 +59,7 @@ tr{
 .likedTrackImage{
   height: 100px;
   width: 100px;
+  margin: 25px;
  
 }
 
@@ -80,11 +81,14 @@ p{
   text-align: center;
 }
 
-.export{
+.removeButton{
     border-radius: 20px;
-    background-color: #78CED6;
+    margin: 50px;
+    width: 100px;
+    background-color: #0c0c0c;
+    color: white;
     border: none;
-    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
+    box-shadow: 3px 3px 3px 3px rgba(3, 3, 3, .5) 
 }
 
 button:hover{

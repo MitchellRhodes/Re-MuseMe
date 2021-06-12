@@ -8,6 +8,7 @@ export class TracksLikedDislikedService {
 
  likedTrack: Tracks[] = [];
  dislikedTrack: Tracks[] = [];
+ track: Tracks | null = null;
   constructor() { }
 
   //Pull from local storage into service properties
@@ -32,6 +33,7 @@ export class TracksLikedDislikedService {
     if (this.likedTrack === null) {
       this.likedTrack = []
     }
+
 
     this.likedTrack.push(song);
     this.likedTrack = this._removeDuplicates(this.likedTrack);
@@ -77,5 +79,20 @@ export class TracksLikedDislikedService {
       this.dislikedTrack = []
     }
     return this.dislikedTrack
+  }
+
+  //Removes liked track from track array in local storage when clicking the x button
+  removeFromLikedTracks(song: any) {
+    this.getFromLocalStorage()
+
+    if (this.likedTrack === null) {
+      this.likedTrack = []
+    }
+
+    let index = this.likedTrack.findIndex(track => track.id === song.id);
+    this.likedTrack.splice(index, 1)
+    this.pushToLocalStorage()
+
+    return this.likedTrack
   }
 }
