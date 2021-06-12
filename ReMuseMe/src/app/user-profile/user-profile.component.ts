@@ -5,6 +5,7 @@ import { Profile } from '../Interfaces/profile'
 import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.service';
 import { Tracks } from '../Interfaces/tracks';
 import { DatabaseService } from '../database.service';
+import { Recommendations } from '../Interfaces/recommendations';
 
 @Component({
   selector: 'app-user-profile',
@@ -34,6 +35,8 @@ export class UserProfileComponent implements OnInit {
 
   randomizedMinMax1: any;
   randomizedMinMax2: any;
+
+  recommended: any;
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -112,10 +115,17 @@ export class UserProfileComponent implements OnInit {
     }
 
 
-    console.log(this.randomValue1, this.randomValue2)
+    // console.log(this.randomValue1, this.randomValue2)
 
+    (await this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2))
+      .subscribe((response: any) => {
+        this.recommended = response.tracks
+        this.track = response.tracks[0]
+        console.log(this.track)
 
-    return this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2);
+      })
+
+    // return this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2);
   }
 
   randomProperty1(object: any) {
