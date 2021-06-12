@@ -48,7 +48,6 @@ h2{
   
 }
 
-<<<<<<< HEAD
 tr{
   border-bottom: 5px solid white;
 
@@ -68,10 +67,6 @@ p{
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-=======
-.profile {
-  width:100vw;
->>>>>>> main
 }
 
 .playlist {
