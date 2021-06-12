@@ -4,14 +4,11 @@
   margin-top: 15px;
   margin-bottom: 20px;
 
-  position: relative;
   
 }
 
 .welcome{
   color:  white;
-  float: right;
-  position: absolute;
   right:0;
   bottom: 0;
   margin: 0;
@@ -51,6 +48,7 @@ h2{
   
 }
 
+<<<<<<< HEAD
 tr{
   border-bottom: 5px solid white;
 
@@ -70,6 +68,10 @@ p{
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+=======
+.profile {
+  width:100vw;
+>>>>>>> main
 }
 
 .playlist {

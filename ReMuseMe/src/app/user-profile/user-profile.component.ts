@@ -191,40 +191,4 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-
-
-
-
-
-
-
-
-  // getRecommended  code that will be reworked for finished product - ami
-
-  //Getting selected categories from service and then creating seed
-
-
-  // this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
-  // let seed = '';
-  // this.selectedCategories.forEach((category: any, index: any) => {
-  //   if (index > 0){
-  //     seed = ${seed},${category.id};
-  //   } else {
-  //     seed = category.id
-  //   }
-  // });
-
-  // // console.log(seed);
-
-  // //Passing Seed to get recommendations from spotify api service
-  // (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
-  //   //console.log(response)
-  //   //Not using yet
-  //   this.recommended = response
-
-
-  //   //Selecting a random track from response to play
-  //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
-  //   this.track = response.tracks[trackToPlayIndex];
-  // });
 }
