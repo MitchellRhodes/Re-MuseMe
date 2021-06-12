@@ -26,10 +26,11 @@ export interface Tracks{
         uri: string,
         
     },
-        name: string,
-        uri: string,
-        preview_url: string,
-        external_urls:{
-            spotify: string,
-        }
+    name: string,
+    uri: string,
+    preview_url: string,
+    external_urls:{
+        spotify: string,
+    },
+    id: string
 }

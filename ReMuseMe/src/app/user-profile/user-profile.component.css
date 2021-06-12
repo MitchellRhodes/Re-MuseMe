@@ -16,38 +16,132 @@
   
 }
 
+h2{
+  text-align: center;
+  color: white;
+}
+
 .userImage{
   border-radius: 50%;
   width: 100px;
 }
 
-
-.block1 {
-  height: 200px;
-  background-color: rgba(120, 206, 214, .5) ;
+/* all three div stlying */
+.box{
+  min-height: 200px;
+  background-color: rgba(120, 206, 214, .8) ;
+  box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
   margin: 20px;
+  border: 1px solid black;
+
 }
 
-.block2 {
-  height: 200px;
-  background-color: rgba(120, 206, 214, .5) ;
-  margin: 20px;
+/* liked tracks div styling */
+
+.likedTable{
+  padding: 10px;
 }
 
-.block3 {
+
+.likedSongsLables{
+  background-color: rgba(120, 206, 214, .8);
+  
+}
+
+tr{
+  border-bottom: 5px solid white;
+
+}
+
+.likedTrackImage{
+  height: 100px;
+  width: 100px;
+ 
+}
+
+p{
+  padding: 10px;
+}
+
+.createPlaylist {
   display: flex;
   justify-content: space-between;
-  margin-left: 30px;
-  margin-right:35px;
-}
-
-.profile {
-  width:100vw;
+  margin-bottom: 20px;
 }
 
 .playlist {
   padding: 5px;
-  width: 75%;
+  width: 500px;
+  margin-right: 15px;
+  border-radius: 50px;
+  text-align: center;
+}
+
+.export{
+    border-radius: 20px;
+    background-color: #78CED6;
+    border: none;
+    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
+}
+
+button:hover{
+  background-color: white;
+  color: black;
+}
+
+hr{
+  width: 100%;
+}
+
+/* recommended div styling */
+
+.recommendedResults{
+  border: 1px solid black;
+  margin: 10px;
+  background-color: rgba(120, 206, 214, .8) ;
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: 50px;
+  box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
+}
+
+.recommendedImage{
+  height: 200px;
+  width: 200px;
+  margin: 20px;
+}
+
+.recommendedInfo{
+  color: black;
+  margin: 25px;
+}
+
+.recommendedList{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.addButton{
+  border-radius: 20px;
+  background-color: #0c0c0c;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 5px 5px 5px 5px rgba(27, 72, 77, 0.5) 
+}
+
+.dataStatsChart{
+  display: block;
+  width: 500px;
+  height: 500px;
+
 }
 
 
@@ -60,25 +154,19 @@
   align-items: center;
 }
 
-.block1 {
+.box {
   width: 75%;
 }
 
-.block2 {
-  width: 75%;
-}
 
 }
 
 @media only screen and (min-width: 1024px) {
 
-  .block1 {
+  .box {
     width: 50%;
   }
 
-  .block2 {
-    width: 50%;
-  }
 }
 
    

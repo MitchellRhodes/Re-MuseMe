@@ -1,4 +1,6 @@
-
+<div class="alertBox" *ngIf = "alertBox">
+    <p class = 'alertBoxText'>{{alertBox.name}} by {{alertBox.album.artists[0].name}}has been added to your liked tracks list</p>
+</div>
 <div class = "searchResultsContainer" > 
  <ul class = 'searchResultsList' >
      <li class = 'searchResultsItem' *ngFor = "let search of searchResults">
@@ -6,7 +8,7 @@
         <h1 class = 'trackInfo'> {{search.name}}</h1>
         <p class = 'trackInfo'>{{search.artists[0].name}}</p>
         <p class = 'trackInfo'> {{search.album.name}} </p>   
-        <button> Add to liked tracks </button>
+        <button (click)="likedSwipe()"> Add to liked tracks </button>
      </li>
  </ul>
  

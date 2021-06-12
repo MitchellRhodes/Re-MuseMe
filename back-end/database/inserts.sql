@@ -1,3 +1,4 @@
+
 -- --country songs
 
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
@@ -131,10 +132,6 @@
 
 
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
--- VALUES('0lHAMNU8RGiIObScrsRgmP', 0.604, 0.788, 0.103, 0.0678, 0.153, 0.127, 0.301);
-
-
--- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
 -- VALUES('1MtUq6Wp1eQ8PC6BbPCj8P',  0.664, 0.714, 0.111, 0.0353, 0.000008,0.0843, 0.71);
 
 
@@ -180,7 +177,7 @@
   
   
   
- -- --METAL
+--   --METAL
   
   
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
@@ -289,7 +286,7 @@
   
   
   
- -- --ROCK
+--   --ROCK
 
 
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
@@ -303,9 +300,6 @@
 
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
 -- VALUES('5WzgYEfub2pFJAAZfrOult',  0.473,0.757, 0.0483, 0.000727, 0, 0.151, 0.425);
-
--- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
--- VALUES('0tyR7Bu9P086aWBFZ4QJoo', 0.369,0.845, 0.0611, 0.0493, 0, 0.416, 0.782);
 
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
 -- VALUES('3YizZrPzNxTpH3OSJASvB7', 0.558, 0.666, 0.0321,0.0119,0,0.0981, 0.44);
@@ -550,7 +544,7 @@
   
   
   
- -- --FUNK
+--   --FUNK
   
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)
 -- VALUES('1LiwqqaafXkNQuWGW3HeId', 0.85, 0.818, 0.0904, 0.124, 0.00135, 0.349, 0.839);
@@ -583,7 +577,7 @@
 -- VALUES('6fjHmx74TeXIqFOHiuK0FH', 0.763, 0.916, 0.049, 0.0973, 0.000792, 0.377,0.932);
   
   
-  -- --PUNK
+--   --PUNK
   
   
 -- INSERT INTO song_stats(song_id, danceability, energy,speechiness,acousticness,instrumentalness, liveness,valence)

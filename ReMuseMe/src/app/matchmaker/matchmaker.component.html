@@ -1,5 +1,7 @@
 <div class="matchMakerContainer">
-    <button mat-fab class='mattButton' (click)='leftSwipe()'>No</button>
+    <div *ngIf="track">
+        <button mat-fab class='mattButton' (click)='dislikedSwipe()'>No</button>
+    </div>
     <div class="matchMakerButton" class="matchMakerDiv" *ngIf="track">
         <img class="trackAlbumImage" src="{{track.album.images[0].url}}">
         <p> {{track.name}}</p>
@@ -11,7 +13,8 @@
             <p>Want to hear more? Click here to open the song in spotify</p>
         </a>
     </div>
-
-    <button class="matchMakerButton" mat-fab class='mattButton' (click)='rightSwipe()'>Yes</button>
+    <div *ngIf="track">
+        <button class="matchMakerButton" mat-fab class='mattButton' (click)="likedSwipe()">Yes</button>
+    </div>
 
 </div>

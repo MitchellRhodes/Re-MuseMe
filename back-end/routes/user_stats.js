@@ -13,22 +13,59 @@ const db = pgp({
 
 
 
+//get all users
+userStats.get('/user', async (req, res) => {
+
+    const users = await db.many(`SELECT * FROM users;`)
+
+
+    if (!users) {
+        return res.status(404).send('Users not found')
+    };
+
+
+    res.status(200).json(users);
+});
+
+
+
+
 //get only the user
-userStats.get('/user/:id', async (req, res) => {
+userStats.get('/user/:email', async (req, res) => {
 
-    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.id = $(id);`, {
+    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.email = $(email);`, {
 
-        id: +req.params.id
+        email: req.params.email
     })
 
 
     if (!user) {
-        return res.status(404).send('UserId not found')
+        return res.status(404).send('User Email not found')
     };
 
 
     res.status(200).json(user);
 });
+
+
+
+//turn song id string into songId number
+userStats.get('/song/:id', async (req, res) => {
+
+    const songId = await db.oneOrNone(`SELECT id FROM song_stats WHERE song_id = $(id);`, {
+
+        id: req.params.id
+    })
+
+
+    if (!songId) {
+        return res.status(404).send('songId not found')
+    };
+
+
+    res.status(200).json(songId);
+});
+
 
 
 
@@ -51,15 +88,22 @@ userStats.get('/user-stats/:id', async (req, res) => {
 });
 
 
+//get every songID for matchmaker random that will only return songs not swiped on by user
 
-//get every songID for matchmaker random(make it so that if song was swiped before it won't appear)
-userStats.get('/song-data', async (req, res) => {
+userStats.get('/user/:id/song-data', async (req, res) => {
 
-    const songIds = await db.many(`select song_id FROM song_stats ORDER BY RANDOM() LIMIT 50`)
+    const songIds = await db.many(`Select * from song_stats
+    where NOT id IN (
+        select swipes.song_id from swipes 
+        INNER JOIN song_stats ON swipes.song_id = song_stats.id
+        where song_stats.id = swipes.song_id AND user_id = $(id) )
+        ORDER BY RANDOM()
+        LIMIT 50`, {
+        id: +req.params.id
+    });
 
     res.status(200).json(songIds)
 });
-
 
 
 
@@ -95,27 +139,62 @@ userStats.post('/user', async (req, res) => {
     };
 
 
-    await db.none(`INSERT INTO users (name) VALUES($(name))`, {
-        name: req.body.name
+    await db.none(`INSERT INTO users (name,email) VALUES($(name), $(email))`, {
+        name: req.body.name,
+        email: req.body.email
     })
 
-    const user = await db.one(`SELECT * FROM users WHERE name = $(name)`, {
-        name: req.body.name
+    const user = await db.one(`SELECT * FROM users WHERE email = $(email)`, {
+        name: req.body.name,
+        email: req.body.email
     })
 
 
     res.status(201).json(user);
 });
 
+
+
+
 //uses joi to insure the user is posted with the correct info 
 function validateUser(user) {
     const schema = Joi.object({
         name: Joi.string().min(1).required(),
+        email: Joi.string().min(1).required()
     });
 
     return schema.validate(user);
 };
 
+
+
+//change user info
+userStats.put('/user/:id', async (req, res) => {
+
+    const user = await db.oneOrNone(`SELECT * FROM users WHERE users.id = $(id);`, {
+
+        id: +req.params.id
+    })
+
+    if (!user) {
+        return res.status(404).send('UserID not found')
+    }
+
+    const validation = validateUser(req.body);
+
+    if (validation.error) {
+        return res.status(400).send(validation.error.details[0].message);
+    };
+
+    await db.oneOrNone(`UPDATE users SET name = $(name), email = $(email) WHERE id = $(id) `, {
+        id: +req.params.id,
+        name: req.body.name,
+        email: req.body.email
+    })
+
+    res.status(200).json(user);
+
+});
 
 
 
@@ -146,6 +225,8 @@ userStats.post('/swipes', async (req, res) => {
 
 
 });
+
+
 
 function validateSwipe(swipe) {
     const schema = Joi.object({

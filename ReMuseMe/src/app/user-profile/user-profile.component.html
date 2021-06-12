@@ -1,17 +1,81 @@
+
+
 <div class='profile'>
     <div class='userProfile' *ngIf="userProfile">
         <img class="userImage" src="{{userProfile.images[0].url}}">
-        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>  
+        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>
     </div>
-    <div class='userInfo'>
         <h2>Your data stats</h2>
-        <div class='block1'>   
+        <hr>
+    
+
+
+    <div class='userInfo'>
+        
+        <div class='userDataStatsDiv box' *ngIf='userStats'>
+            <p>danceability: {{userStats.danceability}}</p>
+            <p>energy: {{userStats.energy}}</p>
+            <p>acousticness: {{userStats.acousticness}}</p>
+            <p>instrumentalness: {{userStats.instrumentalness}}</p>
+            <p>valence: {{userStats.valence}}</p>
         </div>
         <h2>Your liked songs</h2>
-        <div class='block2'></div>
-        <div class='block3'>
+        <hr>
+        <div class='likedTracksDiv box'>
+
+            <table class='likedTable'>
+                <tr>
+                    <th></th>
+                    <th>Track Name</th>
+                    <th>Artist Name</th>
+                    <th>Album Name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                <tr class="likedTracksList" *ngFor='let track of likedTracks'>
+                    <td>
+                        <img class="likedTrackImage" src="{{track.album.images[0].url}}">
+                    </td>
+                    <td>
+                        <p>{{track.name}}</p>
+                    </td>
+                    <td>
+                        <p>{{track.album.artists[0].name}}</p>
+                    </td>
+                    <td>
+                        <p>{{track.album.name}}</p>
+                    </td>
+                    <td><input type="checkbox">Add to playlist</td>
+                    <td><input type="checkbox">Remove from liked songs</td>
+                </tr>
+
+
+            </table>
+        </div>
+
+        <div class='createPlaylist'>
             <input class='playlist' value='Name your playlist here'>
-            <button class='export'>Export To Spotify</button>
+            <button class='export'>Export playlist to spotify</button>
         </div>
     </div>
+</div>
+
+<h2>Tracks we recommend based off of your liked tracks</h2>
+<hr>
+<div class = "recommendedContainer" >
+    
+    <ul class = 'recommendedList'>
+        <li  class = 'recommendedResults' *ngFor='let track of trackArray'>
+            <img class= "recommendedImage" src="{{track.album.images[0].url}}">
+            <p class = "recommendedInfo">{{track.name}}</p>
+            <p class = "recommendedInfo">{{track.album.artists[0].name}}</p>
+            <p class = "recommendedInfo">{{track.album.name}}</p>
+            <audio controls preload loop src="{{track.preview_url}}"></audio>
+            <a href="{{track.external_urls.spotify}}">
+                <p>Want to hear more? Click here to open the song in spotify</p>
+            </a>
+            <button class='addButton' (click)="nextTrack(track)"> Add to liked tracks </button>
+        </li>
+    </ul>
 </div>

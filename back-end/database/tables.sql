@@ -1,6 +1,8 @@
+
 -- CREATE TABLE users(
 -- 	id SERIAL PRIMARY KEY,
--- 	name text NOT NULL
+-- 	name text NOT NULL,
+--     email varchar(255) NOT NULL UNIQUE
 -- );
 
 
@@ -21,5 +23,5 @@
 -- 	id SERIAL PRIMARY KEY,
 -- 	user_id integer NOT NULL REFERENCES users on DELETE CASCADE,
 -- 	song_id integer NOT NULL REFERENCES song_stats ON DELETE CASCADE,
--- 	swipe boolean NOT NULL
+-- 	swipe boolean NULL
 -- );

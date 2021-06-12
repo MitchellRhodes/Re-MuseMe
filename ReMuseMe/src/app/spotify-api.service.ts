@@ -226,12 +226,6 @@ export class SpotifyApiService {
     return this.http.get(`https://api.spotify.com/v1/recommendations/available-genre-seeds`, headers)
   }
 
-
-  async getRecommendsBasedOnSeeds() {
-    const headers = this.getHeaders();
-    //this one may be really complicated and based on our match game, so we will leave it for now
-  }
-
   //user related calls
 
 
@@ -306,10 +300,10 @@ export class SpotifyApiService {
     //   // query = `${query}${id},`;
     // }
     query = ids.join('%2C')
-    console.log(ids)
+    // console.log(ids)
 
     // url.searchParams.set('ids', `${ids}`)
-    console.log(query)
+    // console.log(query)
 
     //this one takes multiple ids
     return this.http.get(`${url}?ids=${query}`, headers) as Observable<any>;
@@ -340,13 +334,13 @@ export class SpotifyApiService {
   // we have to use this to get tracks
 
 
-  async getRecommendations(seed: string) {
+  async getRecommendations(seed1: string, seed2: string, stat1: string, stat2: string, statName1: string, statName2: string, minMax1: string, minMax2: string) {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
-    url.searchParams.set('seed_genres', seed);
-    // url.searchParams.set('seed_tracks', '');
-
-
+    url.searchParams.set('seed_tracks', `${seed1},${seed2}`);
+    url.searchParams.set(`${minMax1}_${statName1}`, stat1);
+    url.searchParams.set(`${minMax2}_${statName2}`, stat2);
+    console.log(url);
     return this.http.get(url.toString().replace('+', '%20'), headers)
   }
 
