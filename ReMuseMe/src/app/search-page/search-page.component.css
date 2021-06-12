@@ -65,7 +65,8 @@ button{
     width: 100px;
     padding: 5px;
     border-radius: 20px;
-    background-color: #78CED6;
+    background-color: #0c0c0c;
+    color: white;
     border: none;
     margin: 20px;
     box-shadow: 5px 5px 5px 5px rgba(27, 72, 77, 0.5) 
@@ -73,4 +74,5 @@ button{
 
 button:hover{
     background-color: white;
+    color: black;
 }

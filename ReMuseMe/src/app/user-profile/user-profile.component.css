@@ -89,6 +89,7 @@ p{
 
 button:hover{
   background-color: white;
+  color: black;
 }
 
 hr{
@@ -131,7 +132,8 @@ hr{
 
 .addButton{
   border-radius: 20px;
-  background-color: #78CED6;
+  background-color: #0c0c0c;
+  color: white;
   border: none;
   padding: 10px;
   margin: 10px;

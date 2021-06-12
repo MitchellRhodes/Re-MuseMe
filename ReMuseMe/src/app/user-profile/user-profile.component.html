@@ -71,10 +71,11 @@
             <p class = "recommendedInfo">{{track.name}}</p>
             <p class = "recommendedInfo">{{track.album.artists[0].name}}</p>
             <p class = "recommendedInfo">{{track.album.name}}</p>
-            <button class='addButton' (click)="nextTrack(track)"> Add to liked tracks </button>
+            <audio controls preload loop src="{{track.preview_url}}"></audio>
             <a href="{{track.external_urls.spotify}}">
                 <p>Want to hear more? Click here to open the song in spotify</p>
             </a>
+            <button class='addButton' (click)="nextTrack(track)"> Add to liked tracks </button>
         </li>
     </ul>
 </div>
