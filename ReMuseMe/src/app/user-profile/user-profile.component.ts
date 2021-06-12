@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SpotifyApiService } from '../spotify-api.service';
 import { Profile } from '../Interfaces/profile'
@@ -6,6 +6,7 @@ import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.se
 import { Tracks } from '../Interfaces/tracks';
 import { DatabaseService } from '../database.service';
 import { Recommendations } from '../Interfaces/recommendations';
+import {Chart} from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-user-profile',
@@ -38,6 +39,15 @@ export class UserProfileComponent implements OnInit {
 
   recommended: any;
 
+  alertBox: Tracks | null = null;
+  chart:any;
+  stats: [] = [];
+  statName: any;
+  statValue: any;
+  @ViewChild('canvas') canvas: ElementRef | any;
+
+
+
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
     private trackslikeddislikedService: TracksLikedDislikedService,
@@ -46,12 +56,13 @@ export class UserProfileComponent implements OnInit {
   //This is how we are getting any of the users spotify profile information
 
   async ngOnInit(): Promise<void> {
+   
 
     this.getTracksFromLocalStorage();
 
     this.getUserStats();
 
-
+  
   };
 
 
@@ -100,8 +111,10 @@ export class UserProfileComponent implements OnInit {
 
     let randomStat2 = this.randomProperty2(this.userStats);
 
+
     this.randomMinMax1();
     this.randomMinMax2();
+    this.getStatNameAndValue(this.userStats);
 
 
 
@@ -119,9 +132,10 @@ export class UserProfileComponent implements OnInit {
 
     (await this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2))
       .subscribe((response: any) => {
-        this.recommended = response.tracks
+        this.trackArray = response.tracks
         this.track = response.tracks[0]
-        console.log(this.track)
+        this.currentIndex = 0
+        console.log('trackArray', this.trackArray)
 
       })
 
@@ -156,7 +170,32 @@ export class UserProfileComponent implements OnInit {
     this.randomizedMinMax2 = minMaxArray[random]
   }
 
-}
+  getStatNameAndValue(object: any){
+    let stats = Object.keys(object);
+    for(let i = 0; i <= stats.length; i++){
+      this.statName = stats[i];
+      this.statValue = object[stats[i]];
+      console.log("statArray",this.statName, this.statValue);
+    }
+    
+    
+
+  }
+
+  nextTrack(addToPlaylist: Tracks) {
+    this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
+    this.alertBox = addToPlaylist;
+    setTimeout( () => {
+      this.alertBox = null
+    }, 3000)
+
+  }
+
+ 
+
+
+
+
 
 
 
@@ -188,4 +227,4 @@ export class UserProfileComponent implements OnInit {
     //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
     //   this.track = response.tracks[trackToPlayIndex];
     // });
-
+}

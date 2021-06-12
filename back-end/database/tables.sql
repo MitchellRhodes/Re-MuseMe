@@ -2,7 +2,7 @@
 -- CREATE TABLE users(
 -- 	id SERIAL PRIMARY KEY,
 -- 	name text NOT NULL,
---     email varchar(255) NOT NULL UNIQUE;
+--     email varchar(255) NOT NULL UNIQUE
 -- );
 
 
