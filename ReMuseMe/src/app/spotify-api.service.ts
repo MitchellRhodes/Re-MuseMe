@@ -334,12 +334,12 @@ export class SpotifyApiService {
   // we have to use this to get tracks
 
 
-  async getRecommendations(seed1: string, seed2: string, stat1: string, stat2: string, statName1: string, statName2: string) {
+  async getRecommendations(seed1: string, seed2: string, stat1: string, stat2: string, statName1: string, statName2: string, minMax1: string, minMax2: string) {
     const headers = this.getHeaders();
     let url = new URL(`https://api.spotify.com/v1/recommendations`)
     url.searchParams.set('seed_tracks', `${seed1},${seed2}`);
-    url.searchParams.set(`${statName1}`, stat1);
-    url.searchParams.set(`${statName2}`, stat2);
+    url.searchParams.set(`${minMax1}_${statName1}`, stat1);
+    url.searchParams.set(`${minMax2}_${statName2}`, stat2);
     console.log(url);
     return this.http.get(url.toString().replace('+', '%20'), headers)
   }

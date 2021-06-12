@@ -32,6 +32,9 @@ export class UserProfileComponent implements OnInit {
   randomStatName2: any;
   randomValue2: any;
 
+  randomizedMinMax1: any;
+  randomizedMinMax2: any;
+
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
     private trackslikeddislikedService: TracksLikedDislikedService,
@@ -94,6 +97,10 @@ export class UserProfileComponent implements OnInit {
 
     let randomStat2 = this.randomProperty2(this.userStats);
 
+    this.randomMinMax1();
+    this.randomMinMax2();
+
+
 
     //this is so we do not get user id or the same random stat
     if (this.randomStatName2 === this.randomStatName1) {
@@ -104,10 +111,11 @@ export class UserProfileComponent implements OnInit {
       randomStat2 = this.randomProperty2(this.userStats);
     }
 
+
     console.log(this.randomValue1, this.randomValue2)
 
 
-    return this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2);
+    return this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2);
   }
 
   randomProperty1(object: any) {
@@ -125,6 +133,19 @@ export class UserProfileComponent implements OnInit {
     this.randomValue2 = object[stats[random]];
 
   }
+
+  randomMinMax1() {
+    let minMaxArray = ['min', 'max']
+    let random = Math.floor(Math.random() * (minMaxArray.length));
+    this.randomizedMinMax1 = minMaxArray[random]
+  }
+
+  randomMinMax2() {
+    let minMaxArray = ['min', 'max']
+    let random = Math.floor(Math.random() * (minMaxArray.length));
+    this.randomizedMinMax2 = minMaxArray[random]
+  }
+
 }
 
 
