@@ -1,24 +1,18 @@
-
-
 <div class='profile'>
     <div class='userProfile' *ngIf="userProfile">
         <img class="userImage" src="{{userProfile.images[0].url}}">
         <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>
     </div>
-        <h2>Your data stats</h2>
-        <hr>
-    
+    <h2>Your data stats</h2>
+    <hr>
+
 
 
     <div class='userInfo'>
-        
-        <div class='userDataStatsDiv box' *ngIf='userStats'>
-            <p>danceability: {{userStats.danceability}}</p>
-            <p>energy: {{userStats.energy}}</p>
-            <p>acousticness: {{userStats.acousticness}}</p>
-            <p>instrumentalness: {{userStats.instrumentalness}}</p>
-            <p>valence: {{userStats.valence}}</p>
-        </div>
+
+
+        <div id="chartContainer" class="chart box"></div>
+
         <h2>Your liked songs</h2>
         <hr>
         <div class='likedTracksDiv box'>
@@ -63,14 +57,14 @@
 
 <h2>Tracks we recommend based off of your liked tracks</h2>
 <hr>
-<div class = "recommendedContainer" >
-    
-    <ul class = 'recommendedList'>
-        <li  class = 'recommendedResults' *ngFor='let track of trackArray'>
-            <img class= "recommendedImage" src="{{track.album.images[0].url}}">
-            <p class = "recommendedInfo">{{track.name}}</p>
-            <p class = "recommendedInfo">{{track.album.artists[0].name}}</p>
-            <p class = "recommendedInfo">{{track.album.name}}</p>
+<div class="recommendedContainer">
+
+    <ul class='recommendedList'>
+        <li class='recommendedResults' *ngFor='let track of trackArray'>
+            <img class="recommendedImage" src="{{track.album.images[0].url}}">
+            <p class="recommendedInfo">{{track.name}}</p>
+            <p class="recommendedInfo">{{track.album.artists[0].name}}</p>
+            <p class="recommendedInfo">{{track.album.name}}</p>
             <audio controls preload loop src="{{track.preview_url}}"></audio>
             <a href="{{track.external_urls.spotify}}">
                 <p>Want to hear more? Click here to open the song in spotify</p>

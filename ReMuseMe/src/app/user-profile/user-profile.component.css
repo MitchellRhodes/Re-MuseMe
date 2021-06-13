@@ -144,6 +144,11 @@ hr{
 
 }
 
+.chart{
+  height: 370px; 
+  width: 100%;
+}
+
 
 @media only screen and (min-width: 768px) {
 
