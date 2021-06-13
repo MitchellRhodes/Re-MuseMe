@@ -45,6 +45,9 @@ export class SearchPageComponent implements OnInit {
 
   }
 
+
+
+  //when yes is clicked, song gets swiped true and pushed to playlist through local storage.
   async likedSwipe() {
 
     //gets user profile info of currently logged in user and takes just email and puts into backend call for user
@@ -78,5 +81,21 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-}
+
+  //adds the liked track they hit yes on to the local storage as well as when the user hits 
+  //add to liked tracks from the search page and the recommended tracks
+
+  
+
+    nextTrack(addToPlaylist: Tracks) {
+        this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
+        this.alertBox = addToPlaylist;
+        setTimeout( () => {
+          this.alertBox = null
+        }, 3000)
+    }
+  
+  }
+ 
+
 

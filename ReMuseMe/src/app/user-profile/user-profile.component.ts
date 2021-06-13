@@ -185,7 +185,7 @@ export class UserProfileComponent implements OnInit {
   //add to liked tracks from the search page and the recommended tracks
 
   nextTrack(addToPlaylist: Tracks) {
-    this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
+    this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null
