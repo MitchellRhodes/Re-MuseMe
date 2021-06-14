@@ -41,9 +41,11 @@ h2{
 
 /* liked tracks div styling */
 
+/* causing the squash issue */
+/* 
 .likedTable{
   width: 30vw;
-}
+} */
 
 table {
   width: 50px;
