@@ -1,0 +1,29 @@
+/* .logo{
+    font-family: 'Libre Barcode 39 Text', cursive;
+    font-size: 75px;
+    font-weight: lighter;
+    color: #78CED6;
+    padding: 10px;
+    text-decoration: none;
+    position: relative;
+    left: 25px;
+}
+
+.navContainer{
+    width: 100%;
+    height: 125px;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+
+app-nav {
+    margin-top: 30px;
+    margin-right: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */

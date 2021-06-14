@@ -41,9 +41,6 @@ h2{
 
 /* liked tracks div styling */
 
-.likedTable{
-  width: 30vw;
-}
 
 table {
   width: 50px;
@@ -167,7 +164,7 @@ hr{
   align-items: center;
 }
 
-.box {
+.chart{
   width: 75%;
 }
 

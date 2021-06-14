@@ -15,5 +15,6 @@ h2{
 
 p{
     color: white;
+    text-align: center;
 }
  /* All styling to the button goes in the spotify-login css not the spotify-login-page css  */

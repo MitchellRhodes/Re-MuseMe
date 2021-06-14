@@ -1,9 +1,9 @@
-.searchResultsContainer {
+/* .searchResultsContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 .searchHeader{
     display: flex;
     justify-content: space-evenly;
@@ -11,44 +11,39 @@
     margin-top: 20px;
 }
 
-
+/*changed font-size from 10px*/
 .trackInfo{
     color: black;
-    font-size: 10px;
+    font-size: 25px;
 }
 
 .searchResultsList{
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
-    flex-direction: row;
-    width:100%;
-    margin-top: 150px;
-    padding: 0;
-    
-   
-   
+    flex-direction: column;
+    padding-inline-start: 0;
 }
 
+/*changed margin from 5, width from 40vw*/
 .searchResultsItem{
     border: 1px solid black;
     margin: 5px;
-    background-color: rgba(120, 206, 214, .8) ;
-    width: 40vw;
+    width: 80vw;
+    background-color: rgba(120, 206, 214, .8);
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     text-align: center;
     border-radius: 50px;
-    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
+    box-shadow: 5px 5px 5px 5px rgb(3 3 3 / 50%);
 }
 
-
+/*changed height and width from 75*/
 .searchImage{
-    height: 75px;
-    width: 75px;
+    height: 200px;
+    width: 200px;
     margin: 20px;
 }
 
@@ -86,4 +81,25 @@ button{
 button:hover{
     background-color: white;
     color: black;
+}
+
+@media only screen and (min-width: 768px) {
+
+ 
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .searchResultsList{
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .searchResultsItem{
+        margin: 10px;
+        width: 30vw;
+    
+    }
 }
