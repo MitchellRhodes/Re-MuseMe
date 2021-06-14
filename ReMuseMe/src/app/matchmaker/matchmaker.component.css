@@ -20,7 +20,19 @@ they are in the global styles.css file  */
 };
 
 
+button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
+    margin: 25px;
+}
 
+button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.yesButton:hover{
+    background-color: green;
+    color: white;
+} 
+
+button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.noButton:hover{
+    background-color: red;
+    color: white;
+} 
 
 @media only screen and (min-width: 768px) {
 

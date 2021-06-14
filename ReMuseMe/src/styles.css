@@ -46,14 +46,6 @@ body{
     align-items: center;
 }
 
-/*was at 25px, changed to 50 to match original*/
-button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
-    margin: 25px;
-}
-
-button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent:hover{
-    background-color: white;
-}
 
 /*these were helping make matchmaker tiny, i changed to this it was at 100,100,25,20*/
 .trackAlbumImage{
