@@ -44,8 +44,7 @@ export class UserProfileComponent implements OnInit {
   stats: [] = [];
   statName: any;
   statValue: any;
-  @ViewChild('canvas') canvas: ElementRef | any;
-
+ 
 
 
   constructor(private route: ActivatedRoute,
@@ -141,6 +140,8 @@ export class UserProfileComponent implements OnInit {
 
     // return this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2);
   }
+
+  //do a for loop to get the name2 and value2 in one function
 
   randomProperty1(object: any) {
     let stats = Object.keys(object);
