@@ -12,12 +12,11 @@ they are in the global styles.css file  */
     align-items: center;
     margin-top: 15px;
     margin-bottom: 15px;
-    /* border-radius: 10px; */
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     border-top-left-radius: 100px;
     border-top-right-radius: 100px;
-    box-shadow: 10px 10px 10px 10px rgba(3, 3, 3, .7) 
+    box-shadow: 10px 10px 10px 10px rgba(3, 3, 3, .7);
 };
 
 

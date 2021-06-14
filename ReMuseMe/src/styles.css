@@ -31,18 +31,23 @@ body{
 /* This is the styling for the music match container, for some reason it wouldn't
  pull from the css linked to the componenet */
 
-  .matchMakerContainer { 
+
+ 
+ .matchMakerContainer { 
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     border-bottom-left-radius: 50%; 
+    
+    
+    
     /* width: 100%; 
     height: 100%;
-    text-align: center;
-     */
+    text-align: center; */
+    
    
- } 
+ }  
 
 /*was at 25px, changed to 50 to match original*/
 button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
@@ -54,7 +59,6 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
     width:500px;
     height: 500px;
     border-radius: 50px;
-    margin-top: 50px;
 }
 
 
@@ -77,7 +81,7 @@ p{
 /*moved some stuff back to header from here*/
 
 
-/* app-header{
+ /* app-header{
     width: 100%;
     height: 125px;
     background-color: black;
@@ -85,26 +89,26 @@ p{
     flex-direction: column;
     justify-content: space-between;
    
-}
+} */
 
-.userImage {
+/* .userImage {
     width: 10px;
     height:10px;
-}  */
+}   */
 
 @media only screen and (min-width: 768px) {
-    /* .navContainer {
+     /* .navContainer {
         width: 100%;
-    } */
+    }  */
 
-    /* app-nav {
+     /* app-nav {
         width: 100%;
 
-    } */
+    }  */
 
-    /* .logo {
+     /* .logo {
         width:100%;
-    } */
+    }  */
 
 
 }
