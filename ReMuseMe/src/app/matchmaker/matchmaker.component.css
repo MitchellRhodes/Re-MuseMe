@@ -35,6 +35,7 @@ they are in the global styles.css file  */
 
     .matchMakerDiv {
         width:500px;
+        margin-top: 25px;
     };
 
 

@@ -30,11 +30,8 @@ import { MatchmakerComponent } from './matchmaker/matchmaker.component';
 import { HeaderComponent } from './header/header.component';
 import { NavComponent } from './nav/nav.component';
 import { SearchCriteriaComponent } from './search-criteria/search-criteria.component';
-import { FooterComponent } from './footer/footer.component';
-import { BrowsecategorydetailsComponent } from './browsecategorydetails/browsecategorydetails.component';
-import { CategorydialogComponent } from './categorydialog/categorydialog.component';
 import { SpotifyLoginPageComponent } from './spotify-login-page/spotify-login-page.component';
-import { CategoriesComponent } from './categories/categories.component';
+
 
 
 
@@ -54,11 +51,8 @@ import { CategoriesComponent } from './categories/categories.component';
     HeaderComponent,
     NavComponent,
     SearchCriteriaComponent,
-    FooterComponent,
-    BrowsecategorydetailsComponent,
-    CategorydialogComponent,
     SpotifyLoginPageComponent,
-    CategoriesComponent,
+ 
     
   ],
   imports: [
