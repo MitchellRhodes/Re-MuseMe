@@ -9,11 +9,11 @@ We want to help people expand their music taste in a way that they normally woul
 
 Who is the target user? 
 
-Anyone who is passionate about music and want to expand their music taste instead of listening to the same old same old
+Anyone who is passionate about music and want to expand their music taste instead of listening to the same old same old.
 
 What are the core features / functionality?
 
-A tinderesk multiple choice between a few songs to see what the user likes so then we can "match" a genre based on genres and sub genres. Creating Playlist that recommend different countries based off if you like a genre that are the same, example "You like pop, you should try EuroPop". User profiles that save your liked genres/songs/artist. User login and authentication
+A tinder-esque multiple choice between a few songs to see what the user likes so then we can "match" a genre based on genres and sub genres. Creating Playlist that recommend different countries based off if you like a genre that are the same, example "You like pop, you should try EuroPop". User profiles that save your liked genres/songs/artist. User login and authentication
 
 What are your stretch goals for features /  functionality? 
 
@@ -21,4 +21,4 @@ Genre and Artist details pages giving the background and history. Reviews on the
 
 What API do you plan to use? 
   
-Spottily API,
+Spotify API,

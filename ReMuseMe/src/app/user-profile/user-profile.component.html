@@ -1,24 +1,18 @@
-
-
 <div class='profile'>
     <div class='userProfile' *ngIf="userProfile">
         <img class="userImage" src="{{userProfile.images[0].url}}">
         <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>
     </div>
-        <h2>Your data stats</h2>
-        <hr>
-    
+    <h2>Your data stats</h2>
+    <hr>
+
 
 
     <div class='userInfo'>
-        
-        <div class='userDataStatsDiv box' *ngIf='userStats'>
-            <p>danceability: {{userStats.danceability}}</p>
-            <p>energy: {{userStats.energy}}</p>
-            <p>acousticness: {{userStats.acousticness}}</p>
-            <p>instrumentalness: {{userStats.instrumentalness}}</p>
-            <p>valence: {{userStats.valence}}</p>
-        </div>
+
+
+        <div id="chartContainer" class="chart box"></div>
+
         <h2>Your liked songs</h2>
         <hr>
         <div class='likedTracksDiv box'>
@@ -56,6 +50,7 @@
 
 <h2>Tracks we recommend based off of your liked tracks</h2>
 <hr>
+
 
 <div class="recommendedAlertBox" *ngIf = "alertBox">
     <p class = 'recommendedAlertBoxText'>{{alertBox.name}} by {{alertBox.album.artists[0].name}}has been added to your liked tracks list</p>

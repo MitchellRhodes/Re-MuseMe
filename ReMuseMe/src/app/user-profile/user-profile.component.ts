@@ -6,7 +6,7 @@ import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.se
 import { Tracks } from '../Interfaces/tracks';
 import { DatabaseService } from '../database.service';
 import { Recommendations } from '../Interfaces/recommendations';
-
+import * as CanvasJs from 'canvasjs'
 
 @Component({
   selector: 'app-user-profile',
@@ -42,9 +42,14 @@ export class UserProfileComponent implements OnInit {
   alertBox: Tracks | null = null;
   chart: any;
   stats: [] = [];
+
   statName: any;
   statValue: any;
  
+
+  statArray: number[] = [];
+
+
 
 
   constructor(private route: ActivatedRoute,
@@ -60,6 +65,8 @@ export class UserProfileComponent implements OnInit {
     this.getTracksFromLocalStorage();
 
     this.getUserStats();
+
+
 
 
   };
@@ -113,7 +120,7 @@ export class UserProfileComponent implements OnInit {
 
     this.randomMinMax1();
     this.randomMinMax2();
-    this.getStatNameAndValue(this.userStats);
+    this.putStatValueInArray(this.userStats);
 
 
 
@@ -126,8 +133,7 @@ export class UserProfileComponent implements OnInit {
       randomStat2 = this.randomProperty2(this.userStats);
     }
 
-
-    // console.log(this.randomValue1, this.randomValue2)
+    this.createChart(this.statArray);
 
     (await this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2))
       .subscribe((response: any) => {
@@ -138,7 +144,6 @@ export class UserProfileComponent implements OnInit {
 
       })
 
-    // return this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2);
   }
 
   //do a for loop to get the name2 and value2 in one function
@@ -171,19 +176,30 @@ export class UserProfileComponent implements OnInit {
     this.randomizedMinMax2 = minMaxArray[random]
   }
 
-  getStatNameAndValue(object: any) {
+
+
+  putStatValueInArray(object: any) {
+
     let stats = Object.keys(object);
+
     for (let i = 0; i <= stats.length; i++) {
-      this.statName = stats[i];
-      this.statValue = object[stats[i]];
-      console.log("statArray", this.statName, this.statValue);
+
+      let statValue = object[stats[i]];
+
+      if (statValue < 1) {
+
+        let statNumber = statValue.split(`,`).map((x: any) => +x)
+        this.statArray.push(statNumber)
+      }
+
     }
 
-
-
+    return this.statArray;
   }
   //adds the liked track they hit yes on to the local storage as well as when the user hits 
   //add to liked tracks from the search page and the recommended tracks
+
+
 
   nextTrack(addToPlaylist: Tracks) {
     this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
@@ -194,45 +210,39 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+
   // Removes a track from the users liked tracks when clicking the x button
 
   removeTrack(removeFromPlaylist: Tracks){
     this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
+    
+  //make sure it is called after  putStatValueInArray
+  createChart(array: number[]) {
+    let chart = new CanvasJs.Chart("chartContainer", {
+      animationEnabled: true,
+      title: {
+        text: "User Stats",
+        horizontalAlign: "left"
+      },
+      data: [{
+        type: "doughnut",
+        startAngle: 60,
+        //innerRadius: 60,
+        indexLabelFontSize: 17,
+        indexLabel: "{label} - #percent%",
+        toolTipContent: "<b>{label}:</b> {y} (#percent%)",
+        dataPoints: [
+          { y: (array[0] * 100), label: "Danceability" },
+          { y: (array[1] * 100), label: "Energy" },
+          { y: (array[2] * 100), label: "Acousticness" },
+          { y: (array[3] * 100), label: "Instrumentalness" },
+          { y: (array[4] * 100), label: "Valence" }
+        ]
+      }]
+    });
+    chart.render();
+
+  
   }
 
-
-
-
-
-
-
-
-  // getRecommended  code that will be reworked for finished product - ami
-
-  //Getting selected categories from service and then creating seed
-
-
-  // this.selectedCategories = this.categorySelectedService.returnSelectedCategories();
-  // let seed = '';
-  // this.selectedCategories.forEach((category: any, index: any) => {
-  //   if (index > 0){
-  //     seed = ${seed},${category.id};
-  //   } else {
-  //     seed = category.id
-  //   }
-  // });
-
-  // // console.log(seed);
-
-  // //Passing Seed to get recommendations from spotify api service
-  // (await this.spotifyApi.getRecommendations(seed)).subscribe((response: any) => {
-  //   //console.log(response)
-  //   //Not using yet
-  //   this.recommended = response
-
-
-  //   //Selecting a random track from response to play
-  //   let trackToPlayIndex = (Math.floor(Math.random() * response.tracks.length) + 1) - 1
-  //   this.track = response.tracks[trackToPlayIndex];
-  // });
 }
