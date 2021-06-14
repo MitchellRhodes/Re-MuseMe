@@ -4,11 +4,14 @@
   margin-top: 15px;
   margin-bottom: 20px;
 
+  position: relative;
   
 }
 
 .welcome{
   color:  white;
+  float: right;
+  position: absolute;
   right:0;
   bottom: 0;
   margin: 0;
@@ -21,7 +24,7 @@ h2{
   color: white;
 }
 
-.userImage{
+.userProfleImage{
   border-radius: 50%;
   width: 100px;
 }
@@ -31,7 +34,7 @@ h2{
   min-height: 200px;
   background-color: rgba(120, 206, 214, .8) ;
   box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
-  margin: 20px;
+  margin: 5px;
   border: 1px solid black;
 
 }
@@ -40,6 +43,11 @@ h2{
 
 .likedTable{
   padding: 10px;
+  width: 30vw;
+}
+
+table {
+  width: 50px;
 }
 
 
@@ -48,10 +56,6 @@ h2{
   
 }
 
-tr{
-  border-bottom: 5px solid white;
-
-}
 
 .likedTrackImage{
   height: 100px;
@@ -79,13 +83,12 @@ p{
 }
 
 .removeButton{
-  border-radius: 20px;
-  margin: 50px;
-  width: 100px;
-  background-color: #0c0c0c;
-  color: white;
-  border: none;
-  box-shadow: 3px 3px 3px 3px rgba(3, 3, 3, .5) 
+    border-radius: 20px;
+    margin: 10px;
+    background-color: #0c0c0c;
+    color: white;
+    border: none;
+    box-shadow: 3px 3px 3px 3px rgba(3, 3, 3, .5) 
 }
 
 button:hover{
@@ -101,9 +104,8 @@ hr{
 
 .recommendedResults{
   border: 1px solid black;
-  margin: 10px;
+  margin: 5px;
   background-color: rgba(120, 206, 214, .8) ;
-  width: 30vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -129,6 +131,8 @@ hr{
     align-items: center;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content: center;
+    padding-inline-start: 0;
 }
 
 .addButton{
@@ -145,20 +149,12 @@ hr{
   display: block;
   width: 500px;
   height: 500px;
+  margin-top: 18px;
 
 }
 
 .chart{
-  height: 370px; 
-  width: 100%;
-}
-
-
-.userInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 425px;
+  margin-top: 50px;
 }
 
 .recommendedAlertBox{
@@ -174,7 +170,6 @@ hr{
   box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
   border: 1px solid black;
   border-radius: 25px;
-  border: 1px solid black;
 }
 
 .recommendedAlertBoxText{
@@ -203,6 +198,10 @@ hr{
 
   .box {
     width: 50%;
+  }
+
+  .chart{
+    margin-top: 50px;
   }
 
 }
