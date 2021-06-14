@@ -58,7 +58,8 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
 .trackAlbumImage{
     width:500px;
     height: 500px;
-    border-radius: 50px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
 }
 
 
