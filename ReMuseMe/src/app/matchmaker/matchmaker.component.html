@@ -1,5 +1,5 @@
 <div class="matchMakerContainer">
-    <div *ngIf="track">
+    <div class = "matchMakerButtons" *ngIf="track">
         <button mat-fab class='mattButton' (click)='dislikedSwipe()'>No</button>
     </div>
     <div class="matchMakerButton" class="matchMakerDiv" *ngIf="track">
@@ -13,7 +13,7 @@
             <p>Want to hear more? Click here to open the song in spotify</p>
         </a>
     </div>
-    <div *ngIf="track">
+    <div class = "matchMakerButtons" *ngIf="track">
         <button class="matchMakerButton" mat-fab class='mattButton' (click)="likedSwipe()">Yes</button>
     </div>
 

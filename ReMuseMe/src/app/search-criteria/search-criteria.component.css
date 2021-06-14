@@ -1,6 +1,7 @@
 .searchContainer {
     z-index: 2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -9,15 +10,15 @@
 .searchInput{
     width: 450px;
     height: 15px;
-    margin: 20px;
+    margin: 10px;
     padding: 10px;
     border-radius: 15px;
     text-align: center;
 }
 
 .search__button{
-    width: 100px;
-    padding: 5px;
+    width: 80vw;
+    padding: 11px;
     border-radius: 20px;
     background-color: #78CED6;
     border: none;
@@ -37,3 +38,25 @@ button:hover{
 }
 
 
+@media only screen and (min-width: 768px) {
+    
+
+
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .searchContainer{
+        flex-direction: row;
+    }
+ 
+    .search__button{
+        width: 100px;
+        padding: 5px;
+    }
+
+    .searchInput{
+        margin: 20px;
+    }
+
+}

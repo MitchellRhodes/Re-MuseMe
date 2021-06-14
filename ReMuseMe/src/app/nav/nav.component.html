@@ -4,5 +4,6 @@
   </button>
 </div>
 <div *ngIf="userProfile" class='container'>
+  <button routerLink="/user-profile" class="profileButton">Profile</button>
   <img routerLink="/user-profile" class="userImage" src="{{userProfile.images[0].url}}" (click)='getUser()'>
 </div>
