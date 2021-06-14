@@ -1,6 +1,15 @@
+.searchContainer {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 .searchInput{
-    width: 450px;
-    margin: 10px;
+    width: 200px;
+    height: 10px;
+    margin: 20px;
     padding: 10px;
     border-radius: 15px;
     text-align: center;
@@ -26,3 +35,5 @@
 button:hover{
     background-color: white;
 }
+
+

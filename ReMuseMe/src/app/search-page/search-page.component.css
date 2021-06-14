@@ -1,4 +1,9 @@
-
+.searchResultsContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .searchHeader{
     display: flex;
     justify-content: space-evenly;
@@ -9,14 +14,18 @@
 
 .trackInfo{
     color: black;
-    margin: 25px;
+    font-size: 10px;
 }
 
 .searchResultsList{
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
+    width:100%;
+    margin-top: 150px;
+    padding: 0;
     
    
    
@@ -24,9 +33,9 @@
 
 .searchResultsItem{
     border: 1px solid black;
-    margin: 10px;
+    margin: 5px;
     background-color: rgba(120, 206, 214, .8) ;
-    width: 30vw;
+    width: 40vw;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -36,9 +45,10 @@
     box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
 }
 
+
 .searchImage{
-    height: 200px;
-    width: 200px;
+    height: 75px;
+    width: 75px;
     margin: 20px;
 }
 
