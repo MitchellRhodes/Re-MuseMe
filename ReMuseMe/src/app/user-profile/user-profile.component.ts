@@ -200,6 +200,11 @@ export class UserProfileComponent implements OnInit {
 
   }
 
+  removeTrack(removeFromPlaylist: Tracks){
+    this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
+  }
+
+
   //make sure it is called after  putStatValueInArray
   createChart(array: number[]) {
     let chart = new CanvasJs.Chart("chartContainer", {

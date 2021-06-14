@@ -56,6 +56,7 @@ tr{
 .likedTrackImage{
   height: 100px;
   width: 100px;
+  margin: 25px;
  
 }
 
@@ -77,11 +78,14 @@ p{
   text-align: center;
 }
 
-.export{
-    border-radius: 20px;
-    background-color: #78CED6;
-    border: none;
-    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5) 
+.removeButton{
+  border-radius: 20px;
+  margin: 50px;
+  width: 100px;
+  background-color: #0c0c0c;
+  color: white;
+  border: none;
+  box-shadow: 3px 3px 3px 3px rgba(3, 3, 3, .5) 
 }
 
 button:hover{
@@ -149,11 +153,32 @@ hr{
   width: 100%;
 }
 
+
 .userInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 425px;
+
+.recommendedAlertBox{
+  display: block;
+  position: fixed;
+  top: 135px;
+  left: 80%;
+  background-color: rgba(120, 206, 214, .9) ;
+  transform: translateX(-50%);
+  min-width: 250px;
+  min-height: 110px;
+  text-align: center;
+  box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
+  border: 1px solid black;
+  border-radius: 25px;
+  border: 1px solid black;
+}
+
+.recommendedAlertBoxText{
+  padding: 10px;
+  margin: 10px;
 }
 
 

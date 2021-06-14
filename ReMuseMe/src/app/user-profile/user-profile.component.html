@@ -23,8 +23,7 @@
                     <th>Track Name</th>
                     <th>Artist Name</th>
                     <th>Album Name</th>
-                    <th></th>
-                    <th></th>
+                    <th>Remove from liked tracks</th>
                 </tr>
 
                 <tr class="likedTracksList" *ngFor='let track of likedTracks'>
@@ -40,23 +39,21 @@
                     <td>
                         <p>{{track.album.name}}</p>
                     </td>
-                    <td><input type="checkbox">Add to playlist</td>
-                    <td><input type="checkbox">Remove from liked songs</td>
+                    <td><button class = "removeButton"(click) = 'removeTrack(track)'>X</button></td>
                 </tr>
 
 
             </table>
-        </div>
-
-        <div class='createPlaylist'>
-            <input class='playlist' value='Name your playlist here'>
-            <button class='export'>Export playlist to spotify</button>
         </div>
     </div>
 </div>
 
 <h2>Tracks we recommend based off of your liked tracks</h2>
 <hr>
+
+<div class="recommendedAlertBox" *ngIf = "alertBox">
+    <p class = 'recommendedAlertBoxText'>{{alertBox.name}} by {{alertBox.album.artists[0].name}}has been added to your liked tracks list</p>
+</div>
 <div class="recommendedContainer">
 
     <ul class='recommendedList'>
