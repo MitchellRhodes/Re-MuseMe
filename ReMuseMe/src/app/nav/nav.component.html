@@ -3,7 +3,7 @@
     <a class='navLinks' routerLink="/home">Home</a>
   </button>
 </div>
-<a class='logo' routerLink="/home">Swipify</a>
+<!-- <a class='logo' routerLink="/home">Swipify</a> -->
 <div *ngIf="userProfile" class='container'>
   <img routerLink="/user-profile" class="userImage" src="{{userProfile.images[0].url}}" (click)='getUser()'>
 </div>
