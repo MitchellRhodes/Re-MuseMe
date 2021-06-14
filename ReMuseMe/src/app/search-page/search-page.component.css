@@ -1,9 +1,4 @@
-/* .searchResultsContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+
 .searchHeader{
     display: flex;
     justify-content: space-evenly;
@@ -11,7 +6,7 @@
     margin-top: 20px;
 }
 
-/*changed font-size from 10px*/
+
 .trackInfo{
     color: black;
     font-size: 25px;
@@ -25,7 +20,6 @@
     padding-inline-start: 0;
 }
 
-/*changed margin from 5, width from 40vw*/
 .searchResultsItem{
     border: 1px solid black;
     margin: 5px;
@@ -40,7 +34,7 @@
     box-shadow: 5px 5px 5px 5px rgb(3 3 3 / 50%);
 }
 
-/*changed height and width from 75*/
+
 .searchImage{
     height: 200px;
     width: 200px;
@@ -83,6 +77,7 @@ button:hover{
     color: black;
 }
 
+/* we are saving this for possible future use, it wasn't necessary */
 @media only screen and (min-width: 768px) {
 
  
