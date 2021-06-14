@@ -24,7 +24,6 @@
                     <th>Artist Name</th>
                     <th>Album Name</th>
                     <th></th>
-                    <th></th>
                 </tr>
 
                 <tr class="likedTracksList" *ngFor='let track of likedTracks'>
@@ -40,8 +39,7 @@
                     <td>
                         <p>{{track.album.name}}</p>
                     </td>
-                    <td><input type="checkbox">Add to playlist</td>
-                    <!-- <td><button class = "removeButton"(click) = 'removeTrack(track)'>X</button></td> -->
+                    <td><button class = "removeButton"(click) = 'removeTrack(track)'>X</button></td>
                 </tr>
 
 
