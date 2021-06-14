@@ -34,22 +34,20 @@ h2{
   min-height: 200px;
   background-color: rgba(120, 206, 214, .8) ;
   box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
-  margin: 5px;
   border: 1px solid black;
+  margin: 5px;
 
 }
 
 /* liked tracks div styling */
 
 .likedTable{
-  padding: 10px;
   width: 30vw;
 }
 
 table {
   width: 50px;
 }
-
 
 .likedSongsLables{
   background-color: rgba(120, 206, 214, .8);
@@ -68,19 +66,6 @@ p{
   padding: 10px;
 }
 
-.createPlaylist {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.playlist {
-  padding: 5px;
-  width: 500px;
-  margin-right: 15px;
-  border-radius: 50px;
-  text-align: center;
-}
 
 .removeButton{
     border-radius: 20px;
@@ -149,12 +134,7 @@ hr{
   display: block;
   width: 500px;
   height: 500px;
-  margin-top: 18px;
 
-}
-
-.chart{
-  margin-top: 50px;
 }
 
 .recommendedAlertBox{
@@ -187,36 +167,45 @@ hr{
   align-items: center;
 }
 
-  .chart{
-    width: 73vw;
-  }
+.box {
+  width: 75%;
+}
+
 
 }
 
 @media only screen and (min-width: 1024px) {
 
   .box {
+    width: 60%;
     margin: 20px;
-    width: 50%;
   }
 
-  .chart{
-    margin-top: 50px;
-    width: 90vw;
-    height: 500px;
-    
+  .likedTracksDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
+  .likedTable{
+    padding: 10px;
+    width: 0;
+  }
+  
   .removeButton{
-    width: 100px;
     margin: 50px;
+    width: 100px;
   }
 
   .recommendedResults{
-    width: 30vw;
     margin: 10px;
+    width: 30vw;
   }
 
+  table {
+    width: auto;
+  }
+  
 }
 
    
