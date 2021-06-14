@@ -192,7 +192,7 @@ export class UserProfileComponent implements OnInit {
 
 
   nextTrack(addToPlaylist: Tracks) {
-    this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
+    this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null

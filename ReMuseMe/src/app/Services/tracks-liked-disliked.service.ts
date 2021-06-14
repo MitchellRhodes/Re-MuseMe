@@ -39,6 +39,18 @@ export class TracksLikedDislikedService {
     this.pushToLocalStorage()
   }
 
+  addToLikedTracks(song: any){
+      
+  
+    this.likedTrack.push(song)
+    
+    this.pushToLocalStorage()
+    this.getFromLocalStorage()
+
+    return this.likedTrack
+}
+
+
   //Removes array duplicates
   _removeDuplicates(arry: any){
     let uniqueTracks: any = [];

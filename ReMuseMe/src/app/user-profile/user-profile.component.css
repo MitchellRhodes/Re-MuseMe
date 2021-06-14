@@ -187,21 +187,37 @@ hr{
   align-items: center;
 }
 
-.box {
-  width: 75%;
-}
-
+  .chart{
+    width: 73vw;
+  }
 
 }
 
 @media only screen and (min-width: 1024px) {
 
   .box {
-    width: 50%;
+    margin: 20px;
   }
 
   .chart{
     margin-top: 50px;
+    width: 90vw;
+    height: 500px;
+    
+  }
+
+  .likedTable{
+    width: 90vw;
+  }
+
+  .removeButton{
+    width: 100px;
+    margin: 50px;
+  }
+
+  .recommendedResults{
+    width: 30vw;
+    margin: 10px;
   }
 
 }
