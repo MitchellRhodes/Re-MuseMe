@@ -89,7 +89,6 @@ export class SpotifyApiService {
       })
     })
       .subscribe((accessToken: any) => {
-        console.log(accessToken);
 
         SpotifyApiService.accessToken = accessToken.access_token;
         localStorage.setItem('accessToken', accessToken.access_token);
@@ -125,7 +124,6 @@ export class SpotifyApiService {
       })
     })
       .subscribe((accessToken: any) => {
-        console.log(accessToken);
 
         SpotifyApiService.accessToken = accessToken.access_token;
         localStorage.setItem('accessToken', accessToken.access_token);
@@ -145,22 +143,16 @@ export class SpotifyApiService {
 
   private getHeaders() {
 
-    console.log(SpotifyApiService.accessToken)
-
-
     if (SpotifyApiService.accessToken === null) {
 
       let accessToken = localStorage.getItem('accessToken')
 
-      console.log(accessToken)
-
 
       if (accessToken === null) {
-        console.log('Bad Token')
 
         this.tokenRefresh();
-
       } else {
+
         SpotifyApiService.accessToken = accessToken;
       }
     }
@@ -295,15 +287,8 @@ export class SpotifyApiService {
 
     let url = new URL(`https://api.spotify.com/v1/tracks`)
     let query: string = '';
-    // for (let id of ids) {
-    //   query = query + id + '%2C'
-    //   // query = `${query}${id},`;
-    // }
-    query = ids.join('%2C')
-    // console.log(ids)
 
-    // url.searchParams.set('ids', `${ids}`)
-    // console.log(query)
+    query = ids.join('%2C')
 
     //this one takes multiple ids
     return this.http.get(`${url}?ids=${query}`, headers) as Observable<any>;
@@ -340,7 +325,6 @@ export class SpotifyApiService {
     url.searchParams.set('seed_tracks', `${seed1},${seed2}`);
     url.searchParams.set(`${minMax1}_${statName1}`, stat1);
     url.searchParams.set(`${minMax2}_${statName2}`, stat2);
-    console.log(url);
     return this.http.get(url.toString().replace('+', '%20'), headers)
   }
 

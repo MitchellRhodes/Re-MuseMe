@@ -22,7 +22,7 @@ export class SearchPageComponent implements OnInit {
   newSwipe: any;
   currentIndex: number = 0;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
     private trackslikeddislikedService: TracksLikedDislikedService,
     private databaseService: DatabaseService) { }
@@ -33,11 +33,10 @@ export class SearchPageComponent implements OnInit {
     let input = params.get('q');
     let type = params.get('type');
 
-    console.log(input, type);
 
-    (await this.spotifyApi.searchBar(input, type)).subscribe((search:any) => {
-      
-      console.log(search);
+
+    (await this.spotifyApi.searchBar(input, type)).subscribe((search: any) => {
+
       //update to response tracks when auth token is working
       this.searchResults = search.tracks.items
     })
@@ -78,18 +77,18 @@ export class SearchPageComponent implements OnInit {
     });
   }
 
-//adds the liked track they hit yes on to the local storage as well as when the user hits 
+  //adds the liked track they hit yes on to the local storage as well as when the user hits 
   //add to liked tracks from the search page and the recommended tracks
 
-  
+
 
   nextTrack(addToPlaylist: Tracks) {
     this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
     this.alertBox = addToPlaylist;
-    setTimeout( () => {
+    setTimeout(() => {
       this.alertBox = null
     }, 3000)
-}
+  }
 
 
 
