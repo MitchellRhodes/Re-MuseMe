@@ -197,6 +197,7 @@ hr{
 
   .box {
     margin: 20px;
+    width: 50%;
   }
 
   .chart{
@@ -204,10 +205,6 @@ hr{
     width: 90vw;
     height: 500px;
     
-  }
-
-  .likedTable{
-    width: 90vw;
   }
 
   .removeButton{
