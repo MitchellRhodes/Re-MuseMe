@@ -200,7 +200,7 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  removeTrack(removeFromPlaylist: Tracks){
+  removeTrack(removeFromPlaylist: Tracks) {
     this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
   }
 
@@ -218,14 +218,14 @@ export class UserProfileComponent implements OnInit {
         startAngle: 60,
         //innerRadius: 60,
         indexLabelFontSize: 17,
-        indexLabel: "{label} - #percent%",
+        indexLabel: "{name} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [
-          { y: (array[0] * 100), label: "Danceability" },
-          { y: (array[1] * 100), label: "Energy" },
-          { y: (array[2] * 100), label: "Acousticness" },
-          { y: (array[3] * 100), label: "Instrumentalness" },
-          { y: (array[4] * 100), label: "Valence" }
+          { y: (array[0] * 100), name: "Danceability", label: "High: This belongs in a club. Low: It belongs in a museum." },
+          { y: (array[1] * 100), name: "Energy", label: "High: You woke up and shotgunned 6 energy drinks. Low: You haven't slept in 2 days." },
+          { y: (array[2] * 100), name: "Acousticness", label: "High: You love the clean dulcet tones. Low: CRANK IT TO 11 BABY!" },
+          { y: (array[3] * 100), name: "Instrumentalness", label: "High: Vocals just ruin a song anyways. Low: Maybe you should've chosen a podcast instead." },
+          { y: (array[4] * 100), name: "Valence", label: "High: You're pumped up by optimism and the major scale. Low: You want to journey to the darkest recesses of your mind." }
         ]
       }]
     });
