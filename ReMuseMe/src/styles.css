@@ -28,9 +28,8 @@ body{
 
 
 .matchMakerButtons{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: none;
+    
 }
 
 
@@ -136,9 +135,7 @@ app-nav {
 
 
 @media only screen and (min-width: 768px) {
-      .navContainer {
-        width: 100%;
-    }  
+   
 
       app-nav {
         width: 100%;
@@ -149,7 +146,6 @@ app-nav {
         width:100%;
     }  
 
-   
 
 }
 
@@ -254,7 +250,15 @@ app-nav {
         display: none;
     }
 
+    .matchMakerButtons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
 }
+
+/* right swipe and left swipe animations and keyframes */
 
 .rightSwipe{
     animation-name: rightSwipe;
