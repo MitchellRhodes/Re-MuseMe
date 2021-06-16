@@ -1,8 +1,11 @@
-<div class="matchMakerContainer">
+<div class="matchMakerContainer" (swipe)="swipeHandler($event)" >
     <div class="matchMakerButtons" *ngIf="track">
         <button mat-fab class='mattButton noButton whiteFont' (click)='dislikedSwipe()'>No</button>
     </div>
-    <div class="matchMakerButton" class="matchMakerDiv" *ngIf="track">
+    <div class="matchMakerDiv" [ngClass]="{
+        'rightSwipe': swipeDirection === 'right',
+        'leftSwipe': swipeDirection === 'left' }"
+        *ngIf="track">
         <img class="trackAlbumImage" src="{{track.album.images[0].url}}">
         <p> {{track.name}}</p>
         <p> {{track.album.artists[0].name}} </p>
