@@ -1,5 +1,7 @@
 <div class="matchMakerContainer" (swipe)="swipeHandler($event)" >
-  
+    <div class="matchMakerButtons" *ngIf="track">
+        <button mat-fab class='mattButton noButton whiteFont' (click)='dislikedSwipe()'>No</button>
+    </div>
     <div class="matchMakerDiv" [ngClass]="{
         'rightSwipe': swipeDirection === 'right',
         'leftSwipe': swipeDirection === 'left' }"
@@ -13,6 +15,10 @@
         <a href="{{track.external_urls.spotify}}">
             <p>Want to hear more? Click here to open the song in spotify</p>
         </a>
+    </div>
+    <div class="matchMakerButtons" *ngIf="track">
+        <button class="matchMakerButton" mat-fab class='mattButton yesButton whiteFont'
+            (click)="likedSwipe()">Yes</button>
     </div>
 
 </div>
