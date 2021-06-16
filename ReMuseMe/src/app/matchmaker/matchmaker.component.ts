@@ -25,6 +25,7 @@ export class MatchmakerComponent implements OnInit {
   newUser: any;
   newSwipe: any;
   likedTracks: Tracks[] = [];
+  swipeDirection: string = 'none';
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -93,7 +94,6 @@ export class MatchmakerComponent implements OnInit {
 
   //when yes is clicked, song gets swiped true and pushed to playlist through local storage.
   async likedSwipe() {
-
     //gets user profile info of currently logged in user and takes just email and puts into backend call for user
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
 
@@ -115,14 +115,41 @@ export class MatchmakerComponent implements OnInit {
             swipe: true
           }
 
+        
+
+
           //moves track ahead in array and posts swipe as true to our database and to users playlist
           this.currentIndex++;
           this.track = this.trackArray[this.currentIndex]
           this.databaseService.postSwipe(this.newSwipe)
+          
+          this.swipeDirection = 'none';
         }
         )
       })
     });
+  }
+
+  //Swipe handler uses custom event provided by hammerjs
+  //calculates event data to  know direction of left or right swipe
+  //right swipe calls likedSwipe left swipe calls dislikedSwipe
+
+  swipeHandler(event: any){
+    let x =
+    Math.abs(
+       event.deltaX) > 40 ? (event.deltaX > 0 ? "Right" : "Left") : "";
+       console.log(x)
+      if(x === 'Right'){
+        this.swipeDirection = 'right';
+        setTimeout(() => {
+          this.likedSwipe()
+        }, 1000)
+      } else {
+        this.swipeDirection = 'left';
+        setTimeout(() => {
+          this.dislikedSwipe()
+        }, 1000)
+      }
   }
 
 
@@ -154,6 +181,7 @@ export class MatchmakerComponent implements OnInit {
           this.currentIndex++;
           this.track = this.trackArray[this.currentIndex]
           this.databaseService.postSwipe(this.newSwipe)
+          this.swipeDirection = 'none';
         }
         )
       })

@@ -134,6 +134,7 @@ app-nav {
 }
 
 
+
 @media only screen and (min-width: 768px) {
       .navContainer {
         width: 100%;
@@ -253,4 +254,36 @@ app-nav {
         display: none;
     }
 
+}
+
+.rightSwipe{
+    animation-name: rightSwipe;
+    animation-duration: 1s;
+}
+
+.leftSwipe{
+    animation-name: leftSwipe;
+    animation-duration: 1s;
+}
+
+@keyframes rightSwipe {
+    0% { 
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(33vw, -0);
+        opacity: .5;
+        background-color: green;
+    }
+}
+
+@keyframes leftSwipe {
+    0% { 
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-33vw, -0);
+        opacity: .5;
+        background-color: red;
+    }
 }
