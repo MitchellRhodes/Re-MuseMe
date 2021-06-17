@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DatabaseService } from '../database.service';
-import { Profile } from '../Interfaces/profile';
-import { User } from '../Interfaces/user';
 import { SpotifyApiService } from '../spotify-api.service';
 
 @Component({

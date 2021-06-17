@@ -20,6 +20,7 @@ they are in the global styles.css file  */
 };
 
 
+
 button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
     margin: 25px;
 }
@@ -36,9 +37,7 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.noButto
 
 @media only screen and (min-width: 768px) {
 
-    .matchMakerDiv {
-        width:500px;
-    };
+    
 
 }
 
@@ -50,5 +49,18 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.noButto
         margin-top: 25px;
     };
 
+    button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent {
+        margin: 25px;
+    }
+
+    button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.yesButton:hover{
+    background-color: green;
+    color: white;
+} 
+
+    button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.noButton:hover{
+    background-color: red;
+    color: white;
+} 
 
 }

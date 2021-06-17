@@ -1,6 +1,6 @@
 // Core angular imports
 
-import { NgModule } from '@angular/core';
+import { NgModule,Injectable  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -32,8 +32,15 @@ import { NavComponent } from './nav/nav.component';
 import { SearchCriteriaComponent } from './search-criteria/search-criteria.component';
 import { SpotifyLoginPageComponent } from './spotify-login-page/spotify-login-page.component';
 
+import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
+import * as Hammer from 'hammerjs';
 
-
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    swipe: { direction: Hammer.DIRECTION_ALL },
+  };
+}
 
 
 
@@ -65,10 +72,15 @@ import { SpotifyLoginPageComponent } from './spotify-login-page/spotify-login-pa
     MatSelectModule,
     MatRadioModule, 
     MatButtonModule,
+    HammerModule,
+    
 
 
   ],
-  providers: [],
+  providers: [{
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: MyHammerConfig,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

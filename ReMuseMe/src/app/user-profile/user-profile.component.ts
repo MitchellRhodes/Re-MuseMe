@@ -5,7 +5,6 @@ import { Profile } from '../Interfaces/profile'
 import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.service';
 import { Tracks } from '../Interfaces/tracks';
 import { DatabaseService } from '../database.service';
-import { Recommendations } from '../Interfaces/recommendations';
 import * as CanvasJs from 'canvasjs'
 
 @Component({
@@ -74,7 +73,6 @@ export class UserProfileComponent implements OnInit {
     });
 
     this.likedTracks = this.trackslikeddislikedService.returnSelectedTracks();
-    console.log(this.likedTracks);
   }
 
 
@@ -137,6 +135,7 @@ export class UserProfileComponent implements OnInit {
         this.trackArray = response.tracks
         this.track = response.tracks[0]
         this.currentIndex = 0
+
       })
 
   }
@@ -202,6 +201,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeTrack(removeFromPlaylist: Tracks) {
+
     this.removeStats(removeFromPlaylist)
     this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
   }

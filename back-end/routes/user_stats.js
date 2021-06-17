@@ -12,6 +12,25 @@ const db = pgp({
 
 
 
+function validateSwipe(swipe) {
+    const schema = Joi.object({
+        user_id: Joi.number().min(1).required(),
+        song_id: Joi.number().min(1).required(),
+        swipe: Joi.boolean()
+    });
+
+    return schema.validate(swipe);
+};
+
+//uses joi to insure the user is posted with the correct info 
+function validateUser(user) {
+    const schema = Joi.object({
+        name: Joi.string().min(1).required(),
+        email: Joi.string().min(1).required()
+    });
+
+    return schema.validate(user);
+};
 
 //get all users
 userStats.get('/user', async (req, res) => {
@@ -86,6 +105,8 @@ userStats.get('/user-stats/:id', async (req, res) => {
 
     res.status(200).json(userStats);
 });
+
+
 
 
 //get every songID for matchmaker random that will only return songs not swiped on by user
@@ -165,18 +186,6 @@ userStats.post('/user', async (req, res) => {
 
 
 
-//uses joi to insure the user is posted with the correct info 
-function validateUser(user) {
-    const schema = Joi.object({
-        name: Joi.string().min(1).required(),
-        email: Joi.string().min(1).required()
-    });
-
-    return schema.validate(user);
-};
-
-
-
 //change user info
 userStats.put('/user/:id', async (req, res) => {
 
@@ -234,6 +243,7 @@ userStats.post('/swipes', async (req, res) => {
 
 
 });
+
 
 
 
