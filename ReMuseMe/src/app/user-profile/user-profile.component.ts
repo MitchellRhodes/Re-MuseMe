@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   likedTracks: Tracks[] = [];
 
-  track: Tracks | null = null;
+  track: any; //changed from Tracks | null =null
   trackArray: Tracks[] = [];
   currentIndex: number = 0;
   songIdArray: string[] = [];
@@ -42,6 +42,8 @@ export class UserProfileComponent implements OnInit {
   chart: any;
   stats: [] = [];
   statArray: number[] = [];
+
+  newSwipe: any;
 
 
 
@@ -129,6 +131,7 @@ export class UserProfileComponent implements OnInit {
 
     (await this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2))
       .subscribe((response: any) => {
+
         this.trackArray = response.tracks
         this.track = response.tracks[0]
         this.currentIndex = 0
@@ -198,6 +201,8 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeTrack(removeFromPlaylist: Tracks) {
+
+    this.removeStats(removeFromPlaylist)
     this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
   }
 
@@ -215,18 +220,47 @@ export class UserProfileComponent implements OnInit {
         startAngle: 60,
         //innerRadius: 60,
         indexLabelFontSize: 17,
-        indexLabel: "{label} - #percent%",
+        indexLabel: "{name} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [
-          { y: (array[0] * 100), label: "Danceability" },
-          { y: (array[1] * 100), label: "Energy" },
-          { y: (array[2] * 100), label: "Acousticness" },
-          { y: (array[3] * 100), label: "Instrumentalness" },
-          { y: (array[4] * 100), label: "Valence" }
+          { y: (array[0] * 100), name: "Danceability", label: "High: This belongs in a club. Low: It belongs in a museum." },
+          { y: (array[1] * 100), name: "Energy", label: "High: You woke up and shotgunned 6 energy drinks. Low: You haven't slept in 2 days." },
+          { y: (array[2] * 100), name: "Acousticness", label: "High: You love the clean dulcet tones. Low: CRANK IT TO 11 BABY!" },
+          { y: (array[3] * 100), name: "Instrumentalness", label: "High: Vocals just ruin a song anyways. Low: Maybe you should've chosen a podcast instead." },
+          { y: (array[4] * 100), name: "Valence", label: "High: You're pumped up by optimism and the major scale. Low: You want to journey to the darkest recesses of your mind." }
         ]
       }]
     });
     chart.render();
   }
 
-}
+
+  async removeStats(song: any) {
+
+    //gets user profile info of currently logged in user and takes just email and puts into backend call for user
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+
+      let userEmail = response.email;
+
+      //backend call for user to get id
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        //calls backend to convert track string id to number so we can store it in swipe
+        (await this.databaseService.changeSongStringIdToNumber(song.id)).subscribe((song: any) => {
+
+          this.newSwipe = {
+            user_id: user.id,
+            song_id: song.id,
+            swipe: false
+          }
+
+          console.log(`new swipe`, this.newSwipe)
+          this.databaseService.putSwipe(this.newSwipe, user.id, song.id)
+        }
+        )
+      })
+    });
+  };
+
+
+};
