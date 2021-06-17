@@ -81,9 +81,9 @@ export class SearchPageComponent implements OnInit {
   //add to liked tracks from the search page and the recommended tracks
 
 
-
   nextTrack(addToPlaylist: Tracks) {
-    this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
+    this.likedSwipe();
+    // this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null

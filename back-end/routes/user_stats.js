@@ -255,7 +255,15 @@ userStats.delete('/user/:id', async (req, res) => {
     res.status(204).json(deleteUser);
 });
 
+//get all swipes for a user
+userStats.get('/user/:id/swipes', async (req, res) => {
 
+    const swipes = await db.many(`SELECT * FROM swipes WHERE user_id = $(id)`, {
+        id: +req.params.id
+    })
+
+    res.status(200).json(swipes);
+});
 
 
 

@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
 
   likedTracks: Tracks[] = [];
 
-  track: Tracks | null = null;
+  track: any;
   trackArray: Tracks[] = [];
   currentIndex: number = 0;
   songIdArray: string[] = [];
@@ -42,6 +42,7 @@ export class UserProfileComponent implements OnInit {
   chart: any;
   stats: [] = [];
   statArray: number[] = [];
+  newSwipe: any;
 
 
 
@@ -186,6 +187,38 @@ export class UserProfileComponent implements OnInit {
     return this.statArray;
   }
 
+  async likedSwipe() {
+
+    //gets user profile info of currently logged in user and takes just email and puts into backend call for user
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+
+      let userEmail = response.email;
+
+
+      //backend call for user to get id, grab track string id from local storage 
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        this.trackslikeddislikedService.addedToPlaylist(this.track);
+
+
+        //calls backend to convert track string id to number so we can store it in swipe
+        (await this.databaseService.changeSongStringIdToNumber(this.track.id)).subscribe((song: any) => {
+
+          this.newSwipe = {
+            user_id: user.id,
+            song_id: song.id,
+            swipe: true
+          }
+
+          //moves track ahead in array and posts swipe as true to our database and to users playlist
+          this.currentIndex++;
+          this.track = this.trackArray[this.currentIndex]
+          this.databaseService.postSwipe(this.newSwipe)
+        }
+        )
+      })
+    });
+  }
 
 
   nextTrack(addToPlaylist: Tracks) {
