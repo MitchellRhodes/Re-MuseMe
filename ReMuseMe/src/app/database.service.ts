@@ -43,15 +43,15 @@ export class DatabaseService {
 
   //POST requests
   async postUser(user: User) {
-    return this.http.post(`http://localhost:3000/user`, user, this.createJson)
+    return this.http.post(`http://localhost:3000/user`, user, this.createJson).subscribe(res => res)
   }
 
   async postSwipe(swipe: Swipe) {
-    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson)
+    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => res)
   }
 
   async postSongFromSpotify(song: Analytics) {
-    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => console.log(`Analytics`, res))
+    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => res)
   }
 
   //PUT Requests
