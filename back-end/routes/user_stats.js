@@ -109,7 +109,7 @@ userStats.get('/user-stats/:id', async (req, res) => {
 
 
 
-//get every songID for matchmaker random that will only return songs not swiped on by user
+//get every songID for matchmaker random that will only return songs not swiped on by user (have 50 limit but currently reduced for my sanity)
 
 userStats.get('/user/:id/song-data', async (req, res) => {
 
@@ -119,7 +119,7 @@ userStats.get('/user/:id/song-data', async (req, res) => {
         INNER JOIN song_stats ON swipes.song_id = song_stats.id
         where song_stats.id = swipes.song_id AND user_id = $(id) )
         ORDER BY RANDOM()
-        LIMIT 50`, {
+        LIMIT 5`, {
         id: +req.params.id
     });
 
