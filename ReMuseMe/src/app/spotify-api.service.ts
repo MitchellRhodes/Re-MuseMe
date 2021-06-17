@@ -98,7 +98,6 @@ export class SpotifyApiService {
 
         SpotifyApiService.expiresIn = accessToken.expires_in;
 
-
         window.location.href = redirect;
       })
   }

@@ -185,6 +185,56 @@ userStats.post('/user', async (req, res) => {
 
 
 
+//post song from spotify when they like it
+userStats.post('/song-data', async (req, res) => {
+
+    const validation = validateSong(req.body);
+
+    if (validation.error) {
+        return res.status(400).send(validation.error.details[0].message);
+    };
+
+
+    await db.none(`INSERT INTO song_stats (song_id, danceability,energy,speechiness,acousticness,instrumentalness,liveness,valence) VALUES($(song_id), $(danceability),$(energy),$(speechiness),$(acousticness),$(instrumentalness),$(liveness),$(valence))`, {
+        song_id: req.body.song_id,
+        danceability: req.body.danceability,
+        energy: req.body.energy,
+        speechiness: req.body.speechiness,
+        acousticness: req.body.acousticness,
+        instrumentalness: req.body.instrumentalness,
+        liveness: req.body.liveness,
+        valence: req.body.valence
+    })
+
+    const song = await db.one(`SELECT * FROM song_stats WHERE song_id = $(song_id)`, {
+        song_id: req.body.song_id
+    })
+
+
+    res.status(201).json(song);
+});
+
+
+
+function validateSong(songStat) {
+    const schema = Joi.object({
+
+        song_id: Joi.string().min(1).required(),
+        danceability: Joi.number().precision(22).required(),
+        energy: Joi.number().precision(22).required(),
+        speechiness: Joi.number().precision(22).required(),
+        acousticness: Joi.number().precision(22).required(),
+        instrumentalness: Joi.number().precision(22).required(),
+        liveness: Joi.number().precision(22).required(),
+        valence: Joi.number().precision(22).required()
+    });
+
+    return schema.validate(songStat);
+};
+
+
+
+
 
 //change user info
 userStats.put('/user/:id', async (req, res) => {
