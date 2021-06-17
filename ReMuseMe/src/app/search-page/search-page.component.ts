@@ -21,6 +21,7 @@ export class SearchPageComponent implements OnInit {
   alertBox: Tracks | null = null;
   newSwipe: any;
   currentIndex: number = 0;
+  search: any;
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -44,7 +45,7 @@ export class SearchPageComponent implements OnInit {
 
   }
 
-  async likedSwipe() {
+  async likedSwipe(track: any) {
 
     //gets user profile info of currently logged in user and takes just email and puts into backend call for user
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
@@ -55,39 +56,50 @@ export class SearchPageComponent implements OnInit {
       //backend call for user to get id, grab track string id from local storage 
       (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
 
-        this.trackslikeddislikedService.addedToPlaylist(this.track);
+        this.trackslikeddislikedService.addedToPlaylist(track);
 
 
-        //calls backend to convert track string id to number so we can store it in swipe
-        (await this.databaseService.changeSongStringIdToNumber(this.track.id)).subscribe((song: any) => {
+        (await this.spotifyApi.getAudioFeaturesForATrack(track.id)).subscribe(async (track: any) => {
 
-          this.newSwipe = {
-            user_id: user.id,
-            song_id: song.id,
-            swipe: true
+          (await this.databaseService.postSongFromSpotify({
+            song_id: track.id,
+            danceability: track.danceability,
+            energy: track.energy,
+            speechiness: track.speechiness,
+            acousticness: track.acousticness,
+            instrumentalness: track.instrumentalness,
+            liveness: track.liveness,
+            valence: track.valence
+          }));
+
+          //calls backend to convert track string id to number so we can store it in swipe
+          (await this.databaseService.changeSongStringIdToNumber(track.id)).subscribe((song: any) => {
+
+            this.newSwipe = {
+              user_id: user.id,
+              song_id: song.id,
+              swipe: true
+            }
+
+            //moves track ahead in array and posts swipe as true to our database and to users playlist
+            this.databaseService.postSwipe(this.newSwipe)
           }
+          )
+        });
 
-          //moves track ahead in array and posts swipe as true to our database and to users playlist
-          this.currentIndex++;
-          this.track = this.trackArray[this.currentIndex]
-          this.databaseService.postSwipe(this.newSwipe)
-        }
-        )
       })
     });
   }
 
-  //adds the liked track they hit yes on to the local storage as well as when the user hits 
-  //add to liked tracks from the search page and the recommended tracks
-
 
   nextTrack(addToPlaylist: Tracks) {
-    this.likedSwipe();
-    // this.trackslikeddislikedService.addedToPlaylist(addToPlaylist);
+    // this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
+    this.likedSwipe(addToPlaylist);
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null
     }, 3000)
+
   }
 
 
