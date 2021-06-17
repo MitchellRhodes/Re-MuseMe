@@ -24,6 +24,10 @@ export class DatabaseService {
     return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => console.log(res))
   }
 
+  async putSwipe(swipe: Swipe, userId: number, id: number) {
+    return this.http.put(`http://localhost:3000/user/${userId}/swipes/${id}`, swipe, this.createJson).subscribe(res => console.log(`put swipe`, res))
+  }
+
   async getUsers() {
     return this.http.get(`http://localhost:3000/user`);
   }

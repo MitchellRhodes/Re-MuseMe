@@ -125,6 +125,15 @@ userStats.get('/song-data/:id', async (req, res) => {
 })
 
 
+//get all swipes for a user
+userStats.get('/user/:id/swipes', async (req, res) => {
+
+    const swipes = await db.many(`SELECT * FROM swipes WHERE user_id = $(id)`, {
+        id: +req.params.id
+    })
+
+    res.status(200).json(swipes);
+});
 
 
 
@@ -198,7 +207,7 @@ userStats.put('/user/:id', async (req, res) => {
 
 
 
-//post user's swipe on song if swipe true then song analytics change one way, and if flase they change another way (NOT DONE)
+//post user's swipe on song if swipe true then song analytics change one way
 userStats.post('/swipes', async (req, res) => {
 
     const validation = validateSwipe(req.body);
@@ -228,6 +237,41 @@ userStats.post('/swipes', async (req, res) => {
 
 
 
+//update a swipe
+userStats.put('/user/:userId/swipes/:id', async (req, res) => {
+
+    const swipe = await db.oneOrNone(`SELECT * FROM swipes WHERE song_id = $(id);`, {
+
+        id: +req.params.id
+    })
+
+    if (!swipe) {
+        return res.status(404).send('Swipe not found')
+    }
+
+
+    const validation = validateSwipe(req.body);
+
+    if (validation.error) {
+        return res.status(400).send(validation.error.details[0].message);
+    };
+
+    await db.oneOrNone(`UPDATE swipes SET user_id = $(user_id), song_id = $(song_id), swipe = $(swipe) WHERE song_id = $(id) AND user_id = $(userId)`, {
+        id: +req.params.id,
+        userId: +req.params.userId,
+        user_id: req.body.user_id,
+        song_id: req.body.song_id,
+        swipe: req.body.swipe
+    })
+
+
+    res.status(200).json(swipe);
+
+
+});
+
+
+
 function validateSwipe(swipe) {
     const schema = Joi.object({
         user_id: Joi.number().min(1).required(),
@@ -237,6 +281,8 @@ function validateSwipe(swipe) {
 
     return schema.validate(swipe);
 };
+
+
 
 
 

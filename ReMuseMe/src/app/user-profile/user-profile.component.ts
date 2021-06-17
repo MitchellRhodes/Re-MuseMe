@@ -19,7 +19,7 @@ export class UserProfileComponent implements OnInit {
 
   likedTracks: Tracks[] = [];
 
-  track: Tracks | null = null;
+  track: any; //changed from Tracks | null =null
   trackArray: Tracks[] = [];
   currentIndex: number = 0;
   songIdArray: string[] = [];
@@ -43,6 +43,8 @@ export class UserProfileComponent implements OnInit {
   chart: any;
   stats: [] = [];
   statArray: number[] = [];
+
+  newSwipe: any;
 
 
 
@@ -131,11 +133,10 @@ export class UserProfileComponent implements OnInit {
 
     (await this.spotifyApi.getRecommendations(randomTrack1.id, randomTrack2.id, this.randomValue1, this.randomValue2, this.randomStatName1, this.randomStatName2, this.randomizedMinMax1, this.randomizedMinMax2))
       .subscribe((response: any) => {
+
         this.trackArray = response.tracks
         this.track = response.tracks[0]
         this.currentIndex = 0
-        console.log('trackArray', this.trackArray)
-
       })
 
   }
@@ -201,6 +202,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   removeTrack(removeFromPlaylist: Tracks) {
+    this.removeStats(removeFromPlaylist)
     this.likedTracks = this.trackslikeddislikedService.removeFromLikedTracks(removeFromPlaylist);
   }
 
@@ -232,4 +234,33 @@ export class UserProfileComponent implements OnInit {
     chart.render();
   }
 
-}
+
+  async removeStats(song: any) {
+
+    //gets user profile info of currently logged in user and takes just email and puts into backend call for user
+    (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
+
+      let userEmail = response.email;
+
+      //backend call for user to get id
+      (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
+
+        //calls backend to convert track string id to number so we can store it in swipe
+        (await this.databaseService.changeSongStringIdToNumber(song.id)).subscribe((song: any) => {
+
+          this.newSwipe = {
+            user_id: user.id,
+            song_id: song.id,
+            swipe: false
+          }
+
+          console.log(`new swipe`, this.newSwipe)
+          this.databaseService.putSwipe(this.newSwipe, user.id, song.id)
+        }
+        )
+      })
+    });
+  };
+
+
+};
