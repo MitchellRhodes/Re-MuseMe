@@ -56,34 +56,7 @@ export class SearchPageComponent implements OnInit {
   }
 
 
-  // async likedSwipe(track: any) {
-  //   // await this.getUserID().then(userid => this.userId = userid)
-  //   console.log('userId promise', this.userId)
-
-  //   this.postNewTrack(track);
-
-  //   await this.convertTrackIdToNumber(track);
-  //   console.log('songId promise', this.songId);
-
-  //   await this.getSwipe().then(swipe => {
-
-  //   })
-
-
-  // }
-
-
   async likedSwipe(track: any) {
-
-    //gets user profile info of currently logged in user and takes just email and puts into backend call for user
-    // (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
-
-    //   let userEmail = response.email;
-    //   console.log('email');
-
-
-    //   // backend call for user to get id, grab track string id from local storage
-    //   (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
 
     this.trackslikeddislikedService.addedToPlaylist(track);
     console.log('track');
@@ -103,52 +76,54 @@ export class SearchPageComponent implements OnInit {
       console.log('posted');
 
       //calls backend to convert track string id to number so we can store it in swipe
-      this.postNewSwipe(track.id)
+      (await this.databaseService.changeSongStringIdToNumber(track.id)).subscribe(async (song: any) => {
 
+        console.log('changed to number', song.id);
+
+        this.postNewSwipe(song.id);
+        // this.putSwipe(song.id);
+
+      });
     });
-
 
   };
 
 
 
-  async postNewSwipe(trackId: string) {
-
-    (await this.databaseService.changeSongStringIdToNumber(trackId)).subscribe(async (song: any) => {
-
-      console.log('changed to number', song.id);
-      (await this.databaseService.getSingleSwipe(this.userId, song.id)).subscribe((response: any) => {
-        console.log(`the response`, response)
 
 
-        // (await this.databaseService.getSingleSwipe(user.id, song.id)).subscribe((swipe: any) => {
-        //   console.log(swipe)
-
-        // if (!response.song_id) {
-        this.newSwipe = {
-          user_id: this.userId,
-          song_id: song.id,
-          swipe: true
-        }
-        // //moves track ahead in array and posts swipe as true to our database and to users playlist
-        console.log(`newSwipe`, this.newSwipe)
-        this.databaseService.postSwipe(this.newSwipe);
+  async postNewSwipe(songid: number) {
 
 
-        // } else if (response.song_id) {
+    // (await this.databaseService.getSingleSwipe(this.userId, song.id)).subscribe((response: any) => {
+    //   console.log(`the response`, response)
 
-        //   this.updateSwipe = {
-        //     user_id: this.userId,
-        //     song_id: song.id,
-        //     swipe: true
-        //   }
 
-        //   console.log(`updateSwipe`, this.updateSwipe)
-        //   this.databaseService.putSwipe(this.updateSwipe, this.userId, song.id)
-        // }
-      });
-    })
+    this.newSwipe = {
+      user_id: this.userId,
+      song_id: songid,
+      swipe: true
+    }
+    // //posts swipe as true to our database and to users playlist
+    console.log(`newSwipe`, this.newSwipe)
+    this.databaseService.postSwipe(this.newSwipe);
+
   }
+
+
+
+  // async putSwipe(songid: number) {
+
+  //   this.updateSwipe = {
+  //     user_id: this.userId,
+  //     song_id: songid,
+  //     swipe: true
+  //   }
+
+  //   console.log(`updateSwipe`, this.updateSwipe)
+  //   this.databaseService.putSwipe(this.updateSwipe, this.userId, songid)
+
+  // }
 
 
 
@@ -181,74 +156,10 @@ export class SearchPageComponent implements OnInit {
   }
 
 
-
-  async postNewTrack(track: any) {
-
-    this.trackslikeddislikedService.addedToPlaylist(track);
-    console.log('track', track);
-
-    (await this.spotifyApi.getAudioFeaturesForATrack(track.id)).subscribe(async (track: any) => {
-
-      (await this.databaseService.postSongFromSpotify({
-        song_id: track.id,
-        danceability: track.danceability,
-        energy: track.energy,
-        speechiness: track.speechiness,
-        acousticness: track.acousticness,
-        instrumentalness: track.instrumentalness,
-        liveness: track.liveness,
-        valence: track.valence
-      }));
-
-    })
-  }
-
-
-  async convertTrackIdToNumber(track: any) {
-    this.trackslikeddislikedService.addedToPlaylist(track);
-    //       console.log('track');
-
-    (await this.spotifyApi.getAudioFeaturesForATrack(track.id)).subscribe(async (track: any) => {
-
-      (await this.databaseService.changeSongStringIdToNumber(track.id)).subscribe(async (song: any) => {
-        console.log(`songID`, song.id)
-        this.songId = song.id
-      })
-
-    })
-    return this.songId;
-  }
-
-
   async getSwipe() {
     (await this.databaseService.getSingleSwipe(this.userId, this.songId)).subscribe((swipe: any) => {
       console.log(`swipe`, swipe)
     })
-  }
-
-
-  // async postNewSwipe() {
-  //   this.newSwipe = {
-  //     user_id: this.userId,
-  //     song_id: this.songId,
-  //     swipe: true
-  //   }
-  //   // //moves track ahead in array and posts swipe as true to our database and to users playlist
-  //   console.log(`newSwipe`, this.newSwipe)
-  //   this.databaseService.postSwipe(this.newSwipe);
-
-  // }
-
-
-  async putSwipe() {
-    this.updateSwipe = {
-      user_id: this.userId,
-      song_id: this.songId,
-      swipe: true
-    }
-
-    console.log(`updateSwipe`, this.updateSwipe)
-    this.databaseService.putSwipe(this.updateSwipe, this.userId, this.songId)
   }
 
 

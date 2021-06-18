@@ -163,15 +163,14 @@ userStats.get('/user/:id/swipes', async (req, res) => {
 userStats.get('/user/:userId/swipes/:id', async (req, res) => {
 
 
-    let swipe = await db.oneOrNone(`SELECT * FROM swipes WHERE song_id = $(id) AND user_id = $(userId);`, {
+    const swipe = await db.oneOrNone(`SELECT * FROM swipes WHERE song_id = $(id) AND user_id = $(userId);`, {
 
         id: +req.params.id,
         userId: +req.params.userId
     })
 
     if (!swipe) {
-        swipe = {};
-        // return res.status(404).send('Swipe not found')
+        return res.status(404).send('Swipe not found')
     }
 
     res.status(200).json(swipe);
