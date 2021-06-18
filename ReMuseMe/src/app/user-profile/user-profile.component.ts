@@ -299,7 +299,6 @@ export class UserProfileComponent implements OnInit {
             swipe: false
           }
 
-          console.log(`new swipe`, this.newSwipe)
           this.databaseService.putSwipe(this.newSwipe, user.id, song.id)
         }
         )

@@ -39,6 +39,10 @@ export class DatabaseService {
     return this.http.get(`http://localhost:3000/user-stats/${id}`);
   }
 
+  async getSingleSwipe(userid: number, songid: number) {
+    return this.http.get(`http://localhost:3000/user/${userid}/swipes/${songid}`);
+  }
+
 
 
   //POST requests
@@ -47,11 +51,11 @@ export class DatabaseService {
   }
 
   async postSwipe(swipe: Swipe) {
-    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => res)
+    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => console.log(res))
   }
 
   async postSongFromSpotify(song: Analytics) {
-    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => res)
+    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => console.log(res))
   }
 
   //PUT Requests
