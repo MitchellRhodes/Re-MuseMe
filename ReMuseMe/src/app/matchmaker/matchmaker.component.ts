@@ -82,6 +82,7 @@ export class MatchmakerComponent implements OnInit {
               this.trackArray = response.tracks
               this.track = response.tracks[0]
               this.currentIndex = 0
+              console.log("TrackArray",this.trackArray)
             });
         });
       });
