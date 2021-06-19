@@ -145,7 +145,7 @@ export class SpotifyApiService {
     if (SpotifyApiService.accessToken === null) {
 
       let accessToken = localStorage.getItem('accessToken')
-
+      this.tokenRefresh();
 
       if (accessToken === null) {
 
