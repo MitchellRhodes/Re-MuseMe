@@ -1,14 +1,13 @@
 const express = require('express');
 const Joi = require("joi");
 const pgp = require('pg-promise')();
+const database = require('../database/database');
 
 const userStats = express.Router();
 
 userStats.use(express.json());
 
-const db = pgp({
-    
-});
+const db = database.db
 
 
 
