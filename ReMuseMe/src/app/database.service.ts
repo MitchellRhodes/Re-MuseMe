@@ -51,16 +51,16 @@ export class DatabaseService {
   }
 
   async postSwipe(swipe: Swipe) {
-    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => console.log(res))
+    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => res)
   }
 
   async postSongFromSpotify(song: Analytics) {
-    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => console.log(res))
+    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => res)
   }
 
   //PUT Requests
   async putSwipe(swipe: Swipe, userId: number, id: number) {
-    return this.http.put(`http://localhost:3000/user/${userId}/swipes/${id}`, swipe, this.createJson).subscribe(res => console.log(`put swipe`, res))
+    return this.http.put(`http://localhost:3000/user/${userId}/swipes/${id}`, swipe, this.createJson).subscribe(res => res)
   }
 
 

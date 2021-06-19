@@ -59,7 +59,6 @@ export class SearchPageComponent implements OnInit {
   async likedSwipe(track: any) {
 
     this.trackslikeddislikedService.addedToPlaylist(track);
-    console.log('track');
 
     (await this.spotifyApi.getAudioFeaturesForATrack(track.id)).subscribe(async (track: any) => {
 
@@ -73,12 +72,10 @@ export class SearchPageComponent implements OnInit {
         liveness: track.liveness,
         valence: track.valence
       }));
-      console.log('posted');
 
       //calls backend to convert track string id to number so we can store it in swipe
       (await this.databaseService.changeSongStringIdToNumber(track.id)).subscribe(async (song: any) => {
 
-        console.log('changed to number', song.id);
 
         this.postNewSwipe(song.id);
         // this.putSwipe(song.id);
@@ -94,18 +91,12 @@ export class SearchPageComponent implements OnInit {
 
   async postNewSwipe(songid: number) {
 
-
-    // (await this.databaseService.getSingleSwipe(this.userId, song.id)).subscribe((response: any) => {
-    //   console.log(`the response`, response)
-
-
     this.newSwipe = {
       user_id: this.userId,
       song_id: songid,
       swipe: true
     }
     // //posts swipe as true to our database and to users playlist
-    console.log(`newSwipe`, this.newSwipe)
     this.databaseService.postSwipe(this.newSwipe);
 
   }
@@ -143,12 +134,12 @@ export class SearchPageComponent implements OnInit {
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
 
       let userEmail = response.email;
-      console.log('email');
+
 
 
       //backend call for user to get id, grab track string id from local storage 
       (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
-        console.log(`userid`, user.id)
+
         this.userId = user.id
       });
     });
@@ -156,11 +147,11 @@ export class SearchPageComponent implements OnInit {
   }
 
 
-  async getSwipe() {
-    (await this.databaseService.getSingleSwipe(this.userId, this.songId)).subscribe((swipe: any) => {
-      console.log(`swipe`, swipe)
-    })
-  }
+  // async getSwipe() {
+  //   (await this.databaseService.getSingleSwipe(this.userId, this.songId)).subscribe((swipe: any) => {
+  //     console.log(`swipe`, swipe)
+  //   })
+  // }
 
 
 
