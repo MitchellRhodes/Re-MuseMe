@@ -7,7 +7,7 @@ const userStats = express.Router();
 userStats.use(express.json());
 
 const db = pgp({
-    database: 'Swipe-if-y'
+    
 });
 
 
