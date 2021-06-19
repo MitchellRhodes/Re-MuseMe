@@ -35,13 +35,6 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.noButto
     color: white;
 } 
 
-.outOfSongsP{
-    display: none;
-}
-
-.noSongs.outOfSongsP{
-    display: block;
-}
 
 @media only screen and (min-width: 768px) {
 
