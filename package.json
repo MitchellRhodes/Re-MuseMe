@@ -1,0 +1,21 @@
+{
+  "name": "Re-MuseMe",
+  "version": "1.0.0",
+  "description": "Swipify is a platform that gets people out of their music genre comfort zone by comparing sub genres and similar undertones of the artist/songs. As a group of music enthusiast we're always on the hunt for new music to listen to, We want to create a place where what music genres and artist you like are truly tailored to you.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd back-end && npm install",
+    "start": "cd back-end && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MitchellRhodes/Re-MuseMe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MitchellRhodes/Re-MuseMe/issues"
+  },
+  "homepage": "https://github.com/MitchellRhodes/Re-MuseMe#readme"
+}
