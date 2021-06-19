@@ -118,8 +118,7 @@ userStats.get('/user/:id/song-data', async (req, res) => {
         select swipes.song_id from swipes 
         INNER JOIN song_stats ON swipes.song_id = song_stats.id
         where song_stats.id = swipes.song_id AND user_id = $(id) )
-        ORDER BY RANDOM()
-        LIMIT 50`, {
+        ORDER BY RANDOM()`, {
         id: +req.params.id
     });
 
