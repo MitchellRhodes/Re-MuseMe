@@ -10,8 +10,7 @@ database.initialize(); //database first so that you can make sure it is live bef
 
 
 
-
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'))
     .use(cors())
