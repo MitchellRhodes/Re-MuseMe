@@ -231,6 +231,20 @@ hr{
     align-items: center;
   }
 
+  .recommendedAlertBox{
+    display: block;
+    position: fixed;
+    top: 135px;
+    left: 80%;
+    background-color: rgba(120, 206, 214, .9) ;
+    transform: translateX(-50%);
+    min-width: 250px;
+    min-height: 110px;
+    text-align: center;
+    box-shadow: 5px 5px 5px 5px rgba(3, 3, 3, .5);
+    border: 1px solid black;
+    border-radius: 25px;
+  }
   
 }
 
