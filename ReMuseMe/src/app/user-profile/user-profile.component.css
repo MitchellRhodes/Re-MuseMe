@@ -211,9 +211,18 @@ hr{
   }
 
   table {
-    width: auto;
+    display: table;
   }
-
+  
+  tr {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  tr.likedTracksList {
+   display: table;
+  }
 
   
 }
