@@ -36,31 +36,31 @@ export class DatabaseService {
   }
 
   async getUserStats(id: number) {
-    return this.http.get(`http://localhost:3000/user-stats/${id}`);
+    return this.http.get(`https://api.swipify.me/user-stats/${id}`);
   }
 
   async getSingleSwipe(userid: number, songid: number) {
-    return this.http.get(`http://localhost:3000/user/${userid}/swipes/${songid}`);
+    return this.http.get(`https://api.swipify.me/user/${userid}/swipes/${songid}`);
   }
 
 
 
   //POST requests
   async postUser(user: User) {
-    return this.http.post(`http://localhost:3000/user`, user, this.createJson).subscribe(res => res)
+    return this.http.post(`https://api.swipify.me/user`, user, this.createJson).subscribe(res => res)
   }
 
   async postSwipe(swipe: Swipe) {
-    return this.http.post(`http://localhost:3000/swipes`, swipe, this.createJson).subscribe(res => res)
+    return this.http.post(`https://api.swipify.me/swipes`, swipe, this.createJson).subscribe(res => res)
   }
 
   async postSongFromSpotify(song: Analytics) {
-    return this.http.post(`http://localhost:3000/song-data`, song, this.createJson).subscribe(res => res)
+    return this.http.post(`https://api.swipify.me/song-data`, song, this.createJson).subscribe(res => res)
   }
 
   //PUT Requests
   async putSwipe(swipe: Swipe, userId: number, id: number) {
-    return this.http.put(`http://localhost:3000/user/${userId}/swipes/${id}`, swipe, this.createJson).subscribe(res => res)
+    return this.http.put(`https://api.swipify.me/user/${userId}/swipes/${id}`, swipe, this.createJson).subscribe(res => res)
   }
 
 
