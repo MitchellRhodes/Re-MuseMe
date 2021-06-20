@@ -10,7 +10,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 body{
     background-image: url('./app/Assets/annie-spratt-pdyQ3Ox-UEU-unsplash.jpg');
     background-size: cover;
-    background-repeat: space;
+    background-repeat: no-repeat;
     background-attachment: scroll;
 }
 
