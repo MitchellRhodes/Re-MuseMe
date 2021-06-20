@@ -34,12 +34,15 @@ body{
 
 
 .trackAlbumImage{
-    width: 60vw;
+    width: 75vw;
     height: 100%;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
 }
 
+audio {
+    width: 70vw;
+}
 
 a{
     text-decoration: none;
