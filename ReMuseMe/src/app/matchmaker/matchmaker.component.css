@@ -39,6 +39,7 @@ button.mat-focus-indicator.mattButton.mat-fab.mat-button-base.mat-accent.noButto
 @media only screen and (min-width: 768px) {
     .matchMakerDiv{
         margin-top: 40px;
+        width: 65vw;
     }
     
 
