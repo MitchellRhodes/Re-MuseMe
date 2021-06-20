@@ -242,7 +242,7 @@ export class UserProfileComponent implements OnInit {
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null
-    }, 30000)
+    }, 3000)
 
   }
 
