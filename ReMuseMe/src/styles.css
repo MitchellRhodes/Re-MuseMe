@@ -11,7 +11,7 @@ body{
     background-image: url('./app/Assets/annie-spratt-pdyQ3Ox-UEU-unsplash.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
 }
 
 
