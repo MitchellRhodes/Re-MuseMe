@@ -152,6 +152,9 @@ app-nav {
     audio {
         width: 60vw;
     }
+    .trackAlbumImage{
+        width: 65vw;
+    }
 
 }
 
