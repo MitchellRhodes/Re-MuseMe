@@ -6,6 +6,7 @@ import { TracksLikedDislikedService } from '../Services/tracks-liked-disliked.se
 import { Tracks } from '../Interfaces/tracks';
 import { DatabaseService } from '../database.service';
 import * as CanvasJs from 'canvasjs'
+import { NONE_TYPE } from '@angular/compiler';
 
 @Component({
   selector: 'app-user-profile',
@@ -256,6 +257,7 @@ export class UserProfileComponent implements OnInit {
   createChart(array: number[]) {
     let chart = new CanvasJs.Chart("chartContainer", {
       animationEnabled: true,
+      backgroundColor:"rgba(120, 206, 214, .1)",
       title: {
         text: "User Stats",
         horizontalAlign: "left"
@@ -265,14 +267,15 @@ export class UserProfileComponent implements OnInit {
         startAngle: 60,
         //innerRadius: 60,
         indexLabelFontSize: 17,
+        indexLabelFontColor: "black",
         indexLabel: "{name} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [
-          { y: (array[0] * 100), name: "Danceability", label: "High: This belongs in a club. Low: It belongs in a museum." },
-          { y: (array[1] * 100), name: "Energy", label: "High: You woke up and shotgunned 6 energy drinks. Low: You haven't slept in 2 days." },
-          { y: (array[2] * 100), name: "Acousticness", label: "High: You love the clean dulcet tones. Low: CRANK IT TO 11 BABY!" },
-          { y: (array[3] * 100), name: "Instrumentalness", label: "High: Vocals just ruin a song anyways. Low: Maybe you should've chosen a podcast instead." },
-          { y: (array[4] * 100), name: "Valence", label: "High: You're pumped up by optimism and the major scale. Low: You want to journey to the darkest recesses of your mind." }
+          { y: (array[0] * 100), name: "Danceability", label: "High: This belongs in a club. Low: It belongs in a museum.", color: "Yellow"},
+          { y: (array[1] * 100), name: "Energy", label: "High: You woke up and shotgunned 6 energy drinks. Low: You haven't slept in 2 days.", color: "Crimson" },
+          { y: (array[2] * 100), name: "Acousticness", label: "High: You love the clean dulcet tones. Low: CRANK IT TO 11 BABY!", color: "MediumBlue"},
+          { y: (array[3] * 100), name: "Instrumentalness", label: "High: Vocals just ruin a song anyways. Low: Maybe you should've chosen a podcast instead.", color: "LawnGreen"},
+          { y: (array[4] * 100), name: "Valence", label: "High: You're pumped up by optimism and the major scale. Low: You want to journey to the darkest recesses of your mind.", color: "Indigo" }
         ]
       }]
     });

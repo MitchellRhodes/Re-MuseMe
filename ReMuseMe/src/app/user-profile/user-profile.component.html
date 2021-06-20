@@ -1,7 +1,7 @@
 <div class='profile'>
     <div class='userProfile' *ngIf="userProfile">
         <img class="userProfleImage" src="{{userProfile.images[0].url}}">
-        <p class="welcome"> Welcome back {{userProfile.display_name}}! </p>
+        <h3 class="welcome"> Welcome back {{userProfile.display_name}}! </h3>
     </div>
     
 
@@ -28,7 +28,9 @@
 
                 <tr class="likedTracksList" *ngFor='let track of likedTracks'>
                     <td>
-                        <img class="likedTrackImage" src="{{track.album.images[0].url}}">
+                        <a href="{{track.external_urls.spotify}}" title= "Want to hear more? Click here to open the song in spotify">
+                            <img class="likedTrackImage" src="{{track.album.images[0].url}}">
+                        </a>
                     </td>
                     <td>
                         <p>{{track.name}}</p>
