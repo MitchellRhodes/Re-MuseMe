@@ -152,7 +152,7 @@ hr{
   display: block;
   position: fixed;
   top: 135px;
-  left: 70%;
+  left: 50%;
   background-color: rgba(120, 206, 214, .9) ;
   transform: translateX(-50%);
   min-width: 250px;
@@ -231,9 +231,6 @@ hr{
     align-items: center;
   }
 
-  .recommendedAlertBox{
-    left: 80%;
-  }
   
 }
 
