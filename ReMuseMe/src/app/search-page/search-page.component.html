@@ -8,6 +8,10 @@
         <h1 class = 'trackInfo'> {{search.name}}</h1>
         <p class = 'trackInfo'>{{search.artists[0].name}}</p>
         <p class = 'trackInfo'> {{search.album.name}} </p>   
+        <audio controls preload loop src="{{search.preview_url}}"></audio>
+        <a href="{{search.external_urls.spotify}}">
+            <p>Want to hear more? Click here to open the song in spotify</p>
+        </a>
         <button (click)="nextTrack(search)"> Add to liked tracks </button>
      </li>
  </ul>

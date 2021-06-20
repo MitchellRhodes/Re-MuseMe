@@ -1,19 +1,4 @@
 <div class='searchContainer'>
-
-  <!-- Filters will eventually be gone, the search bar should be able to figure it out on it's own -->
-  <!-- 
-  <mat-radio-group> -->
-
-   <!-- <mat-radio-group [(ngModel)]="selectedSearchValue" class='labels'>
-    <mat-radio-button value="artist" class='buttons'>Artist</mat-radio-button>
-    <mat-radio-button value="album" class='buttons'>Album</mat-radio-button>
-    <mat-radio-button value="track" class='buttons'>Track</mat-radio-button>
-    </mat-radio-group> -->
-
   <input [(ngModel)]='query' class="searchInput" type="text" placeholder="Search for a song" />
   <button class="search__button" (click)=search()>Search</button>
-
-
-
-
 </div>

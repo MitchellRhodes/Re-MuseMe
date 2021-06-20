@@ -258,6 +258,10 @@ app-nav {
         justify-content: center;
         align-items: center;
     }
+
+    audio {
+        width: 25vw;
+    }
     
 }
 
