@@ -98,7 +98,6 @@ export class SpotifyApiService {
 
         SpotifyApiService.expiresIn = accessToken.expires_in;
 
-
         window.location.href = redirect;
       })
   }
@@ -146,7 +145,7 @@ export class SpotifyApiService {
     if (SpotifyApiService.accessToken === null) {
 
       let accessToken = localStorage.getItem('accessToken')
-
+      this.tokenRefresh();
 
       if (accessToken === null) {
 
