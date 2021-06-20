@@ -60,7 +60,7 @@ export class SpotifyApiService {
     const codeChallenge = this.base64urlencode(sha);
 
     localStorage.setItem('codeVerifier', codeVerifier);
-    return window.location.href = `https://accounts.spotify.com/authorize?client_id=91f7955d1dba44f4aaac8ad72f54a129&response_type=code&redirect_uri=http://localhost:4200/spotify-callback/&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`
+    return window.location.href = `https://accounts.spotify.com/authorize?client_id=91f7955d1dba44f4aaac8ad72f54a129&response_type=code&redirect_uri=https://swipify.me/spotify-callback/&code_challenge_method=S256&code_challenge=${codeChallenge}&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`
   }
 
 
@@ -79,7 +79,7 @@ export class SpotifyApiService {
       .set('client_id', '91f7955d1dba44f4aaac8ad72f54a129')
       .set('grant_type', 'authorization_code')
       .set('code', code)
-      .set('redirect_uri', 'http://localhost:4200/spotify-callback/')
+      .set('redirect_uri', 'https://swipify.me/spotify-callback/')
       .set('code_verifier', codeVerifier)
 
 

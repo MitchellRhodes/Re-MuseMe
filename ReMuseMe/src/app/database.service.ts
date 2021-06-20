@@ -19,20 +19,20 @@ export class DatabaseService {
 
   //GET requests
   async getAllSongsNotSwiped(id: number) {
-    return this.http.get(`http://localhost:3000/user/${id}/song-data`);
+    return this.http.get(`https://api.swipify.me/user/${id}/song-data`);
   }
 
   async getUsers() {
-    return this.http.get(`http://localhost:3000/user`);
+    return this.http.get(`https://api.swipify.me/user`);
   }
 
   async getUser(email: string) {
 
-    return this.http.get(`http://localhost:3000/user/${email}`);
+    return this.http.get(`https://api.swipify.me/user/${email}`);
   }
 
   async changeSongStringIdToNumber(id: string) {
-    return this.http.get(`http://localhost:3000/song/${id}`);
+    return this.http.get(`https://api.swipify.me/song/${id}`);
   }
 
   async getUserStats(id: number) {
