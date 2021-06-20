@@ -221,7 +221,12 @@ hr{
   }
   
   tr.likedTracksList {
-   display: table;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
   }
 
   
