@@ -45,7 +45,7 @@
     display: block;
     position: fixed;
     top: 100px;
-    left: 80%;
+    left: 50%;
     background-color: rgba(120, 206, 214, .9) ;
     transform: translateX(-50%);
     min-width: 250px;
