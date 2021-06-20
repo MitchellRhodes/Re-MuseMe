@@ -58,9 +58,16 @@ export class MatchmakerComponent implements OnInit {
     });
 
 
+    this.getMatchmakerArray();
 
-    //search our database for user after getting email from spotify api so then check the swipes table for songs that have been swiped, 
-    //so we can populate with songs that have no swipe
+  };
+
+
+
+  //search our database for user after getting email from spotify api so then check the swipes table for songs that have been swiped, 
+  //so we can populate with songs that have no swipe
+  async getMatchmakerArray() {
+
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
 
       let userEmail = response.email;
@@ -94,9 +101,17 @@ export class MatchmakerComponent implements OnInit {
             });
         });
       });
-
     });
   };
+
+
+  async repopulateMatchmakerArray() {
+    /*When the original array hits the end, we don't splice out so we need to clear the array and then call that random function
+again to have it repopulate*/
+
+    //end with recalling this
+    this.getMatchmakerArray();
+  }
 
 
 
@@ -172,22 +187,21 @@ export class MatchmakerComponent implements OnInit {
   //calculates event data to  know direction of left or right swipe
   //right swipe calls likedSwipe left swipe calls dislikedSwipe
 
-  swipeHandler(event: any){
+  swipeHandler(event: any) {
     let x =
-    Math.abs(
-       event.deltaX) > 40 ? (event.deltaX > 0 ? "Right" : "Left") : "";
-       console.log(x)
-      if(x === 'Right'){
-        this.swipeDirection = 'right';
-        setTimeout(() => {
-          this.likedSwipe()
-        }, 1000)
-      } else {
-        this.swipeDirection = 'left';
-        setTimeout(() => {
-          this.dislikedSwipe()
-        }, 1000)
-      }
+      Math.abs(
+        event.deltaX) > 40 ? (event.deltaX > 0 ? "Right" : "Left") : "";
+    if (x === 'Right') {
+      this.swipeDirection = 'right';
+      setTimeout(() => {
+        this.likedSwipe()
+      }, 1000)
+    } else {
+      this.swipeDirection = 'left';
+      setTimeout(() => {
+        this.dislikedSwipe()
+      }, 1000)
+    }
   }
 
 

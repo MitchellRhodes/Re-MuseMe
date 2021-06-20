@@ -203,31 +203,42 @@ export class UserProfileComponent implements OnInit {
       (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
 
         this.trackslikeddislikedService.addedToPlaylist(this.track);
-        
+        (await this.spotifyApi.getAudioFeaturesForATrack(this.track.id)).subscribe(async (track: any) => {
 
+          (await this.databaseService.postSongFromSpotify({
+            song_id: track.id,
+            danceability: track.danceability,
+            energy: track.energy,
+            speechiness: track.speechiness,
+            acousticness: track.acousticness,
+            instrumentalness: track.instrumentalness,
+            liveness: track.liveness,
+            valence: track.valence
+          }));
 
-        //calls backend to convert track string id to number so we can store it in swipe
-        (await this.databaseService.changeSongStringIdToNumber(this.track.id)).subscribe((song: any) => {
+          //calls backend to convert track string id to number so we can store it in swipe
+          (await this.databaseService.changeSongStringIdToNumber(track.id)).subscribe((song: any) => {
 
-          this.newSwipe = {
-            user_id: user.id,
-            song_id: song.id,
-            swipe: true
+            this.newSwipe = {
+              user_id: user.id,
+              song_id: song.id,
+              swipe: true
+            }
+
+            //moves track ahead in array and posts swipe as true to our database and to users playlist
+            this.databaseService.postSwipe(this.newSwipe)
           }
+          )
+        });
 
-          //moves track ahead in array and posts swipe as true to our database and to users playlist
-          this.currentIndex++;
-          this.track = this.trackArray[this.currentIndex]
-          this.databaseService.postSwipe(this.newSwipe)
-        }
-        )
       })
     });
   }
 
 
   nextTrack(addToPlaylist: Tracks) {
-    this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
+    // this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
+    this.likedSwipe();
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null
@@ -291,7 +302,6 @@ export class UserProfileComponent implements OnInit {
             swipe: false
           }
 
-          console.log(`new swipe`, this.newSwipe)
           this.databaseService.putSwipe(this.newSwipe, user.id, song.id)
         }
         )
