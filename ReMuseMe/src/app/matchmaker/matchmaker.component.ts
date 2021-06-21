@@ -82,7 +82,7 @@ export class MatchmakerComponent implements OnInit {
             this.songIdArray.push(song.song_id)
           });
 
-          console.log(this.songIdArray)
+          // console.log(this.songIdArray)
 
 
 
@@ -97,7 +97,7 @@ export class MatchmakerComponent implements OnInit {
               this.trackArray = response.tracks
               this.track = response.tracks[0]
               this.currentIndex = 0
-              console.log("TrackArray",this.trackArray)
+              // console.log("TrackArray",this.trackArray)
             });
         });
       });
@@ -141,7 +141,7 @@ again to have it repopulate*/
           this.databaseService.postSwipe(this.newSwipe)
           
         
-          console.log('index', this.currentIndex, this.trackArray.length)
+          // console.log('index', this.currentIndex, this.trackArray.length)
 
           //moves track ahead in array and posts swipe as true to our database and to users playlist
           if(this.currentIndex < this.trackArray.length -1){
@@ -162,7 +162,7 @@ again to have it repopulate*/
               songsToCall.push(this.songIdArray[i + (50 * this.currentPage)])
             }
 
-            console.log('songs to call', songsToCall);
+            // console.log('songs to call', songsToCall);
 
             (await this.spotifyApi.getSeveralTracks(songsToCall))
             .subscribe((response: any) => {
@@ -170,7 +170,7 @@ again to have it repopulate*/
               this.track = response.tracks[0]
               this.currentIndex = 0
               this.currentPage++
-              console.log("TrackArray",this.trackArray)
+              // console.log("TrackArray",this.trackArray)
             });
           }
           
@@ -232,7 +232,7 @@ again to have it repopulate*/
 
           //moves track ahead in array and posts swipe to our database as false
 
-          console.log('index', this.currentIndex, this.trackArray.length)
+          // console.log('index', this.currentIndex, this.trackArray.length)
           
           if(this.currentIndex < this.trackArray.length -1){
             this.currentIndex++;
@@ -258,7 +258,7 @@ again to have it repopulate*/
               this.track = response.tracks[0]
               this.currentIndex = 0
               this.currentPage++
-              console.log("TrackArray",this.trackArray)
+              // console.log("TrackArray",this.trackArray)
             });
           }
           this.swipeDirection = 'none';
