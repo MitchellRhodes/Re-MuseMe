@@ -191,7 +191,7 @@ export class UserProfileComponent implements OnInit {
     return this.statArray;
   }
 
-  async likedSwipe(track: any) {
+  async likedSwipe() {
 
     //gets user profile info of currently logged in user and takes just email and puts into backend call for user
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
@@ -202,8 +202,8 @@ export class UserProfileComponent implements OnInit {
       //backend call for user to get id, grab track string id from local storage 
       (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
 
-        this.trackslikeddislikedService.addedToPlaylist(track);
-        (await this.spotifyApi.getAudioFeaturesForATrack(track.id)).subscribe(async (track: any) => {
+        this.trackslikeddislikedService.addedToPlaylist(this.track);
+        (await this.spotifyApi.getAudioFeaturesForATrack(this.track.id)).subscribe(async (track: any) => {
 
           (await this.databaseService.postSongFromSpotify({
             song_id: track.id,
@@ -238,7 +238,7 @@ export class UserProfileComponent implements OnInit {
 
   nextTrack(addToPlaylist: Tracks) {
     // this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
-    this.likedSwipe(addToPlaylist);
+    this.likedSwipe();
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null
