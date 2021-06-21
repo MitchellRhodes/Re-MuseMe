@@ -31,9 +31,11 @@ import { HeaderComponent } from './header/header.component';
 import { NavComponent } from './nav/nav.component';
 import { SearchCriteriaComponent } from './search-criteria/search-criteria.component';
 import { SpotifyLoginPageComponent } from './spotify-login-page/spotify-login-page.component';
+import { AboutComponent } from './about/about.component';
 
 import {HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import * as Hammer from 'hammerjs';
+
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -59,6 +61,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NavComponent,
     SearchCriteriaComponent,
     SpotifyLoginPageComponent,
+    AboutComponent,
  
     
   ],
