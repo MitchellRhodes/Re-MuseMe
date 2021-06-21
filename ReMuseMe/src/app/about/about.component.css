@@ -48,4 +48,8 @@ a{
         text-align: center;
     }
     
+    a{
+        flex-direction: row;
+        padding: 5px;
+    }
   }
