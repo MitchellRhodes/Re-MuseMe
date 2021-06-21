@@ -81,6 +81,10 @@ p{
     border: none;
 }
 
+.aboutButton{
+    padding:10px
+}
+
 .navLinks{
     text-decoration: none;
     color: black;
@@ -93,7 +97,6 @@ p{
     border-radius: 20px;
     background-color: #78CED6;
     border: none;
-    margin-top: 10px;
     margin-bottom: 5px;
 }
 
