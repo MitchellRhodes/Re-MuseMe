@@ -191,7 +191,7 @@ export class UserProfileComponent implements OnInit {
     return this.statArray;
   }
 
-  async likedSwipe() {
+  async likedSwipe(track: any) {
 
     //gets user profile info of currently logged in user and takes just email and puts into backend call for user
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
@@ -202,8 +202,8 @@ export class UserProfileComponent implements OnInit {
       //backend call for user to get id, grab track string id from local storage 
       (await this.databaseService.getUser(userEmail)).subscribe(async (user: any) => {
 
-        this.trackslikeddislikedService.addedToPlaylist(this.track);
-        (await this.spotifyApi.getAudioFeaturesForATrack(this.track.id)).subscribe(async (track: any) => {
+        this.trackslikeddislikedService.addedToPlaylist(track);
+        (await this.spotifyApi.getAudioFeaturesForATrack(track.id)).subscribe(async (track: any) => {
 
           (await this.databaseService.postSongFromSpotify({
             song_id: track.id,
@@ -238,7 +238,7 @@ export class UserProfileComponent implements OnInit {
 
   nextTrack(addToPlaylist: Tracks) {
     // this.trackslikeddislikedService.addToLikedTracks(addToPlaylist);
-    this.likedSwipe();
+    this.likedSwipe(addToPlaylist);
     this.alertBox = addToPlaylist;
     setTimeout(() => {
       this.alertBox = null
@@ -257,7 +257,7 @@ export class UserProfileComponent implements OnInit {
   createChart(array: number[]) {
     let chart = new CanvasJs.Chart("chartContainer", {
       animationEnabled: true,
-      backgroundColor:"rgba(120, 206, 214, .1)",
+      backgroundColor: "rgba(120, 206, 214, .1)",
       title: {
         text: "User Stats",
         horizontalAlign: "left"
@@ -271,10 +271,10 @@ export class UserProfileComponent implements OnInit {
         indexLabel: "{name} - #percent%",
         toolTipContent: "<b>{label}:</b> {y} (#percent%)",
         dataPoints: [
-          { y: (array[0] * 100), name: "Danceability", label: "High: This belongs in a club. Low: It belongs in a museum.", color: "Yellow"},
+          { y: (array[0] * 100), name: "Danceability", label: "High: This belongs in a club. Low: It belongs in a museum.", color: "Yellow" },
           { y: (array[1] * 100), name: "Energy", label: "High: You woke up and shotgunned 6 energy drinks. Low: You haven't slept in 2 days.", color: "Crimson" },
-          { y: (array[2] * 100), name: "Acousticness", label: "High: You love the clean dulcet tones. Low: CRANK IT TO 11 BABY!", color: "MediumBlue"},
-          { y: (array[3] * 100), name: "Instrumentalness", label: "High: Vocals just ruin a song anyways. Low: Maybe you should've chosen a podcast instead.", color: "LawnGreen"},
+          { y: (array[2] * 100), name: "Acousticness", label: "High: You love the clean dulcet tones. Low: CRANK IT TO 11 BABY!", color: "MediumBlue" },
+          { y: (array[3] * 100), name: "Instrumentalness", label: "High: Vocals just ruin a song anyways. Low: Maybe you should've chosen a podcast instead.", color: "LawnGreen" },
           { y: (array[4] * 100), name: "Valence", label: "High: You're pumped up by optimism and the major scale. Low: You want to journey to the darkest recesses of your mind.", color: "Indigo" }
         ]
       }]
