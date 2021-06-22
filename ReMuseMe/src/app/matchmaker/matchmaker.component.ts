@@ -51,7 +51,7 @@ export class MatchmakerComponent implements OnInit {
             name: response.display_name,
             email: response.email
           }
-
+          console.log(`went into create new user`, newUser)
           return this.databaseService.postUser(newUser);
 
         } else {
