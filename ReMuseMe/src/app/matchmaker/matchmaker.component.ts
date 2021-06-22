@@ -27,7 +27,7 @@ export class MatchmakerComponent implements OnInit {
   likedTracks: Tracks[] = [];
   swipeDirection: string = 'none';
   currentPage: number = 1;
-  
+
 
   constructor(private route: ActivatedRoute,
     private spotifyApi: SpotifyApiService,
@@ -49,12 +49,15 @@ export class MatchmakerComponent implements OnInit {
       }
 
 
-      if (user !== newUser.email) {
+      if (user !== response.email) {
 
         return this.databaseService.postUser(newUser);
+
+      } else {
+
+        return user;
       }
 
-      return user;
     });
 
 
@@ -76,7 +79,7 @@ export class MatchmakerComponent implements OnInit {
 
         (await this.databaseService.getAllSongsNotSwiped(user.id)).subscribe(async (songs: any) => {
 
-          
+
           this.songIdArray = [];
           songs.forEach((song: any) => {
             this.songIdArray.push(song.song_id)
@@ -88,7 +91,7 @@ export class MatchmakerComponent implements OnInit {
 
           //uses the ids found in the above to get the info from spotify
           let songsToCall = [];
-          for(let i = 0; i < 50; i++){
+          for (let i = 0; i < 50; i++) {
             songsToCall.push(this.songIdArray[i])
           }
 
@@ -139,44 +142,44 @@ again to have it repopulate*/
             swipe: true
           }
           this.databaseService.postSwipe(this.newSwipe)
-          
-        
+
+
           // console.log('index', this.currentIndex, this.trackArray.length)
 
           //moves track ahead in array and posts swipe as true to our database and to users playlist
-          if(this.currentIndex < this.trackArray.length -1){
+          if (this.currentIndex < this.trackArray.length - 1) {
             this.currentIndex++;
             this.track = this.trackArray[this.currentIndex]
-          } else{
+          } else {
             let songsToCall = [];
             let indexLeft = 0;
             let songsLeft = (this.songIdArray.length - (50 * this.currentPage))
-            if( songsLeft >= 50){
+            if (songsLeft >= 50) {
               indexLeft = 50
-            }else if(songsLeft > 0){
+            } else if (songsLeft > 0) {
               indexLeft = (this.songIdArray.length - (50 * this.currentPage))
-            } 
-            
+            }
 
-            for(let i = 0; i < indexLeft; i++){
+
+            for (let i = 0; i < indexLeft; i++) {
               songsToCall.push(this.songIdArray[i + (50 * this.currentPage)])
             }
 
             // console.log('songs to call', songsToCall);
 
             (await this.spotifyApi.getSeveralTracks(songsToCall))
-            .subscribe((response: any) => {
-              this.trackArray = response.tracks
-              this.track = response.tracks[0]
-              this.currentIndex = 0
-              this.currentPage++
-              // console.log("TrackArray",this.trackArray)
-            });
+              .subscribe((response: any) => {
+                this.trackArray = response.tracks
+                this.track = response.tracks[0]
+                this.currentIndex = 0
+                this.currentPage++
+                // console.log("TrackArray",this.trackArray)
+              });
           }
-          
-          
+
+
           this.swipeDirection = 'none';
-          
+
         }
         )
       })
@@ -227,39 +230,39 @@ again to have it repopulate*/
             song_id: song.id,
             swipe: false
           }
-          
+
           this.databaseService.postSwipe(this.newSwipe)
 
           //moves track ahead in array and posts swipe to our database as false
 
           // console.log('index', this.currentIndex, this.trackArray.length)
-          
-          if(this.currentIndex < this.trackArray.length -1){
+
+          if (this.currentIndex < this.trackArray.length - 1) {
             this.currentIndex++;
             this.track = this.trackArray[this.currentIndex]
-          } else{
+          } else {
             let songsToCall = [];
             let indexLeft = 0;
             let songsLeft = (this.songIdArray.length - (50 * this.currentPage))
-            if(songsLeft >= 50){
+            if (songsLeft >= 50) {
               indexLeft = 50
-            }else if (songsLeft > 0){
+            } else if (songsLeft > 0) {
               indexLeft = (this.songIdArray.length - (50 * this.currentPage))
-            } 
-            
+            }
 
-            for(let i = 0; i < indexLeft; i++){
+
+            for (let i = 0; i < indexLeft; i++) {
               songsToCall.push(this.songIdArray[i + (50 * this.currentPage)])
             }
 
             (await this.spotifyApi.getSeveralTracks(songsToCall))
-            .subscribe((response: any) => {
-              this.trackArray = response.tracks
-              this.track = response.tracks[0]
-              this.currentIndex = 0
-              this.currentPage++
-              // console.log("TrackArray",this.trackArray)
-            });
+              .subscribe((response: any) => {
+                this.trackArray = response.tracks
+                this.track = response.tracks[0]
+                this.currentIndex = 0
+                this.currentPage++
+                // console.log("TrackArray",this.trackArray)
+              });
           }
           this.swipeDirection = 'none';
 
