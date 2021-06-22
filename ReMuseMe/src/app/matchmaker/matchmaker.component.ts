@@ -41,29 +41,23 @@ export class MatchmakerComponent implements OnInit {
 
     //checks our database for user with email, and if there is no email in ours that matches we create user
     (await this.spotifyApi.getUserProfile()).subscribe(async (response: any) => {
-
       let user = (await this.databaseService.getUsers()).pipe(map((response: any) => response.email))
 
-      try {
-        if (user !== response.email) {
 
-          let newUser = {
-            name: response.display_name,
-            email: response.email
-          }
-          console.log(`went into create new user`, newUser)
-          return this.databaseService.postUser(newUser);
 
-        } else {
+      if (user !== response.email) {
 
-          return user;
+        let newUser = {
+          name: response.display_name,
+          email: response.email
         }
 
-      } catch {
+        return this.databaseService.postUser(newUser);
 
-        return console.log('error')
+      } else {
+
+        return user;
       }
-
 
     });
 
