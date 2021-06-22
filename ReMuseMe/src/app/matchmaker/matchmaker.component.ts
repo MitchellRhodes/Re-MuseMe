@@ -44,20 +44,26 @@ export class MatchmakerComponent implements OnInit {
 
       let user = (await this.databaseService.getUsers()).pipe(map((response: any) => response.email))
 
+      try {
+        if (user !== response.email) {
 
-      if (user !== response.email) {
+          let newUser = {
+            name: response.display_name,
+            email: response.email
+          }
 
-        let newUser = {
-          name: response.display_name,
-          email: response.email
+          return this.databaseService.postUser(newUser);
+
+        } else {
+
+          return user;
         }
 
-        return this.databaseService.postUser(newUser);
+      } catch {
 
-      } else {
-
-        return user;
+        return console.log('error')
       }
+
 
     });
 
